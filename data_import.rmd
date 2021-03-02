@@ -1,0 +1,23 @@
+---
+title: "Data import"
+author: "Iris Zhong"
+date: "3/2/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r load library}
+#install.packages("here")
+library(here)
+```
+
+```{r import data}
+# import premeasures
+prem <- read.csv(here("TeleCom_Dyad_premeasures.csv"))
+# import daily diary
+diary <- read.csv(here("TeleCom_Dyad_dailydiary.csv"))
+```
+
