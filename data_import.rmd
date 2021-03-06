@@ -20,5 +20,3 @@ prem <- read.csv(here("TeleCom_Dyad_premeasures.csv"))
 # import daily diary
 diary <- read.csv(here("TeleCom_Dyad_dailydiary.csv"))
 ```
-
-This is a r markdown.
