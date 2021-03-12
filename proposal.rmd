@@ -92,6 +92,21 @@ We are planning to use the following variables:
 
 Below is the list of readings for annotated bibliography:
 
+@oshio2013division \
+@zhang2020work \
+@blom2017couples \
+@faulkner2005gender \
+@erchull2010well \
+@nourani2019relationship \
+@dillaway2001race \
+@norton1983measuring\
+@song2020does\
+@fleche2020gender\
+@gillespie2019gendered\
+@carriero2017interplay\
+@hu2018fairness\
+@jeffrey2008exploring\
+@delanoeije2019boundary
 
 We have used R [Version 4.0.3; @R-base] and the R-package *papaja* [Version 0.1.0.9997; @R-papaja] in this proposal.
 
