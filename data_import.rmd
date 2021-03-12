@@ -2,7 +2,10 @@
 title: "Data import"
 author: "Iris Zhong"
 date: "3/2/2021"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
+  word_document: default
 ---
 
 ```{r setup, include=FALSE}

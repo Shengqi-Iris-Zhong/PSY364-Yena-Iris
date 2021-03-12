@@ -1,0 +1,108 @@
+---
+title             : "PSY 364 Proposal"
+shorttitle        : "Proposal"
+
+author: 
+  - name          : "Iris Zhong"
+    affiliation   : "1"
+    corresponding : yes    # Define only one corresponding author
+    email         : "szhong@smith.edu"
+
+  - name          : "Yena Li"
+    affiliation   : "1"
+
+
+affiliation:
+  - id            : "1"
+    institution   : "Smith College"
+  
+keywords          : "keywords"
+wordcount         : "X"
+
+bibliography      : ["r-references-proposal.bib","psych-references-proposal.bib"]
+
+floatsintext      : no
+figurelist        : no
+tablelist         : no
+footnotelist      : no
+linenumbers       : no
+mask              : no
+draft             : no
+
+documentclass     : "apa6"
+classoption       : "man"
+output            : papaja::apa6_pdf
+---
+
+```{r setup, include = FALSE}
+library("papaja")
+r_refs("r-references-proposal.bib")
+cite_r("r-references-proposal.bib")
+```
+
+```{r analysis-preferences}
+# Seed for random number generation
+set.seed(42)
+knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
+```
+
+## Hypothesis
+
+Due to the ongoing pandemic, many people have transitioned to work remotely. Therefore, their work-family relationship and chore division with their partner could be altered. Little research has been conducted on how working from home would affect romantic relationships. This study is trying to bridge the gap of this line of research, investigating how an individual or partner’s telework could influence their perceived fairness in household chores, thereby affecting their relationship quality. We also incorporate the factor of gender into our research, exploring how males and females differ in their perceived fairness in chore division that leads to differences in relationship qualities.
+
+Our research question is twofold:
+
+1. Whether the respondent or their partner is teleworking can affect their perceived fairness in household chores, and further influence their relationship quality;
+
+2. Whether gender also plays a role in perceived chore fairness and consequently affects relationship quality.
+
+
+We plan to adopt an actor-partner model that is present in @west2009superordinate. In this model, the outcome from the actor is influenced by both the actor themselves and their partner. Thus, we predict that whether the partner is teleworking can influence the actor’s perceived fairness in household chores. Additionally, the partner’s perceived fairness in chores can have an impact on the actor’s relationship quality.
+
+In addition, in @radcliffe2015flexible’s study, for heterosexual couples, when the female has more flexibility in working, she tends to take on more family responsibilities without noticing the unfairness. However, when the male has a more flexible job, the female still involves in the majority of family-related activities. Our research is built on top of this study. We hypothesize that telework allows for a more flexible working schedule, therefore creating more opportunities for the individual to participate in household tasks. On the other hand, females might report less perceived unfairness in chore division, regardless of their working flexibility, because of the traditional gender norms that women internalize. 
+
+Finally, we predict that perceived fairness in chore division could have a significant impact on romantic relationship quality. We believe that an even share of household tasks can lead to a higher level of relationship satisfaction. 
+
+## Variables
+
+We are planning to use the following variables:
+
+### Explanatory Variables
+
+
+- **Gender** (*gender*): whether the respondent is male or female
+
+- **Participant ID** (*partID*): the ID of the participant
+
+- **Dyad ID** (*dyadID*): the ID of the couple
+
+- **Telework** (*Q139*): whether the respondent or their partner is/are teleworking
+
+- **Chore fairness** (*fair_chores*): how the respondent felt about the fairness of the division of household tasks on a particular day
+
+- **Time** (no direct variable available): indicate the entry in the daily diary
+
+### Response variable
+
+- **Relationship quality** (*qmi1* to *qmi4*): the quality of marriage index (4 questions in total, 4 point scale)
+
+
+
+## Reading List
+
+Below is the list of readings for annotated bibliography:
+
+
+We have used R [Version 4.0.3; @R-base] and the R-package *papaja* [Version 0.1.0.9997; @R-papaja] in this proposal.
+
+
+\newpage
+
+# References
+
+\begingroup
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+
+<div id="refs" custom-style="Bibliography"></div>
+\endgroup
