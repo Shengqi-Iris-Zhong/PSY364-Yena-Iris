@@ -1,0 +1,190 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  english,
+  man]{apa6}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={PSY 364 - Annotated Bibliography Part 1},
+  pdfauthor={Iris Zhong1},
+  pdflang={en-EN},
+  pdfkeywords={keywords},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+% Manuscript styling
+\usepackage{upgreek}
+\captionsetup{font=singlespacing,justification=justified}
+
+% Table formatting
+\usepackage{longtable}
+\usepackage{lscape}
+% \usepackage[counterclockwise]{rotating}   % Landscape page setup for large tables
+\usepackage{multirow}		% Table styling
+\usepackage{tabularx}		% Control Column width
+\usepackage[flushleft]{threeparttable}	% Allows for three part tables with a specified notes section
+\usepackage{threeparttablex}            % Lets threeparttable work with longtable
+
+% Create new environments so endfloat can handle them
+% \newenvironment{ltable}
+%   {\begin{landscape}\begin{center}\begin{threeparttable}}
+%   {\end{threeparttable}\end{center}\end{landscape}}
+\newenvironment{lltable}{\begin{landscape}\begin{center}\begin{ThreePartTable}}{\end{ThreePartTable}\end{center}\end{landscape}}
+
+% Enables adjusting longtable caption width to table width
+% Solution found at http://golatex.de/longtable-mit-caption-so-breit-wie-die-tabelle-t15767.html
+\makeatletter
+\newcommand\LastLTentrywidth{1em}
+\newlength\longtablewidth
+\setlength{\longtablewidth}{1in}
+\newcommand{\getlongtablewidth}{\begingroup \ifcsname LT@\roman{LT@tables}\endcsname \global\longtablewidth=0pt \renewcommand{\LT@entry}[2]{\global\advance\longtablewidth by ##2\relax\gdef\LastLTentrywidth{##2}}\@nameuse{LT@\roman{LT@tables}} \fi \endgroup}
+
+% \setlength{\parindent}{0.5in}
+% \setlength{\parskip}{0pt plus 0pt minus 0pt}
+
+% \usepackage{etoolbox}
+\makeatletter
+\patchcmd{\HyOrg@maketitle}
+  {\section{\normalfont\normalsize\abstractname}}
+  {\section*{\normalfont\normalsize\abstractname}}
+  {}{\typeout{Failed to patch abstract.}}
+\patchcmd{\HyOrg@maketitle}
+  {\section{\protect\normalfont{\@title}}}
+  {\section*{\protect\normalfont{\@title}}}
+  {}{\typeout{Failed to patch title.}}
+\makeatother
+\shorttitle{Annotated Bibliography}
+\keywords{keywords\newline\indent Word count: X}
+\DeclareDelayedFloatFlavor{ThreePartTable}{table}
+\DeclareDelayedFloatFlavor{lltable}{table}
+\DeclareDelayedFloatFlavor*{longtable}{table}
+\makeatletter
+\renewcommand{\efloat@iwrite}[1]{\immediate\expandafter\protected@write\csname efloat@post#1\endcsname{}}
+\makeatother
+\usepackage{csquotes}
+\ifxetex
+  % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
+  \usepackage{polyglossia}
+  \setmainlanguage[]{english}
+\else
+  \usepackage[shorthands=off,main=english]{babel}
+\fi
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newenvironment{cslreferences}%
+  {\setlength{\parindent}{0pt}%
+  \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces}%
+  {\par}
+
+\title{PSY 364 - Annotated Bibliography Part 1}
+\author{Iris Zhong\textsuperscript{1}}
+\date{}
+
+
+\affiliation{\vspace{0.5cm}\textsuperscript{1} Smith College}
+
+\begin{document}
+\maketitle
+
+\hypertarget{what-fairness-gendered-division-of-housework-and-family-life-satisfaction-across-30-countries-hu2018fairness}{%
+\subsection{What Fairness? Gendered Division of Housework and Family Life Satisfaction across 30 Countries (Hu \& Yucel, 2018)}\label{what-fairness-gendered-division-of-housework-and-family-life-satisfaction-across-30-countries-hu2018fairness}}
+
+This is a cross-cultural study that examines how gender role influences division of housework and family life satisfaction, and how the social context regarding gender equality in different countries may moderate the relationship above. I will mostly focus on within-country hypotheses and results in this research, since our dataset only samples individuals from one country.
+
+Hypothesis 1 (inter-gender relational fairness comparison between partners): A female's perceived fairness in housework share with her partner is positively correlated with her family life satisfaction. In other words, if she believes that she and her partner has an equal division of housework chores, she is more likely to satisfy with her family life.
+
+Hypothesis 2 (intra-gender referential comparison within country): If a female has a more even share of housework than the other women from the same country, she tends to have higher satisfaction in family life.
+
+Hypothesis 3 (moderating effect between the two dimensions of fairness comparison): The relationship between family life satisfaction and referential comparison is stronger when a female has a less even share of housework than the other women in the same country.
+
+The study uses the 2012 survey ``Family and Changing Gender Roles'' survey from International Social Survey Programme. Researchers choose to only focus on female respondents with heterosexual cohabiting partners. The final sample consists of 10467 women from 30 countries. The major variables to my interests are women's satisfaction with family life, women's share of couple's housework time, inter-gender relational fairness comparison between partners (i.e., how fair is the share of housework between the couple), intra-gender referential comparison within country (how a female's share of housework is compared to other women in the country).
+
+The research adopts a mixed effect multilevel model, where level 1 is individual measures, and level 2 is country measures. The results confirm with all of the hypotheses: women reported a higher level of family life satisfaction when they perceived the housework division between the partners to be fair rather than unfair; women enjoyed greater family life satisfaction when their share of housework is more even than the other women with similar gender ideology in the same country; relational fairness has a greater impact on women's family life satisfaction when their share of housework is considered less egalitarian.
+
+The important takeaway from this research is that perceived fairness in housework can be twofold: inter-gender relational fairness comparison between partners, and intra-gender referential comparison with other women. Since we haven't included the latter factor, it is possible that we have missed how social norms in housework division could influence an individual's family satisfaction. Regardless, the study provides insights in predicting our results, as women report greater family life satisfaction when the division of housework between the partners is more even. It also offers a list of covariates that are worth considering, such as education, marital status, socioeconomics status, and family income.
+
+We have used R (Version 4.0.3; R Core Team, 2020) and the R-package \emph{papaja} (Version 0.1.0.9997; Aust \& Barth, 2020) in this proposal.
+
+\newpage
+
+\hypertarget{references}{%
+\section{References}\label{references}}
+
+\begingroup
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+
+\hypertarget{refs}{}
+\begin{cslreferences}
+\leavevmode\hypertarget{ref-R-papaja}{}%
+Aust, F., \& Barth, M. (2020). \emph{papaja: Create APA manuscripts with R Markdown}. Retrieved from \url{https://github.com/crsh/papaja}
+
+\leavevmode\hypertarget{ref-hu2018fairness}{}%
+Hu, Y., \& Yucel, D. (2018). What fairness? Gendered division of housework and family life satisfaction across 30 countries. \emph{European Sociological Review}, \emph{34}(1), 92--105.
+
+\leavevmode\hypertarget{ref-R-base}{}%
+R Core Team. (2020). \emph{R: A language and environment for statistical computing}. Vienna, Austria: R Foundation for Statistical Computing. Retrieved from \url{https://www.R-project.org/}
+\end{cslreferences}
+
+\endgroup
+
+
+\end{document}

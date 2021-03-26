@@ -1,0 +1,77 @@
+---
+title             : "PSY 364 - Annotated Bibliography Part 1"
+shorttitle        : "Annotated Bibliography"
+
+author: 
+  - name          : "Iris Zhong"
+    affiliation   : "1"
+    corresponding : yes    # Define only one corresponding author
+    email         : "szhong@smith.edu"
+
+affiliation:
+  - id            : "1"
+    institution   : "Smith College"
+  
+keywords          : "keywords"
+wordcount         : "X"
+
+bibliography      : ["r-references-ab1.bib","psych-references-ab1.bib"]
+
+floatsintext      : no
+figurelist        : no
+tablelist         : no
+footnotelist      : no
+linenumbers       : no
+mask              : no
+draft             : no
+
+documentclass     : "apa6"
+classoption       : "man"
+output            : papaja::apa6_pdf
+---
+
+```{r setup, include = FALSE}
+library("papaja")
+r_refs("r-references-ab1.bib")
+cite_r("r-references-ab1.bib")
+```
+
+```{r analysis-preferences}
+# Seed for random number generation
+set.seed(42)
+knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
+```
+
+## What Fairness? Gendered Division of Housework and Family Life Satisfaction across 30 Countries [@hu2018fairness]
+
+This is a cross-cultural study that examines how gender role influences division of housework and family life satisfaction, and how the social context regarding gender equality in different countries may moderate the relationship above. I will mostly focus on within-country hypotheses and results in this research, since our dataset only samples individuals from one country.  
+
+Hypothesis 1 (inter-gender relational fairness comparison between partners): A female's perceived fairness in housework share with her partner is positively correlated with her family life satisfaction. In other words, if she believes that she and her partner has an equal division of housework chores, she is more likely to satisfy with her family life. 
+
+Hypothesis 2 (intra-gender referential comparison within country):  If a female has a more even share of housework than the other women from the same country, she tends to have higher satisfaction in family life. 
+
+Hypothesis 3 (moderating effect between the two dimensions of fairness comparison): The relationship between family life satisfaction and referential comparison is stronger when a female has a less even share of housework than the other women in the same country. 
+
+The study uses the 2012 survey "Family and Changing Gender Roles" survey from International Social Survey Programme. Researchers choose to only focus on female respondents with heterosexual cohabiting partners. The final sample consists of 10467 women from 30 countries. The major variables to my interests are women's satisfaction with family life, women's share of couple's housework time, inter-gender relational fairness comparison between partners (i.e., how fair is the share of housework between the couple),  intra-gender referential comparison within country (how a female's share of housework is compared to other women in the country). 
+
+The research adopts a mixed effect multilevel model, where level 1 is individual measures, and level 2 is country measures. The results confirm with all of the hypotheses: women reported a higher level of family life satisfaction when they perceived the housework division between the partners to be fair rather than unfair; women enjoyed greater family life satisfaction when their share of housework is more even than the other women with similar gender ideology in the same country; relational fairness has a greater impact on women's family life satisfaction when their share of housework is considered less egalitarian. 
+
+The important takeaway from this research is that perceived fairness in housework can be twofold: inter-gender relational fairness comparison between partners, and intra-gender referential comparison with other women. Since we haven't included the latter factor, it is possible that we have missed how social norms in housework division could influence an individual's family satisfaction. Regardless, the study provides insights in predicting our results, as women report greater family life satisfaction when the division of housework between the partners is more even. It also offers a list of covariates that are worth considering, such as education, marital status, socioeconomics status, and family income. 
+
+
+
+
+
+We have used R [Version 4.0.3; @R-base] and the R-package *papaja* [Version 0.1.0.9997; @R-papaja] in this proposal.
+
+
+\newpage
+
+# References
+
+\begingroup
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+
+<div id="refs" custom-style="Bibliography"></div>
+\endgroup
