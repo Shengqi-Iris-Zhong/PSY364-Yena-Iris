@@ -1,0 +1,216 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  english,
+  man]{apa6}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Annotated Bibliography 1},
+  pdfauthor={Yena Li1},
+  pdflang={en-EN},
+  pdfkeywords={keywords},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+% Manuscript styling
+\usepackage{upgreek}
+\captionsetup{font=singlespacing,justification=justified}
+
+% Table formatting
+\usepackage{longtable}
+\usepackage{lscape}
+% \usepackage[counterclockwise]{rotating}   % Landscape page setup for large tables
+\usepackage{multirow}		% Table styling
+\usepackage{tabularx}		% Control Column width
+\usepackage[flushleft]{threeparttable}	% Allows for three part tables with a specified notes section
+\usepackage{threeparttablex}            % Lets threeparttable work with longtable
+
+% Create new environments so endfloat can handle them
+% \newenvironment{ltable}
+%   {\begin{landscape}\begin{center}\begin{threeparttable}}
+%   {\end{threeparttable}\end{center}\end{landscape}}
+\newenvironment{lltable}{\begin{landscape}\begin{center}\begin{ThreePartTable}}{\end{ThreePartTable}\end{center}\end{landscape}}
+
+% Enables adjusting longtable caption width to table width
+% Solution found at http://golatex.de/longtable-mit-caption-so-breit-wie-die-tabelle-t15767.html
+\makeatletter
+\newcommand\LastLTentrywidth{1em}
+\newlength\longtablewidth
+\setlength{\longtablewidth}{1in}
+\newcommand{\getlongtablewidth}{\begingroup \ifcsname LT@\roman{LT@tables}\endcsname \global\longtablewidth=0pt \renewcommand{\LT@entry}[2]{\global\advance\longtablewidth by ##2\relax\gdef\LastLTentrywidth{##2}}\@nameuse{LT@\roman{LT@tables}} \fi \endgroup}
+
+% \setlength{\parindent}{0.5in}
+% \setlength{\parskip}{0pt plus 0pt minus 0pt}
+
+% \usepackage{etoolbox}
+\makeatletter
+\patchcmd{\HyOrg@maketitle}
+  {\section{\normalfont\normalsize\abstractname}}
+  {\section*{\normalfont\normalsize\abstractname}}
+  {}{\typeout{Failed to patch abstract.}}
+\patchcmd{\HyOrg@maketitle}
+  {\section{\protect\normalfont{\@title}}}
+  {\section*{\protect\normalfont{\@title}}}
+  {}{\typeout{Failed to patch title.}}
+\makeatother
+\shorttitle{Annotated Bibliography}
+\keywords{keywords\newline\indent Word count: X}
+\DeclareDelayedFloatFlavor{ThreePartTable}{table}
+\DeclareDelayedFloatFlavor{lltable}{table}
+\DeclareDelayedFloatFlavor*{longtable}{table}
+\makeatletter
+\renewcommand{\efloat@iwrite}[1]{\immediate\expandafter\protected@write\csname efloat@post#1\endcsname{}}
+\makeatother
+\usepackage{csquotes}
+\ifxetex
+  % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
+  \usepackage{polyglossia}
+  \setmainlanguage[]{english}
+\else
+  \usepackage[shorthands=off,main=english]{babel}
+\fi
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newenvironment{cslreferences}%
+  {\setlength{\parindent}{0pt}%
+  \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces}%
+  {\par}
+
+\title{Annotated Bibliography 1}
+\author{Yena Li\textsuperscript{1}}
+\date{}
+
+
+\affiliation{\vspace{0.5cm}\textsuperscript{1} Smith College}
+
+\begin{document}
+\maketitle
+
+\textbf{Division of Household Labor and Marital Satisfaction in China, Japan, and Korea}
+
+Oshio, Nozaki, and Kobayashi (2013)
+
+The purpose of this paper is to compare the relationship between division of household labor and marital satisfaction in three of the countries in Asia (China, Japan, and Korea). The researchers used data collected using General Social Surveys(GSS) in 2006. After exclusion, the data included 2,287 respondents from the CGSS (China), 911 from the JGSS (Japan), and 945 from the KGSS (Korea). In-person interviews were used in surveys for all three countries, and the survey for Japan also included self-administered questionnaires. After thorough analysis, the researchers made four main observations. First, agreeing with observations made with U.S. data, marital satisfaction of wives was negatively correlated with the burden of housework they take on. Second, this study suggests that women's fertility may be affected by taking care of a bigger portion of the housework. There was also increasing instability in marriages across the three countries. Finally, the researchers noted that even though there were many similarities in the relationship between household labor and marital satisfaction across countries, the differences were also significant.
+
+Although the population is from another region, it looks at the impact of division of household labor on marital satisfaction, with a focus on the wives. We are also interested in how the interaction of gender and fairness of chore divisions might affect the marital satisfaction. It would also be interesting to compare and contrast the result from the data set that we have, and what they have concluded.
+
+\textbf{A work-life conflict perspective on telework}
+
+Zhang, Moeckel, Moreno, Shuai, and Gao (2020)
+
+The researchers that conducted this study wanted to investigate whether it is less likely for married males or fathers to telework when they have work-family conflict. They also wanted to examine if females in the same situation (married or have children) would be more likely to telework when encountering a work-family conflict. The data of this study was collected from the survey ``German Microcensus 2010'' and only included people that worked within German (n = 188,081). According to their analysis, unrelated to gender or marital status, people that have children are less likely to telework than people without children. Among the participants that don't have children, males are more likely to telework females, and it is more likely for people that are single to telework compared to people that are married. However, for employed parents with children, females are more likely to telework, and it is more likely for partnered parents to telework compared to single parents. This suggests that children are an important factor in a person's division to telework when encountering work-family conflicts.
+
+This study looks at under what kind of situations an individual would choose to telework, which is the other direction of what we are trying to investigate in our study (we are going to be investigating the effects of telework). Although it is not directly related to our study, we could get some important insight from looking at this perspective, to develop our study and hypothesis.
+
+\textbf{Couples' Division of Employment and Household Chores and Relationship Satisfaction: A Test of the Specialization and Equity Hypotheses}
+
+Blom, Kraaykamp, and Verbakel (2017)
+
+This paper had several hypotheses: 1) the scientists proposed that people's higher level of relationship satisfaction is related to the lower level of specialization in a family; 2) they also wanted to investigate the role of egalitarian gender attitudes and suggested that specialization in a family might have a less positive effect on people with egalitarian gender attitudes than people with a more traditional gender role attitudes; 3) the researchers suggest that compared to people without young children, specialization in family might have a less negative effect for people in family with young children; 4) relationship satisfaction has a positive correlation with equity in hours in a family; 5) compared to people with traditional gender role attitudes, the influence of hours-equity in family might be more positive on relationship satisfaction for people with egalitarian gender role attitudes; 6) compared to people without children, people with children might experience a more positive influence. Data used in this study was obtained from BHPS (British Household Panel Survey) and participants less than 25 or more than 60 years old, along with the missing data, were excluded from the database. Interviews were held with the participants and they were re-interviewed in the following years. In the end, the database consisted of 4102 relationships and 21302 observations. The researchers concluded that men with egalitarian gender role attitudes were less satisfied than men with traditional gender role attitudes when the household labour division was specialized and not balanced. When children were involved, the positive link between relationship satisfaction and specialization was not strong compared to when there are no children involved. They also found that women's relationship satisfaction was not influenced by hours-equity or specialization, and that only men seemed to be affected by it.
+
+This study investigated how division of household labor would affect couples' relationships and examined a factor for why a difference might occur in the same gender population (traditional man vs.~egalitarian man). This is something that is not considered in our study, but could play a role in affecting our result. Future research could try to incorporate and measure this factor in the study.
+
+\textbf{WELL . . . SHE WANTS IT MORE: PERCEPTIONS OF SOCIAL NORMS ABOUT DESIRES FOR MARRIAGE AND CHILDREN AND ANTICIPATED CHORE PARTICIPATION}
+
+Erchull, Liss, Axelson, Staebell, and Askari (2010)
+
+The researchers hypothesized that the difference between man and woman in terms of the desires for marriage and having children are small, and that man's desires for marriage and children would be higher in reality than what is believed in the society. In contrast, women's desire for marriage and children would be lower in reality than what is believed in the society. The researchers also proposed that for men and women, the relationship between desire for marriage and children and anticipation of household labor or child care is different. After online and on campus (colleges and universities in Virginia), a total of 355 women and 111 men between the ages of 17-28 participated in this study. After receiving consent from the participants, they were asked to fill out an online survey which included questions on demographics, an attitude towards women scale, a drive to marry scale, a drive to have children scale, and a chore list. Finally, participants were debriefed by the researchers. After data analysis, the researchers' first hypothesis was supported by the data and the difference between man and woman in terms of the desire for marriage and having children is very subtle. They also found that both female and male participants perceived the typical female's desire for marriage and children to be higher than in reality while perceiving the typical male's desire for both to be lower than in reality. Finally, researchers suggested that the desire for marriage predicted anticipated household labour participation for females, but not for males. Similarly, the desire for children predicted anticipated child care work participation for females, but not for males.
+
+Although this study doesn't relate directly to what we are investigating in our study, I find the perspective of it interesting. This (desire for marriage and children) is another factor that is not taken into consideration in our study, but would be interesting to be included as a possible mediator for self-perceived chore fairness in the future.
+
+\hfill\break
+\hfill\break
+This assignment has used R (Version 4.0.3; R Core Team, 2020) and the R-package \emph{papaja} (Version 0.1.0.9997; Aust \& Barth, 2020) in this proposal.
+
+\newpage
+
+\hypertarget{references}{%
+\section{References}\label{references}}
+
+\begingroup
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+
+\hypertarget{refs}{}
+\begin{cslreferences}
+\leavevmode\hypertarget{ref-R-papaja}{}%
+Aust, F., \& Barth, M. (2020). \emph{papaja: Create APA manuscripts with R Markdown}. Retrieved from \url{https://github.com/crsh/papaja}
+
+\leavevmode\hypertarget{ref-blom2017couples}{}%
+Blom, N., Kraaykamp, G., \& Verbakel, E. (2017). Couples' division of employment and household chores and relationship satisfaction: A test of the specialization and equity hypotheses. \emph{European Sociological Review}, \emph{33}(2), 195--208.
+
+\leavevmode\hypertarget{ref-erchull2010well}{}%
+Erchull, M. J., Liss, M., Axelson, S. J., Staebell, S. E., \& Askari, S. F. (2010). Well. She wants it more: Perceptions of social norms about desires for marriage and children and anticipated chore participation. \emph{Psychology of Women Quarterly}, \emph{34}(2), 253--260.
+
+\leavevmode\hypertarget{ref-oshio2013division}{}%
+Oshio, T., Nozaki, K., \& Kobayashi, M. (2013). Division of household labor and marital satisfaction in china, japan, and korea. \emph{Journal of Family and Economic Issues}, \emph{34}(2), 211--223.
+
+\leavevmode\hypertarget{ref-R-base}{}%
+R Core Team. (2020). \emph{R: A language and environment for statistical computing}. Vienna, Austria: R Foundation for Statistical Computing. Retrieved from \url{https://www.R-project.org/}
+
+\leavevmode\hypertarget{ref-zhang2020work}{}%
+Zhang, S., Moeckel, R., Moreno, A. T., Shuai, B., \& Gao, J. (2020). A work-life conflict perspective on telework. \emph{Transportation Research Part A: Policy and Practice}, \emph{141}, 51--68.
+\end{cslreferences}
+
+\endgroup
+
+
+\end{document}

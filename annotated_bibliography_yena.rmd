@@ -1,0 +1,93 @@
+---
+title             : "Annotated Bibliography 1"
+shorttitle        : "Annotated Bibliography"
+
+author: 
+  - name          : "Yena Li"
+    affiliation   : "1"
+    corresponding : yes    # Define only one corresponding author
+    email         : "yli07@smith.edu"
+
+affiliation:
+  - id            : "1"
+    institution   : "Smith College"
+  
+keywords          : "keywords"
+wordcount         : "X"
+
+bibliography      : ["r-references-ab1.bib","lit-review.bib"]
+
+floatsintext      : no
+figurelist        : no
+tablelist         : no
+footnotelist      : no
+linenumbers       : no
+mask              : no
+draft             : no
+
+documentclass     : "apa6"
+classoption       : "man"
+output            : papaja::apa6_pdf
+---
+
+```{r setup, include = FALSE}
+library("papaja")
+r_refs("r-references-yena.bib")
+cite_r("r-references-yena.bib")
+```
+
+```{r analysis-preferences}
+# Seed for random number generation
+set.seed(42)
+knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
+```
+
+**Division of Household Labor and Marital Satisfaction in China, Japan, and Korea**
+
+@oshio2013division
+
+The purpose of this paper is to compare the relationship between division of household labor and marital satisfaction in three of the countries in Asia (China, Japan, and Korea). The researchers used data collected using General Social Surveys(GSS) in 2006. After exclusion, the data included 2,287 respondents from the CGSS (China), 911 from the JGSS (Japan), and 945 from the KGSS (Korea). In-person interviews were used in surveys for all three countries, and the survey for Japan also included self-administered questionnaires. After thorough analysis, the researchers made four main observations. First, agreeing with observations made with U.S. data, marital satisfaction of wives was negatively correlated with the burden of housework they take on. Second, this study suggests that women’s fertility may be affected by taking care of a bigger portion of the housework. There was also increasing instability in marriages across the three countries. Finally, the researchers noted that even though there were many similarities in the relationship between household labor and marital satisfaction across countries, the differences were also significant.
+
+Although the population is from another region, it looks at the impact of division of household labor on marital satisfaction, with a focus on the wives. We are also interested in how the interaction of gender and fairness of chore divisions might affect the marital satisfaction. It would also be interesting to compare and contrast the result from the data set that we have, and what they have concluded. 
+
+**A work-life conflict perspective on telework**
+
+@zhang2020work
+
+The researchers that conducted this study wanted to investigate whether it is less likely for married males or fathers to telework when they have work-family conflict. They also wanted to examine if females in the same situation (married or have children) would be more likely to telework when encountering a work-family conflict. The data of this study was collected from the survey “German Microcensus 2010” and only included people that worked within German (n = 188,081). According to their analysis, unrelated to gender or marital status, people that have children are less likely to telework than people without children. Among the participants that don’t have children, males are more likely to telework females, and it is more likely for people that are single to telework compared to people that are married. However, for employed parents with children, females are more likely to telework, and it is more likely for partnered parents to telework compared to single parents. This suggests that children are an important factor in a person’s division to telework when encountering work-family conflicts.
+
+This study looks at under what kind of situations an individual would choose to telework, which is the other direction of what we are trying to investigate in our study (we are going to be investigating the effects of telework). Although it is not directly related to our study, we could get some important insight from looking at this perspective, to develop our study and hypothesis. 
+
+
+**Couples’ Division of Employment and Household Chores and Relationship Satisfaction: A Test of the Specialization and Equity Hypotheses**
+
+@blom2017couples
+
+This paper had several hypotheses: 1) the scientists proposed that people’s higher level of relationship satisfaction is related to the lower level of specialization in a family; 2) they also wanted to investigate the role of egalitarian gender attitudes and suggested that specialization in a family might have a less positive effect on people with egalitarian gender attitudes than people with a more traditional gender role attitudes; 3) the researchers suggest that compared to people without young children, specialization in family might have a less negative effect for people in family with young children; 4) relationship satisfaction has a positive correlation with equity in hours in a family; 5) compared to people with traditional gender role attitudes, the influence of hours-equity in family might be more positive on relationship satisfaction for people with egalitarian gender role attitudes; 6) compared to people without children, people with children might experience a more positive influence. Data used in this study was obtained from BHPS (British Household Panel Survey) and participants less than 25 or more than 60 years old, along with the missing data, were excluded from the database. Interviews were held with the participants and they were re-interviewed in the following years. In the end, the database consisted of 4102 relationships and 21302 observations. The researchers concluded that men with egalitarian gender role attitudes were less satisfied than men with traditional gender role attitudes when the household labour division was specialized and not balanced. When children were involved, the positive link between relationship satisfaction and specialization was not strong compared to when there are no children involved. They also found that women’s relationship satisfaction was not influenced by hours-equity or specialization, and that only men seemed to be affected by it. 
+
+This study investigated how division of household labor would affect couples' relationships and examined a factor for why a difference might occur in the same gender population (traditional man vs. egalitarian man). This is something that is not considered in our study, but could play a role in affecting our result. Future research could try to incorporate and measure this factor in the study.
+
+
+**WELL . . . SHE WANTS IT MORE: PERCEPTIONS OF SOCIAL NORMS ABOUT DESIRES FOR MARRIAGE AND CHILDREN AND ANTICIPATED CHORE PARTICIPATION**
+
+@erchull2010well
+
+The researchers hypothesized that the difference between man and woman in terms of the desires for marriage and having children are small, and that man’s desires for marriage and children would be higher in reality than what is believed in the society. In contrast, women’s desire for marriage and children would be lower in reality than what is believed in the society. The researchers also proposed that for men and women, the relationship between desire for marriage and children and anticipation of household labor or child care is different. After online and on campus (colleges and universities in Virginia), a total of 355 women and 111 men between the ages of 17-28 participated in this study. After receiving consent from the participants, they were asked to fill out an online survey which included questions on demographics, an attitude towards women scale, a drive to marry scale, a drive to have children scale, and a chore list. Finally, participants were debriefed by the researchers. After data analysis, the researchers’ first hypothesis was supported by the data and the difference between man and woman in terms of the desire for marriage and having children is very subtle. They also found that both female and male participants perceived the typical female’s desire for marriage and children to be higher than in reality while perceiving the typical male’s desire for both to be lower than in reality. Finally, researchers suggested that the desire for marriage predicted anticipated household labour participation for females, but not for males. Similarly, the desire for children predicted anticipated child care work participation for females, but not for males.
+
+Although this study doesn’t relate directly to what we are investigating in our study, I find the perspective of it interesting. This (desire for marriage and children) is another factor that is not taken into consideration in our study, but would be interesting to be included as a possible mediator for self-perceived chore fairness in the future.
+
+
+\
+\
+This assignment has used R [Version 4.0.3; @R-base] and the R-package *papaja* [Version 0.1.0.9997; @R-papaja] in this proposal.
+
+\newpage
+
+# References
+
+\begingroup
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+
+<div id="refs" custom-style="Bibliography"></div>
+\endgroup
