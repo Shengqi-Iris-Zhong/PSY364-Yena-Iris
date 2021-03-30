@@ -1,0 +1,260 @@
+---
+title: "Scales"
+author: "Yena Li"
+date: "3/28/2021"
+output: html_document
+---
+
+These are instructions for computing **scale scores** of constructs, e.g., marital quality: love, to be used in subsequent analyses. If you want to use the marital quality scale (which consists of **items**, w11mar1_A - w11mar25_A) you will first need to create scale scores for the 4 sub-scales: Love, Maintenance, Conflict, and Ambivalence.
+
+
+```{r, message=FALSE}
+library(dplyr)
+library(tidyverse)
+library(psych)
+library(here)
+```
+
+```{r import data}
+# import premeasures
+prem <- read.csv(here("TeleCom_Dyad_premeasures.csv"))
+# import daily diary
+diary <- read.csv(here("TeleCom_Dyad_dailydiary.csv"))
+```
+
+```{r}
+diary$RecordedDate <- as.Date(diary$RecordedDate, format = '%m/%d/%y %H:%M')
+```
+
+
+
+# Step 0: add day 1-14 to diary data
+
+```{r}
+diary <- diary %>%
+  mutate(partID = case_when(partID_given == "" ~ partID,
+                            partID_given != "" ~ partID_given),
+         partID = str_replace_all(partID, " ", ""),
+         partID = str_replace_all(partID, ":", ""),
+         partID = str_replace(partID, "R-", "R_"),
+         partID = ifelse(str_starts(partID,"R", negate = T ),
+                         paste0("R_",partID), partID))
+```
+
+
+```{r}
+diary %>%
+  group_by(partID) %>%
+  arrange(RecordedDate, .by_group = T) %>%
+  filter(n() != 14)
+```
+
+
+
+#Step 1: Look at the correlation matrix for each sub-scale
+
+
+
+## Qmi
+
+### 1.Re-code for "Not true about me" = 1, "A little true about me" = 2, "Somewhat true about me" = 3, "Mostly true about me" = 4
+
+```{r, warning = F}
+diary <- diary %>%
+  mutate(qmi1.r = recode(qmi1, "Not true about me" = 1, "A little true about me" = 2, "Somewhat true about me" = 3, "Mostly true about me" = 4),
+         qmi2.r = recode(qmi2, "Not true about me" = 1, "A little true about me" = 2, "Somewhat true about me" = 3, "Mostly true about me" = 4),
+         qmi3.r = recode(qmi3, "Not true about me" = 1, "A little true about me" = 2, "Somewhat true about me" = 3, "Mostly true about me" = 4),
+         qmi4.r = recode(qmi4, "Not true about me" = 1, "A little true about me" = 2, "Somewhat true about me" = 3, "Mostly true about me" = 4))
+```
+
+
+
+### 2.Corr.Matrix
+
+```{r}
+# QMI reliability for all data
+corr.test(select(diary, qmi1.r, qmi2.r, qmi3.r, qmi4.r))$r
+```
+
+# Separate days for QMI
+
+```{r}
+diary_day1 <- diary %>%
+  filter()
+```
+
+
+
+
+
+## Gender role belief scale
+
+### 1.Re-code for "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5
+
+```{r, warning = F}
+prem <- prem %>%
+  mutate(grbs_1.r = recode(grbs_1,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+         grbs_2.r = recode(grbs_2,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+         grbs_3.r = recode(grbs_3,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+         grbs_4.r = recode(grbs_4,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+         grbs_5.r = recode(grbs_5,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+         grbs_6.r = recode(grbs_6,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+         grbs_7.r = recode(grbs_7,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+         grbs_8.r = recode(grbs_8,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+         grbs_9.r = recode(grbs_9,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+         grbs_10.r = recode(grbs_10,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+         grbs_11.r = recode(grbs_11,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+         grbs_12.r = recode(grbs_12,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+         grbs_13.r = recode(grbs_13,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+         grbs_14.r = recode(grbs_14,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+         grbs_15.r = recode(grbs_15,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+         grbs_16.r = recode(grbs_16,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+          grbs_17.r = recode(grbs_17,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+         grbs_18.r = recode(grbs_18,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+         grbs_19.r = recode(grbs_19,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+         grbs_20.r = recode(grbs_20,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5))
+```
+
+
+
+
+### 2.Corr.Matrix
+
+```{r}
+#grbs`
+corr.test(select(prem, grbs_1.r, grbs_2.r, grbs_3.r, grbs_4.r, grbs_5.r, grbs_6.r, grbs_7.r, grbs_8.r, grbs_9.r, grbs_10.r, grbs_11.r, grbs_12.r, grbs_13.r, grbs_14.r, grbs_15.r, grbs_16.r, grbs_17.r, grbs_18.r, grbs_19.r, grbs_20.r))$r
+```
+
+#Step 2: Reverse scaore any items that need it
+
+Based on the correlation matrices you computed above, decide if you need to reverse code any variables. In this case, we do not. But in many other situations you will need to. As an example, you can use the following code to reverse the second item. Note the `.r` added to the new variable. 
+
+Needs to be revised: 2,3,7,10,12,17
+
+```{r}
+prem <- prem %>%
+  mutate(grbs_2.r = (1 + 5) - grbs_2.r)
+```
+
+```{r}
+prem <- prem %>%
+  mutate(grbs_3.r = (1 + 5) - grbs_3.r)
+```
+
+```{r}
+prem <- prem %>%
+  mutate(grbs_7.r = (1 + 5) - grbs_7.r)
+```
+
+```{r}
+prem <- prem %>%
+  mutate(grbs_10.r = (1 + 5) - grbs_10.r)
+```
+
+```{r}
+prem <- prem %>%
+  mutate(grbs_12.r = (1 + 5) - grbs_12.r)
+```
+
+```{r}
+prem <- prem %>%
+  mutate(grbs_17.r = (1 + 5) - grbs_17.r)
+```
+
+#Step 3: Look at correlation matrix again, this time using reversed items
+
+```{r, eval = FALSE}
+corr.test(select(prem, grbs_1.r, grbs_2.r, grbs_3.r, grbs_4.r, grbs_5.r, grbs_6.r, grbs_7.r, grbs_8.r, grbs_9.r, grbs_10.r, grbs_11.r, grbs_12.r, grbs_13.r, grbs_14.r, grbs_15.r, grbs_16.r, grbs_17.r, grbs_18.r, grbs_19.r, grbs_20.r))$r
+```
+
+```{r}
+library(corrplot)
+grbs_corr <- corr.test(select(prem, grbs_1.r, grbs_2.r, grbs_3.r, grbs_4.r, grbs_5.r, grbs_6.r, grbs_7.r, grbs_8.r, grbs_9.r, grbs_10.r, grbs_11.r, grbs_12.r, grbs_13.r, grbs_14.r, grbs_15.r, grbs_16.r, grbs_17.r, grbs_18.r, grbs_19.r, grbs_20.r))$r
+corrplot(grbs_corr,tl.col = "black", tl.srt = 30)
+```
+
+
+
+```{r}
+alpha(select(prem, grbs_1.r, grbs_2.r, grbs_3.r, grbs_4.r, grbs_5.r, grbs_6.r, grbs_7.r, grbs_8.r, grbs_9.r, grbs_10.r, grbs_11.r, grbs_12.r, grbs_13.r, grbs_14.r, grbs_15.r, grbs_16.r, grbs_17.r, grbs_18.r, grbs_19.r, grbs_20.r))
+```
+
+
+
+
+
+#Step 4: Once all of teh correaltions are positive, calculate the reliability, using revsered items. 
+
+You want to look at `raw_alpha` in the output!
+
+```{r}
+alpha(select(diary, qmi1.r, qmi2.r, qmi3.r, qmi4.r))
+```
+
+Ideally the reliabilities would be above .70. In this case, the reliabilities for conflict and maintenance are less than .70. There's not much as can do about this, besides dropping an item or two. Note that if you drop mar15 from the conflict scale, the reliability would go up to .68. This is your call. 
+
+#Step 5: If alpha is >=.70, calculate the scale scores. 
+
+You'll want to calclate scale scores for both the actor `_A` and partner variables `_P`.
+
+```{r}
+#Love
+Goldberg_rutendo$w11love_A <- rowMeans(select(Goldberg_rutendo, w11Mar1_A, w11mar3_A, 
+                                              w11mar5_A, w11mar6_A, w11mar8_A, w11mar9_A, 
+                                              w11mar10_A, w11mar11_A, w11mar12_A, 
+                                              w11mar13_A), na.rm = TRUE)
+
+Goldberg_rutendo$w11love_P <- rowMeans(select(Goldberg_rutendo, w11Mar1_P, w11mar3_P, 
+                                              w11mar5_P, w11mar6_P, w11mar8_P, w11mar9_P, 
+                                              w11mar10_P, w11mar11_P, w11mar12_P, 
+                                              w11mar13_P), na.rm = TRUE)
+```
+
+```{r}
+#Conflict
+Goldberg_rutendo$w11conflict_A <- rowMeans(select(Goldberg_rutendo,w11mar2_A, w11mar4_A, 
+                                                  w11mar7_A, w11mar14_A, 
+                                                  w11mar15_A), na.rm = TRUE)
+                                           
+Goldberg_rutendo$w11conflict_P <- rowMeans(select(Goldberg_rutendo,w11mar2_P, w11mar4_P, 
+                                                  w11mar7_P, w11mar14_P, 
+                                                  w11mar15_P), na.rm = TRUE)
+```
+
+```{r}
+#Ambivalence
+Goldberg_rutendo$w11ambiv_A <- rowMeans(select(Goldberg_rutendo,w11mar16_A, w11mar18_A, 
+                                               w11mar21_A, w11mar22_A, 
+                                               w11mar24_A), na.rm = TRUE)
+
+Goldberg_rutendo$w11ambiv_P <- rowMeans(select(Goldberg_rutendo,w11mar16_P, 
+                                               w11mar18_P, w11mar21_P, w11mar22_P, 
+                                               w11mar24_P), na.rm = TRUE)
+```
+
+```{r}
+#Maintenance
+Goldberg_rutendo$w11maint_A <- rowMeans(select(Goldberg_rutendo,w11mar17_A, 
+                                               w11mar19_A, w11mar20_A, w11mar23_A, 
+                                               w11mar25_A), na.rm = TRUE)
+
+Goldberg_rutendo$w11maint_P <- rowMeans(select(Goldberg_rutendo,w11mar17_P, 
+                                               w11mar19_P, w11mar20_P, w11mar23_P, 
+                                               w11mar25_P), na.rm = TRUE)
+```
+
+#Step 6: Go forth and use your variable!
+
+```{r, warning=FALSE, message=FALSE}
+library(ggplot2)
+library(mosaic)
+```
+
+```{r}
+qplot(x = w11love_A, data = Goldberg_rutendo, bins = 12)
+```
+
+```{r}
+favstats(w11love_A ~ as.factor(sexor), data = Goldberg_rutendo)
+```
+
