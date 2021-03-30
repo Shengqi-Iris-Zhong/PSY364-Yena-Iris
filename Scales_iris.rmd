@@ -42,13 +42,47 @@ diary <- diary %>%
 ```
 
 
+
 ```{r}
-diary %>%
-  group_by(partID) %>%
-  arrange(RecordedDate, .by_group = T) %>%
-  filter(n() != 14)
+diary <- diary %>%
+  mutate(day_num = case_when(day == "Monday" ~ 1,
+                             day == "Tuesday" ~ 2,
+                             day == "Wednesday" ~ 3,
+                             day == "Thursday" ~ 4,
+                             day == "Friday" ~ 5,
+                             day == "Saturday" ~ 6,
+                             day == "Sunday" ~ 7))
 ```
 
+
+
+```{r}
+diary1 <- diary %>%
+  group_by(partID,day_num) %>%
+  arrange(RecordedDate, .by_group = T) %>%
+  #filter(n() != 14) %>%
+  mutate(week_num = seq_along(day_num)) %>%
+  select(partID, dyadID, week_num, day, day_num, RecordedDate)
+```
+
+```{r}
+diary1
+  
+```
+
+
+```{r}
+diary1 <- diary1 %>%
+  ungroup() %>%
+  group_by(partID) %>%
+  arrange(RecordedDate, .by_group = T) %>%
+  mutate(day_index = seq_along(day))
+
+  
+  
+  #mutate(obsid = day_index+14*(dyadID-1))
+
+```
 
 
 #Step 1: Look at the correlation matrix for each sub-scale

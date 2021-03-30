@@ -24,15 +24,12 @@ prem$r_length <- as.Date(as.character(prem$RecordedDate), format="%m/%d/%y")-
 ```
 
 ```{r}
+prem$r_in_years <- as.numeric(prem$r_length) 
 prem <- prem %>%
-  mutate(r_in_years = r_length/365)
+  mutate(r_in_years = r_in_years/365)
 ```
 
 # Relationship length summary
-
-```{r}
-prem$r_in_years <- as.numeric(prem$r_in_years, units="year")
-```
 
 ```{r}
 summary(prem$r_in_years)
