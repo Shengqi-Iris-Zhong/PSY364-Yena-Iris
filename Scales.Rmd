@@ -215,32 +215,11 @@ alpha(select(diary, qmi1.r, qmi2.r, qmi3.r, qmi4.r))
 
 Ideally the reliabilities would be above .70. In this case, the reliabilities for conflict and maintenance are less than .70. There's not much as can do about this, besides dropping an item or two. Note that if you drop mar15 from the conflict scale, the reliability would go up to .68. This is your call. 
 
-#Step 5: If alpha is >=.70, calculate the scale scores. 
-
-You'll want to calclate scale scores for both the actor `_A` and partner variables `_P`.
-
-```{r}
-#Love
-Goldberg_rutendo$w11love_A <- rowMeans(select(Goldberg_rutendo, w11Mar1_A, w11mar3_A, 
-                                              w11mar5_A, w11mar6_A, w11mar8_A, w11mar9_A, 
-                                              w11mar10_A, w11mar11_A, w11mar12_A, 
-                                              w11mar13_A), na.rm = TRUE)
-
-Goldberg_rutendo$w11love_P <- rowMeans(select(Goldberg_rutendo, w11Mar1_P, w11mar3_P, 
-                                              w11mar5_P, w11mar6_P, w11mar8_P, w11mar9_P, 
-                                              w11mar10_P, w11mar11_P, w11mar12_P, 
-                                              w11mar13_P), na.rm = TRUE)
-```
+#Step 5: If alpha is >=.70, calculate the scale scores.  
 
 ```{r}
 #Conflict
-Goldberg_rutendo$w11conflict_A <- rowMeans(select(Goldberg_rutendo,w11mar2_A, w11mar4_A, 
-                                                  w11mar7_A, w11mar14_A, 
-                                                  w11mar15_A), na.rm = TRUE)
-                                           
-Goldberg_rutendo$w11conflict_P <- rowMeans(select(Goldberg_rutendo,w11mar2_P, w11mar4_P, 
-                                                  w11mar7_P, w11mar14_P, 
-                                                  w11mar15_P), na.rm = TRUE)
+prem$grbs <- rowMeans(select(prem, grbs_1.r, grbs_2.r, grbs_3.r, grbs_4.r, grbs_5.r, grbs_6.r, grbs_7.r, grbs_8.r, grbs_9.r, grbs_10.r, grbs_11.r, grbs_12.r, grbs_13.r, grbs_14.r, grbs_15.r, grbs_16.r, grbs_17.r, grbs_18.r, grbs_19.r, grbs_20.r), na.rm = TRUE)
 ```
 
 ```{r}
