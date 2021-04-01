@@ -12,6 +12,8 @@ These are instructions for computing **scale scores** of constructs, e.g., marit
 library(dplyr)
 library(psych)
 library(here)
+library(ggplot2)
+library(nlme)
 ```
 
 #Step 1: Look at the correlation matrix for each sub-scale
@@ -210,7 +212,11 @@ corr.test(select(prem, grbs_1.r, grbs_2.r, grbs_3.r, grbs_4.r, grbs_5.r, grbs_6.
 You want to look at `raw_alpha` in the output!
 
 ```{r}
-alpha(select(diary, qmi1.r, qmi2.r, qmi3.r, qmi4.r))
+psych::alpha(select(diary, qmi1.r, qmi2.r, qmi3.r, qmi4.r))
+```
+
+```{r}
+psych::alpha(select(prem, grbs_1.r, grbs_2.r, grbs_3.r, grbs_4.r, grbs_5.r, grbs_6.r, grbs_7.r, grbs_8.r, grbs_9.r, grbs_10.r, grbs_11.r, grbs_12.r, grbs_13.r, grbs_14.r, grbs_15.r, grbs_16.r, grbs_17.r, grbs_18.r, grbs_19.r, grbs_20.r))
 ```
 
 Ideally the reliabilities would be above .70. In this case, the reliabilities for conflict and maintenance are less than .70. There's not much as can do about this, besides dropping an item or two. Note that if you drop mar15 from the conflict scale, the reliability would go up to .68. This is your call. 
@@ -218,44 +224,60 @@ Ideally the reliabilities would be above .70. In this case, the reliabilities fo
 #Step 5: If alpha is >=.70, calculate the scale scores.  
 
 ```{r}
-#Conflict
-prem$grbs <- rowMeans(select(prem, grbs_1.r, grbs_2.r, grbs_3.r, grbs_4.r, grbs_5.r, grbs_6.r, grbs_7.r, grbs_8.r, grbs_9.r, grbs_10.r, grbs_11.r, grbs_12.r, grbs_13.r, grbs_14.r, grbs_15.r, grbs_16.r, grbs_17.r, grbs_18.r, grbs_19.r, grbs_20.r), na.rm = TRUE)
+#qmi
+diary$qmi_ss <- rowMeans(select(diary, qmi1.r, qmi2.r, qmi3.r, qmi4.r), na.rm = TRUE)
 ```
 
 ```{r}
-#Ambivalence
-Goldberg_rutendo$w11ambiv_A <- rowMeans(select(Goldberg_rutendo,w11mar16_A, w11mar18_A, 
-                                               w11mar21_A, w11mar22_A, 
-                                               w11mar24_A), na.rm = TRUE)
+#grbs
+prem$grbs_ss <- rowMeans(select(prem, grbs_1.r, grbs_2.r, grbs_3.r, grbs_4.r, grbs_5.r, grbs_6.r, grbs_7.r, grbs_8.r, grbs_9.r, grbs_10.r, grbs_11.r, grbs_12.r, grbs_13.r, grbs_14.r, grbs_15.r, grbs_16.r, grbs_17.r, grbs_18.r, grbs_19.r, grbs_20.r), na.rm = TRUE)
+```
 
-Goldberg_rutendo$w11ambiv_P <- rowMeans(select(Goldberg_rutendo,w11mar16_P, 
-                                               w11mar18_P, w11mar21_P, w11mar22_P, 
-                                               w11mar24_P), na.rm = TRUE)
+# ICC
+
+```{r}
+qmi_mod <- gls(qmi_ss ~ 1, 
+                 na.action=na.omit, 
+                 correlation=corCompSymm (form=~1|dyadID), 
+                 data=diary)
 ```
 
 ```{r}
-#Maintenance
-Goldberg_rutendo$w11maint_A <- rowMeans(select(Goldberg_rutendo,w11mar17_A, 
-                                               w11mar19_A, w11mar20_A, w11mar23_A, 
-                                               w11mar25_A), na.rm = TRUE)
-
-Goldberg_rutendo$w11maint_P <- rowMeans(select(Goldberg_rutendo,w11mar17_P, 
-                                               w11mar19_P, w11mar20_P, w11mar23_P, 
-                                               w11mar25_P), na.rm = TRUE)
+grbs_mod <- gls(grbs_ss ~ 1, 
+                 na.action=na.omit, 
+                 correlation=corCompSymm (form=~1|dyadID), 
+                 data=prem)
 ```
 
-#Step 6: Go forth and use your variable!
+We use gls as it allows us to correlate the errors of the two members.
 
-```{r, warning=FALSE, message=FALSE}
-library(ggplot2)
-library(mosaic)
-```
+gls Statement Explained  
+
+`empty_mod =`                             object name where the results are located   
+`gls()`                                    statistical procedure used  
+`tension_A ~`                              outcome variable name in the dataset    
+`genderE_A,`                   predictors variables in the dataset 
+`na.action=na.omit,`                       needed if there are missing data  
+`correlation=corCompSymm (form=~1|cuplid),`  correlates errors of the two members from the same dyad, Dyad is the ID variable for dyad      
+`data=acitelli_pair`                              name of the dataset in R (see above)      
+
+
+##Output
 
 ```{r}
-qplot(x = w11love_A, data = Goldberg_rutendo, bins = 12)
+summary(qmi_mod)
+```
+```{r}
+summary(grbs_mod)
 ```
 
+To look at the measure of nonindependence, which can be accessed by:
+
 ```{r}
-favstats(w11love_A ~ as.factor(sexor), data = Goldberg_rutendo)
+coef(empty_mod$model$corStruct, unconstrained = FALSE)
+```
+
+This is partial intraclass correlation.  That is, it the correlations between the two members' perceptions of tension, controlling for both gender.   
+
 ```
 
