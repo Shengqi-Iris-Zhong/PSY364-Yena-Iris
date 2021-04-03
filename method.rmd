@@ -3,58 +3,32 @@ title             : "Method Draft"
 shorttitle        : "Method"
 
 author: 
-  - name          : "Iris"
+  - name          : "Iris Zhong"
     affiliation   : "1"
     corresponding : yes    # Define only one corresponding author
     address       : "Postal address"
     email         : "my@email.com"
-    role:         # Contributorship roles (e.g., CRediT, https://casrai.org/credit/)
-      - Conceptualization
-      - Writing - Original Draft Preparation
-      - Writing - Review & Editing
-  - name          : "Ernst-August Doelle"
-    affiliation   : "1,2"
-    role:
-      - Writing - Review & Editing
+
+
+  - name          : "Yena Li"
+    affiliation   : "1"
+
 
 affiliation:
   - id            : "1"
-    institution   : "Wilhelm-Wundt-University"
-  - id            : "2"
-    institution   : "Konstanz Business School"
+    institution   : "Smith College"
 
-authornote: |
-  Add complete departmental affiliations for each author here. Each new line herein must be indented, like this line.
 
-  Enter author note here.
-
-abstract: |
-  One or two sentences providing a **basic introduction** to the field,  comprehensible to a scientist in any discipline.
-  
-  Two to three sentences of **more detailed background**, comprehensible  to scientists in related disciplines.
-  
-  One sentence clearly stating the **general problem** being addressed by  this particular study.
-  
-  One sentence summarizing the main result (with the words "**here we show**" or their equivalent).
-  
-  Two or three sentences explaining what the **main result** reveals in direct comparison to what was thought to be the case previously, or how the  main result adds to previous knowledge.
-  
-  One or two sentences to put the results into a more **general context**.
-  
-  Two or three sentences to provide a **broader perspective**, readily comprehensible to a scientist in any discipline.
-  
-  <!-- https://tinyurl.com/ybremelq -->
-  
 keywords          : "keywords"
 wordcount         : "X"
 
-bibliography      : ["r-references-method.bib"]
+bibliography      : ["r-references-method.bib","psych-references.bib"]
 
 floatsintext      : no
 figurelist        : no
 tablelist         : no
 footnotelist      : no
-linenumbers       : yes
+linenumbers       : no
 mask              : no
 draft             : no
 
@@ -65,7 +39,16 @@ output            : papaja::apa6_pdf
 
 ```{r setup, include = FALSE}
 library("papaja")
+library("tidyverse")
+library("tidyr")
+library(mosaic)
+library(ggplot2)
+library(here)
+library(stargazer)
+library(psychTools)
+library(furniture)
 r_refs("r-references-method.bib")
+cite_r("r-references-method.bib")
 ```
 
 ```{r analysis-preferences}
@@ -75,26 +58,13 @@ knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
 ```
 
 
-
-# Methods
-
-
-```{r load libraries}
-library(tidyverse)
-library(tidyr)
-library(mosaic)
-library(ggplot2)
-library(here)
-library(stargazer)
-library(psychTools)
-library(furniture)
-```
-
 ```{r import data}
 # import premeasures
 prem <- read.csv("TeleCom_Dyad_premeasures.csv",fileEncoding = 'UTF-8-BOM')
 # import daily diary
 diary <- read.csv(here("TeleCom_Dyad_dailydiary.csv"))
+
+clean_diary <- read.csv(here("clean_diary.csv"))
 ```
 
 ```{r clean partID, include = F}
@@ -146,69 +116,92 @@ prem_select <- prem_select %>%
          gender = as.factor(gender))
 ```
 
+```{r, include = F}
+# number of individuals/dyads in prem/diary
+prem_calc <- clean_diary %>%
+               group_by(dyadID) %>%
+               mutate(label = cur_group_id())
 
+max(prem_calc$label)
 
-```{r, results = 'asis'}
-stargazer(prem_select, type = "latex")
 ```
+
+```{r characteristics, include = F}
+fav_stats(prem_select$age)
+fav_stats(prem_select$r_years)
+fav_stats(prem_select$childnum)
+fav_stats(prem_select$income)
+```
+
+# Measures
+
+## Quality Marriage Index (QMI)
+The QMI assesses the behavior and attitude of couples in a romantic relationship and provides insight to couples’ satisfaction towards their relationships [@norton1983measuring]. Four of the questions on the scale were used in this study. Example items include, “Today, we have a good relationship,” and “Today, my relationship with my partner makes me happy,” measured on a 1 (not true about me), to 4 (mostly true about me) scale. The scale was reliable, with the overall cronbach's alpha = 0.96. Cronbach’s alpha on each day ranges from xx to xx. The intraclass correlation (ICC) for the QMI was large, ICC = 0.66. ICC on each day spans from xx to xx.
+
+## Gender Role Belief Scale (GRBS)
+The GRBS measures one’s gender ideology, which is his or her beliefs for what men and women’s role in the society should be, and his or her attitude towards men and women [@kerr1996development]. All twenty questions on the scale were included in this study. Example items include, “It is disrespectful for a man to swear in the presence of a lady,” and “Women should have as much sexual freedom as man,” measured on a 1 (strongly disagree), to 5 (strongly agree) scale. The scale was reliable,  with the cronbach's alpha = 0.89. The intraclass correlation (ICC) for this scale was large, ICC = 0.63.
+
+
+# Participants
+
+In sum, 364 people from 182 pairs of couples filled out the pre-measure survey. Then, 263 people from 155 dyads participated in the daily diary survey, producing 3482 responses in total. Responses with entry error (wrong day of the week, extra or redundant data, survey finished in different weeks within the dyads) were removed, leaving 2745 valid responses from 211 individuals in 127 dyads. The actor-partner independence model is unable to operate in situations where on a particular day, only one person from the couple fills out the diary. Therefore, xx people of xx dyads were further excluded. The final dataset consisted of xx people from xx dyads, with xx same-sex couples and xx heterosexual couples. 
+
+*Table 1* shows the sample demographics in terms of participants’ gender, telework status, age, relationship length, race, number of children (less than 13 years old) at home, and income level (**Note: Table 1 shows data from pre-measure dataset without any exclusion. We will update this part after the dataset is fully cleaned.**) There were 185 female and 179 male in this sample. Participants’ age varied from 26 to 74 years, with an average of 45.80 (*SD = 8.35*). Their relationship length was approximately 18.45 years on average (*SD = 10.19*). Due to the pandemic, more than 60% of the respondents teleworked. The sample consisted of 269 White or European Americans, 24 Black or African Americans, 37 Asian or Asian Americans, 21 Latinx or Hispanic, 4 Middle Eastern, 4 identified as both White or European American and Latinx or Hispanic, 1 identified as other race or ethnicity, and 4 preferred not to answer. On average, the participants had 0.8 children raised in the household (*SD = 1.35*). The average income level of the sample was 76618.8 dollars (*SD = 105,704.1*). 
+
 
 
 ```{r, results = "asis"}
-table1(prem_select, gender, age, r_years, race, childnum, income, splitby = ~telework, format_number = T, output = "markdown")
+#table1(prem_select, gender, age, telework,r_years, race, childnum, income, format_number = T, na.rm = FALSE, output = "latex2")
   
 ```
 
 
-\begin{table}[!htbp] \centering 
-  \caption{} 
-  \label{} 
-\begin{tabular}{@{\extracolsep{5pt}}lccccccc} 
-\\[-1.8ex]\hline 
-\hline \\[-1.8ex] 
-Statistic & \multicolumn{1}{c}{N} & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{St. Dev.} & \multicolumn{1}{c}{Min} & \multicolumn{1}{c}{Pctl(25)} & \multicolumn{1}{c}{Pctl(75)} & \multicolumn{1}{c}{Max} \\ 
-\hline \\[-1.8ex] 
-dyadID & 364 & 26,018,185.000 & 9,455,389.000 & 377,033 & 28,947,773 & 31,423,023 & 33,735,733 \\ 
-age & 364 & 45.802 & 8.350 & 26 & 39 & 52 & 74 \\ 
-r\_years & 360 & 18.448 & 10.192 & $-$48.074 & 11.813 & 23.205 & 43.186 \\ 
-childnum & 364 & 0.830 & 1.346 & 0 & 0 & 1 & 12 \\ 
-income & 296 & 76,618.800 & 105,704.100 & 0.000 & 37,500.000 & 92,000.000 & 1,490,000.000 \\ 
-\hline \\[-1.8ex] 
-\end{tabular} 
-\end{table} 
-Show in New WindowClear OutputExpand/Collapse Output
+
+\
+\
+This assignment has used R [Version 4.0.3; @R-base] and the R-packages *dplyr* [Version 1.0.2; @R-dplyr], *forcats* [Version 0.5.0; @R-forcats], *ggformula* [Version 0.10.1; @R-ggformula], *ggplot2* [Version 3.3.2; @R-ggplot2], *ggridges* [Version 0.5.2; @R-ggridges], *ggstance* [Version 0.3.5; @R-ggstance], *here* [Version 1.0.1; @R-here], *lattice* [Version 0.20.41; @R-lattice], *Matrix* [Version 1.2.18; @R-Matrix], *mosaic* [Version 1.8.3; @R-mosaic; @R-mosaicData], *mosaicData* [Version 0.20.2; @R-mosaicData], *papaja* [Version 0.1.0.9997; @R-papaja], *psychTools* [Version 2.1.3; @R-psychTools], *purrr* [Version 0.3.4; @R-purrr], *readr* [Version 1.4.0; @R-readr], *RJ-2017-037* [@R-RJ-2017-037; @R-RJ-2017-037; @R-RJ-2017-037; @R-RJ-2017-037; @R-RJ-2017-037], *stargazer* [Version 5.2.2; @R-stargazer], *stringr* [Version 1.4.0; @R-stringr], *tibble* [Version 3.0.4; @R-tibble], *tidyr* [Version 1.1.2; @R-tidyr], and *tidyverse* [Version 1.3.0; @R-tidyverse].
+
 \begin{table}[ ht ] 
 \centering 
 \caption{}\label{}
-\begin{tabular}{ l c c }
+\begin{tabular}{ l c }
 \toprule
- &   \multicolumn{ 2 }{c}{ telework }\\ 
-  & 0 & 1 \\ 
- & n = 79 & n = 216 \\ 
+ &   \multicolumn{ 1 }{c}{ Total }\\ 
+ & n = 364 \\ 
  \midrule
-gender &   &  \\ 
-\hspace{6pt}    0 & 52 (65.8\%) & 101 (46.8\%)\\ 
-\hspace{6pt}    1 & 27 (34.2\%) & 115 (53.2\%)\\ 
-age &   &  \\ 
-\hspace{6pt}   & 46.7 (8.0) & 45.2 (8.5)\\ 
-r\_years &   &  \\ 
-\hspace{6pt}   & 17.6 (12.5) & 18.5 (9.4)\\ 
-race &   &  \\ 
-\hspace{6pt}    Asian or Asian American & 6 (7.6\%) & 25 (11.6\%)\\ 
-\hspace{6pt}    Black or African American & 7 (8.9\%) & 12 (5.6\%)\\ 
-\hspace{6pt}    Latinx or Hispanic & 4 (5.1\%) & 14 (6.5\%)\\ 
-\hspace{6pt}    Middle Eastern & 0 (0\%) & 2 (0.9\%)\\ 
-\hspace{6pt}    Other & 0 (0\%) & 1 (0.5\%)\\ 
-\hspace{6pt}    Prefer not to answer & 0 (0\%) & 2 (0.9\%)\\ 
-\hspace{6pt}    White or European American & 61 (77.2\%) & 159 (73.6\%)\\ 
-\hspace{6pt}    White or European American,Latinx or Hispanic & 1 (1.3\%) & 1 (0.5\%)\\ 
-childnum &   &  \\ 
-\hspace{6pt}   & 0.7 (0.9) & 0.9 (1.5)\\ 
-income &   &  \\ 
-\hspace{6pt}   & 62,494.7 (66,422.0) & 81,768.9 (116,748.9)\\ 
+gender &  \\ 
+\hspace{6pt}    male & 179 (49.2\%)\\ 
+\hspace{6pt}    female & 185 (50.8\%)\\ 
+\hspace{6pt}    \emph{missing} & 0 (0\%)\\ 
+age &  \\ 
+\hspace{6pt}   & 45.8 (8.4)\\ 
+telework &  \\ 
+\hspace{6pt}    no & 129 (35.4\%)\\
+\hspace{6pt}    yes & 235 (64.6\%)\\ 
+\hspace{6pt}    \emph{missing} & 0 (0\%)\\ 
+relationship\_length &  \\ 
+\hspace{6pt}   & 18.4 (10.2)\\ 
+race &  \\ 
+\hspace{6pt}    Asian or Asian American & 37 (10.2\%)\\ 
+\hspace{6pt}    Black or African American & 24 (6.6\%)\\ 
+\hspace{6pt}    Latinx or Hispanic & 21 (5.8\%)\\ 
+\hspace{6pt}    Middle Eastern & 4 (1.1\%)\\ 
+\hspace{6pt}    Other & 1 (0.3\%)\\ 
+\hspace{6pt}    Prefer not to answer & 4 (1.1\%)\\ 
+\hspace{6pt}    White or European American & 269 (73.9\%)\\ 
+\hspace{6pt}    White or European American,Latinx or Hispanic & 4 (1.1\%)\\ 
+\hspace{6pt}    \emph{missing} & 0 (0\%)\\ 
+number\_of\_children &  \\ 
+\hspace{6pt}   & 0.8 (1.3)\\ 
+income &  \\ 
+\hspace{6pt}   & 76,618.8 (105,704.1)\\ 
 \bottomrule
 
 \end{tabular}
 \end{table}
+
+
+
 
 
 
@@ -222,3 +215,5 @@ income &   &  \\
 
 <div id="refs" custom-style="Bibliography"></div>
 \endgroup
+
+

@@ -1,0 +1,297 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  english,
+  man]{apa6}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Method Draft},
+  pdfauthor={Iris Zhong1 \& Yena Li1},
+  pdflang={en-EN},
+  pdfkeywords={keywords},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+% Manuscript styling
+\usepackage{upgreek}
+\captionsetup{font=singlespacing,justification=justified}
+
+% Table formatting
+\usepackage{longtable}
+\usepackage{lscape}
+% \usepackage[counterclockwise]{rotating}   % Landscape page setup for large tables
+\usepackage{multirow}		% Table styling
+\usepackage{tabularx}		% Control Column width
+\usepackage[flushleft]{threeparttable}	% Allows for three part tables with a specified notes section
+\usepackage{threeparttablex}            % Lets threeparttable work with longtable
+
+% Create new environments so endfloat can handle them
+% \newenvironment{ltable}
+%   {\begin{landscape}\begin{center}\begin{threeparttable}}
+%   {\end{threeparttable}\end{center}\end{landscape}}
+\newenvironment{lltable}{\begin{landscape}\begin{center}\begin{ThreePartTable}}{\end{ThreePartTable}\end{center}\end{landscape}}
+
+% Enables adjusting longtable caption width to table width
+% Solution found at http://golatex.de/longtable-mit-caption-so-breit-wie-die-tabelle-t15767.html
+\makeatletter
+\newcommand\LastLTentrywidth{1em}
+\newlength\longtablewidth
+\setlength{\longtablewidth}{1in}
+\newcommand{\getlongtablewidth}{\begingroup \ifcsname LT@\roman{LT@tables}\endcsname \global\longtablewidth=0pt \renewcommand{\LT@entry}[2]{\global\advance\longtablewidth by ##2\relax\gdef\LastLTentrywidth{##2}}\@nameuse{LT@\roman{LT@tables}} \fi \endgroup}
+
+% \setlength{\parindent}{0.5in}
+% \setlength{\parskip}{0pt plus 0pt minus 0pt}
+
+% \usepackage{etoolbox}
+\makeatletter
+\patchcmd{\HyOrg@maketitle}
+  {\section{\normalfont\normalsize\abstractname}}
+  {\section*{\normalfont\normalsize\abstractname}}
+  {}{\typeout{Failed to patch abstract.}}
+\patchcmd{\HyOrg@maketitle}
+  {\section{\protect\normalfont{\@title}}}
+  {\section*{\protect\normalfont{\@title}}}
+  {}{\typeout{Failed to patch title.}}
+\makeatother
+\shorttitle{Method}
+\keywords{keywords\newline\indent Word count: X}
+\DeclareDelayedFloatFlavor{ThreePartTable}{table}
+\DeclareDelayedFloatFlavor{lltable}{table}
+\DeclareDelayedFloatFlavor*{longtable}{table}
+\makeatletter
+\renewcommand{\efloat@iwrite}[1]{\immediate\expandafter\protected@write\csname efloat@post#1\endcsname{}}
+\makeatother
+\usepackage{csquotes}
+\ifxetex
+  % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
+  \usepackage{polyglossia}
+  \setmainlanguage[]{english}
+\else
+  \usepackage[shorthands=off,main=english]{babel}
+\fi
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newenvironment{cslreferences}%
+  {\setlength{\parindent}{0pt}%
+  \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces}%
+  {\par}
+
+\title{Method Draft}
+\author{Iris Zhong\textsuperscript{1} \& Yena Li\textsuperscript{1}}
+\date{}
+
+
+\affiliation{\vspace{0.5cm}\textsuperscript{1} Smith College}
+
+\begin{document}
+\maketitle
+
+\hypertarget{measures}{%
+\section{Measures}\label{measures}}
+
+\hypertarget{quality-marriage-index-qmi}{%
+\subsection{Quality Marriage Index (QMI)}\label{quality-marriage-index-qmi}}
+
+The QMI assesses the behavior and attitude of couples in a romantic relationship and provides insight to couples' satisfaction towards their relationships (Norton, 1983). Four of the questions on the scale were used in this study. Example items include, ``Today, we have a good relationship,'' and ``Today, my relationship with my partner makes me happy,'' measured on a 1 (not true about me), to 4 (mostly true about me) scale. The scale was reliable, with the overall cronbach's alpha = 0.96. Cronbach's alpha on each day ranges from xx to xx. The intraclass correlation (ICC) for the QMI was large, ICC = 0.66. ICC on each day spans from xx to xx.
+
+\hypertarget{gender-role-belief-scale-grbs}{%
+\subsection{Gender Role Belief Scale (GRBS)}\label{gender-role-belief-scale-grbs}}
+
+The GRBS measures one's gender ideology, which is his or her beliefs for what men and women's role in the society should be, and his or her attitude towards men and women (Kerr \& Holden, 1996). All twenty questions on the scale were included in this study. Example items include, ``It is disrespectful for a man to swear in the presence of a lady,'' and ``Women should have as much sexual freedom as man,'' measured on a 1 (strongly disagree), to 5 (strongly agree) scale. The scale was reliable, with the cronbach's alpha = 0.89. The intraclass correlation (ICC) for this scale was large, ICC = 0.63.
+
+\hypertarget{participants}{%
+\section{Participants}\label{participants}}
+
+In sum, 364 people from 182 pairs of couples filled out the pre-measure survey. Then, 263 people from 155 dyads participated in the daily diary survey, producing 3482 responses in total. Responses with entry error (wrong day of the week, extra or redundant data, survey finished in different weeks within the dyads) were removed, leaving 2745 valid responses from 211 individuals in 127 dyads. The actor-partner independence model is unable to operate in situations where on a particular day, only one person from the couple fills out the diary. Therefore, xx people of xx dyads were further excluded. The final dataset consisted of xx people from xx dyads, with xx same-sex couples and xx heterosexual couples.
+
+\emph{Table 1} shows the sample demographics in terms of participants' gender, telework status, age, relationship length, race, number of children (less than 13 years old) at home, and income level (\textbf{Note: Table 1 shows data from pre-measure dataset without any exclusion. We will update this part after the dataset is fully cleaned.}) There were 185 female and 179 male in this sample. Participants' age varied from 26 to 74 years, with an average of 45.80 (\emph{SD = 8.35}). Their relationship length was approximately 18.45 years on average (\emph{SD = 10.19}). Due to the pandemic, more than 60\% of the respondents teleworked. The sample consisted of 269 White or European Americans, 24 Black or African Americans, 37 Asian or Asian Americans, 21 Latinx or Hispanic, 4 Middle Eastern, 4 identified as both White or European American and Latinx or Hispanic, 1 identified as other race or ethnicity, and 4 preferred not to answer. On average, the participants had 0.8 children raised in the household (\emph{SD = 1.35}). The average income level of the sample was 76618.8 dollars (\emph{SD = 105,704.1}).
+
+\hfill\break
+\hfill\break
+This assignment has used R (Version 4.0.3; R Core Team, 2020) and the R-packages \emph{dplyr} (Version 1.0.2; Wickham et al., 2020), \emph{forcats} (Version 0.5.0; Wickham, 2020a), \emph{ggformula} (Version 0.10.1; Kaplan \& Pruim, 2021), \emph{ggplot2} (Version 3.3.2; Wickham, 2016), \emph{ggridges} (Version 0.5.2; Wilke, 2020), \emph{ggstance} (Version 0.3.5; Henry et al., 2020), \emph{here} (Version 1.0.1; Müller, 2020), \emph{lattice} (Version 0.20.41; Sarkar, 2008), \emph{Matrix} (Version 1.2.18; Bates \& Maechler, 2019), \emph{mosaic} (Version 1.8.3; Pruim, Kaplan, \& Horton, 2017, 2021), \emph{mosaicData} (Version 0.20.2; Pruim et al., 2021), \emph{papaja} (Version 0.1.0.9997; Aust \& Barth, 2020), \emph{psychTools} (Version 2.1.3; Revelle, 2020), \emph{purrr} (Version 0.3.4; Henry \& Wickham, 2020), \emph{readr} (Version 1.4.0; Wickham \& Hester, 2020), \emph{RJ-2017-037} (Barrett \& Brignone, 2017, 2017, 2017, 2017, 2017), \emph{stargazer} (Version 5.2.2; Hlavac, 2018), \emph{stringr} (Version 1.4.0; Wickham, 2019), \emph{tibble} (Version 3.0.4; Müller \& Wickham, 2020), \emph{tidyr} (Version 1.1.2; Wickham, 2020b), and \emph{tidyverse} (Version 1.3.0; Wickham, Averick, et al., 2019).
+
+\begin{table}[ ht ] 
+\centering 
+\caption{}\label{}
+\begin{tabular}{ l c }
+\toprule
+ &   \multicolumn{ 1 }{c}{ Total }\\ 
+ & n = 364 \\ 
+ \midrule
+gender &  \\ 
+\hspace{6pt}    male & 179 (49.2\%)\\ 
+\hspace{6pt}    female & 185 (50.8\%)\\ 
+\hspace{6pt}    \emph{missing} & 0 (0\%)\\ 
+age &  \\ 
+\hspace{6pt}   & 45.8 (8.4)\\ 
+telework &  \\ 
+\hspace{6pt}    no & 129 (35.4\%)\\
+\hspace{6pt}    yes & 235 (64.6\%)\\ 
+\hspace{6pt}    \emph{missing} & 0 (0\%)\\ 
+relationship\_length &  \\ 
+\hspace{6pt}   & 18.4 (10.2)\\ 
+race &  \\ 
+\hspace{6pt}    Asian or Asian American & 37 (10.2\%)\\ 
+\hspace{6pt}    Black or African American & 24 (6.6\%)\\ 
+\hspace{6pt}    Latinx or Hispanic & 21 (5.8\%)\\ 
+\hspace{6pt}    Middle Eastern & 4 (1.1\%)\\ 
+\hspace{6pt}    Other & 1 (0.3\%)\\ 
+\hspace{6pt}    Prefer not to answer & 4 (1.1\%)\\ 
+\hspace{6pt}    White or European American & 269 (73.9\%)\\ 
+\hspace{6pt}    White or European American,Latinx or Hispanic & 4 (1.1\%)\\ 
+\hspace{6pt}    \emph{missing} & 0 (0\%)\\ 
+number\_of\_children &  \\ 
+\hspace{6pt}   & 0.8 (1.3)\\ 
+income &  \\ 
+\hspace{6pt}   & 76,618.8 (105,704.1)\\ 
+\bottomrule
+
+\end{tabular}
+\end{table}
+
+\newpage
+
+\hypertarget{references}{%
+\section{References}\label{references}}
+
+\begingroup
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+
+\hypertarget{refs}{}
+\begin{cslreferences}
+\leavevmode\hypertarget{ref-R-papaja}{}%
+Aust, F., \& Barth, M. (2020). \emph{papaja: Create APA manuscripts with R Markdown}. Retrieved from \url{https://github.com/crsh/papaja}
+
+\leavevmode\hypertarget{ref-R-RJ-2017-037}{}%
+Barrett, T. S., \& Brignone, E. (2017). Furniture for quantitative scientists. \emph{The R Journal}, \emph{9}(2), 142--148. \url{https://doi.org/10.32614/RJ-2017-037}
+
+\leavevmode\hypertarget{ref-R-Matrix}{}%
+Bates, D., \& Maechler, M. (2019). \emph{Matrix: Sparse and dense matrix classes and methods}. Retrieved from \url{https://CRAN.R-project.org/package=Matrix}
+
+\leavevmode\hypertarget{ref-R-purrr}{}%
+Henry, L., \& Wickham, H. (2020). \emph{Purrr: Functional programming tools}. Retrieved from \url{https://CRAN.R-project.org/package=purrr}
+
+\leavevmode\hypertarget{ref-R-ggstance}{}%
+Henry, L., Wickham, H., \& Chang, W. (2020). \emph{Ggstance: Horizontal 'ggplot2' components}. Retrieved from \url{https://CRAN.R-project.org/package=ggstance}
+
+\leavevmode\hypertarget{ref-R-stargazer}{}%
+Hlavac, M. (2018). \emph{Stargazer: Well-formatted regression and summary statistics tables}. Bratislava, Slovakia: Central European Labour Studies Institute (CELSI). Retrieved from \url{https://CRAN.R-project.org/package=stargazer}
+
+\leavevmode\hypertarget{ref-R-ggformula}{}%
+Kaplan, D., \& Pruim, R. (2021). \emph{Ggformula: Formula interface to the grammar of graphics}. Retrieved from \url{https://CRAN.R-project.org/package=ggformula}
+
+\leavevmode\hypertarget{ref-kerr1996development}{}%
+Kerr, P. S., \& Holden, R. R. (1996). Development of the gender role beliefs scale (grbs). \emph{Journal of Social Behavior and Personality}, \emph{11}(5), 3.
+
+\leavevmode\hypertarget{ref-R-here}{}%
+Müller, K. (2020). \emph{Here: A simpler way to find your files}. Retrieved from \url{https://CRAN.R-project.org/package=here}
+
+\leavevmode\hypertarget{ref-R-tibble}{}%
+Müller, K., \& Wickham, H. (2020). \emph{Tibble: Simple data frames}. Retrieved from \url{https://CRAN.R-project.org/package=tibble}
+
+\leavevmode\hypertarget{ref-norton1983measuring}{}%
+Norton, R. (1983). Measuring marital quality: A critical look at the dependent variable. \emph{Journal of Marriage and the Family}, 141--151.
+
+\leavevmode\hypertarget{ref-R-mosaicData}{}%
+Pruim, R., Kaplan, D., \& Horton, N. (2021). \emph{MosaicData: Project mosaic data sets}. Retrieved from \url{https://CRAN.R-project.org/package=mosaicData}
+
+\leavevmode\hypertarget{ref-R-mosaic}{}%
+Pruim, R., Kaplan, D. T., \& Horton, N. J. (2017). The mosaic package: Helping students to 'think with data' using r. \emph{The R Journal}, \emph{9}(1), 77--102. Retrieved from \url{https://journal.r-project.org/archive/2017/RJ-2017-024/index.html}
+
+\leavevmode\hypertarget{ref-R-base}{}%
+R Core Team. (2020). \emph{R: A language and environment for statistical computing}. Vienna, Austria: R Foundation for Statistical Computing. Retrieved from \url{https://www.R-project.org/}
+
+\leavevmode\hypertarget{ref-R-psychTools}{}%
+Revelle, W. (2020). \emph{PsychTools:Tools to accompany the 'psych; package for psychological research}. Evanston, Illinois: Northwestern University. Retrieved from \url{https://CRAN.R-project.org/package=psychTools}
+
+\leavevmode\hypertarget{ref-R-lattice}{}%
+Sarkar, D. (2008). \emph{Lattice: Multivariate data visualization with r}. New York: Springer. Retrieved from \url{http://lmdvr.r-forge.r-project.org}
+
+\leavevmode\hypertarget{ref-R-ggplot2}{}%
+Wickham, H. (2016). \emph{Ggplot2: Elegant graphics for data analysis}. Springer-Verlag New York. Retrieved from \url{https://ggplot2.tidyverse.org}
+
+\leavevmode\hypertarget{ref-R-stringr}{}%
+Wickham, H. (2019). \emph{Stringr: Simple, consistent wrappers for common string operations}. Retrieved from \url{https://CRAN.R-project.org/package=stringr}
+
+\leavevmode\hypertarget{ref-R-forcats}{}%
+Wickham, H. (2020a). \emph{Forcats: Tools for working with categorical variables (factors)}. Retrieved from \url{https://CRAN.R-project.org/package=forcats}
+
+\leavevmode\hypertarget{ref-R-tidyr}{}%
+Wickham, H. (2020b). \emph{Tidyr: Tidy messy data}. Retrieved from \url{https://CRAN.R-project.org/package=tidyr}
+
+\leavevmode\hypertarget{ref-R-tidyverse}{}%
+Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L. D., François, R., \ldots{} Yutani, H. (2019). Welcome to the tidyverse. \emph{Journal of Open Source Software}, \emph{4}(43), 1686. \url{https://doi.org/10.21105/joss.01686}
+
+\leavevmode\hypertarget{ref-R-dplyr}{}%
+Wickham, H., François, R., Henry, L., \& Müller, K. (2020). \emph{Dplyr: A grammar of data manipulation}. Retrieved from \url{https://CRAN.R-project.org/package=dplyr}
+
+\leavevmode\hypertarget{ref-R-readr}{}%
+Wickham, H., \& Hester, J. (2020). \emph{Readr: Read rectangular text data}. Retrieved from \url{https://CRAN.R-project.org/package=readr}
+
+\leavevmode\hypertarget{ref-R-ggridges}{}%
+Wilke, C. O. (2020). \emph{Ggridges: Ridgeline plots in 'ggplot2'}. Retrieved from \url{https://CRAN.R-project.org/package=ggridges}
+\end{cslreferences}
+
+\endgroup
+
+
+\end{document}

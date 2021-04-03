@@ -22,6 +22,41 @@ library(psychTools)
 library(furniture)
 ```
 
+\begin{table}[ ht ] 
+\centering 
+\caption{}\label{}
+\begin{tabular}{ l c c c }
+\toprule
+ &   &  \multicolumn{ 2 }{c}{ telework }\\ 
+  & Total & 0 & 1 \\ 
+ & n = 364 & n = 129 & n = 235 \\ 
+ \midrule
+gender &   &   &  \\ 
+\hspace{6pt}    0 & 179 (49.2\%) & 69 (53.5\%) & 110 (46.8\%)\\ 
+\hspace{6pt}    1 & 185 (50.8\%) & 60 (46.5\%) & 125 (53.2\%)\\ 
+\hspace{6pt}    \emph{missing} & 0 (0\%) & 0 (0\%) & 0 (0\%)\\ 
+age &   &   &  \\ 
+\hspace{6pt}   & 45.8 (8.4) & 46.7 (8.1) & 45.3 (8.5)\\ 
+r\_years &   &   &  \\ 
+\hspace{6pt}   & 18.4 (10.2) & 18.3 (11.5) & 18.5 (9.4)\\ 
+race &   &   &  \\ 
+\hspace{6pt}    Asian or Asian American & 37 (10.2\%) & 11 (8.5\%) & 26 (11.1\%)\\ 
+\hspace{6pt}    Black or African American & 24 (6.6\%) & 11 (8.5\%) & 13 (5.5\%)\\ 
+\hspace{6pt}    Latinx or Hispanic & 21 (5.8\%) & 5 (3.9\%) & 16 (6.8\%)\\ 
+\hspace{6pt}    Middle Eastern & 4 (1.1\%) & 2 (1.6\%) & 2 (0.9\%)\\ 
+\hspace{6pt}    Other & 1 (0.3\%) & 0 (0\%) & 1 (0.4\%)\\ 
+\hspace{6pt}    Prefer not to answer & 4 (1.1\%) & 1 (0.8\%) & 3 (1.3\%)\\ 
+\hspace{6pt}    White or European American & 269 (73.9\%) & 97 (75.2\%) & 172 (73.2\%)\\ 
+\hspace{6pt}    White or European American,Latinx or Hispanic & 4 (1.1\%) & 2 (1.6\%) & 2 (0.9\%)\\ 
+\hspace{6pt}    \emph{missing} & 0 (0\%) & 0 (0\%) & 0 (0\%)\\ 
+childnum &   &   &  \\ 
+\hspace{6pt}   & 0.8 (1.3) & 0.7 (1.0) & 0.9 (1.5)\\ 
+income &   &   &  \\ 
+\hspace{6pt}   & 76,618.8 (105,704.1) & 62,494.7 (66,422.0) & 81,760.8 (116,478.4)\\ 
+\bottomrule
+
+\end{tabular}
+\end{table}
 ```{r import data}
 # import premeasures
 prem <- read.csv("TeleCom_Dyad_premeasures.csv",fileEncoding = 'UTF-8-BOM')
@@ -80,12 +115,12 @@ prem_select <- prem_select %>%
 
 
 
-```{r, results = 'asis'}
+```{r, results = 'asis', include = F}
 stargazer(prem_select, type = "latex")
 ```
 
 
-```{r, results = "asis"}
+```{r, results = "asis", include = F}
 table1(prem_select, gender, age, r_years, race, childnum, income, splitby = ~telework, format_number = T, output = "markdown")
   
 ```
@@ -142,6 +177,8 @@ income &   &  \\
 
 \end{tabular}
 \end{table}
+
+
 
 
 ```{r, results = 'asis'}
