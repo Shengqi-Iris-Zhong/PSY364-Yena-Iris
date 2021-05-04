@@ -1,0 +1,80 @@
+---
+title             : "PSY 364 -- Introduction"
+shorttitle        : "Introduction"
+
+author: 
+  - name          : "Iris Zhong"
+    affiliation   : "1"
+    corresponding : yes    # Define only one corresponding author
+    address       : "Postal address"
+    email         : "my@email.com"
+
+
+  - name          : "Yena Li"
+    affiliation   : "1"
+
+
+affiliation:
+  - id            : "1"
+    institution   : "Smith College"
+
+
+keywords          : "keywords"
+wordcount         : "X"
+
+bibliography      : ["r-references-intro.bib","psych-references.bib"]
+
+floatsintext      : no
+figurelist        : no
+tablelist         : no
+footnotelist      : no
+linenumbers       : no
+mask              : no
+draft             : no
+
+documentclass     : "apa6"
+classoption       : "man"
+output            : papaja::apa6_pdf
+---
+
+```{r setup, include = FALSE}
+library("papaja")
+
+r_refs("r-references-intro.bib")
+cite_r("r-references-intro.bib")
+```
+
+# Introduction
+                 	
+Even though issues related to gender equality have been hugely discussed, women still face many unfair treatments conducted both consciously or unconsciously. For example, even with a job, women do the majority of household chores at home. Given that many workplaces' modes have transitioned to remote telework due to the pandemic (COVID-19), with their partner also having more flexibility from teleworking, would it elevate the amount of chores women perform on a daily basis? Apparently, this issue is more complicated than what people have thought it would be, since the inequalities in divisions of housework from pre-COVID times remained for women [@dunatchik2021gender]. Past studies have shown that fairness in housework can influence relationship satisfaction. Does the switch to telework influence people’s perspectives on how fairly household tasks are divided? If the change of work mode because of the pandemic alters the perceived fairness in chore division, would it affect the couple's relationship as well? Does it give any insight into post-covid period? We believe that these are important questions to investigate and could be useful information for preventing or solving problems that occur in the relationship. Although there are studies on how gender, gender ideology or telework and chore fairness relates to marital satisfaction, no research has connected all three elements -- telework, household chore fairness, and satisfaction -- together. In this study, we seek to investigate the relationship between all of the elements using pairwise data and an actor-partner interdependence model.
+
+Household labor division is something that has to be faced by the majority of couples all around the world. In order to explore the relationship between the two, researchers have been conducting a lot of studies on how factors such as gender could mediate or moderate how chore fairness could affect couples’ marital satisfaction. An interesting finding related to this topic was by @erchull2010well, in which they suggested that the desire for marriage predicted anticipated household labour participation for females, but not for males; similarly, the desire for children predicted anticipated child care work participation for females, but not for males. However, they also found that anticipated chores and other tasks did not equal to what each individual in the relationship actually took on [@erchull2010well]. According to @hu2018fairness, women across thirty countries reported a higher level of family life satisfaction when they perceived the housework division between the partners to be fair rather than unfair. Similar to subjective burden from house work, the actual amount of housework women take on could also affect marital satisfaction. For example, agreeing with observations made with U.S. data, marital satisfaction of wives was negatively correlated with the burden of housework they take on [@oshio2013division]. A study conducted by @nourani2019relationship in Iran also found a significant relationship between male participants’ satisfaction and their participation in household labor, but not between female participants’ satisfaction and their participation in household labor. According to the researchers, female participants’ marital satisfaction seemed to be higher when their male counterparts were involved in more family related tasks [@nourani2019relationship]. More specifically, perceived unfairness in housework and expenses for both the respondents themselves and their partners could reduce relationship satisfaction in general, except for perceived unfairness for partners in shared expenses [@gillespie2019gendered]. Furthermore, perceived self unfairness was a stronger predictor of relationship quality than perceived partner unfairness [@gillespie2019gendered]. Interestingly, @dillaway2001race found that women had lower marital satisfaction than men overall, and their satisfaction was low regardless of how much house work they performed. When they incorporated race into the framework, they realized that black women seemed to have lower marital satisfaction than white women, and that when black men and white men performed the same amount of housework, black men were less likely to report high marital satisfaction than white men [@dillaway2001race]. Compared to white men, black men did more housework in general; however, when they are not involved in as much housework, black men reported higher marital satisfaction than white men. 
+
+Other than gender, researchers have also investigated how gender ideology could explain or predict labor division in the household, as well as the link between chore fairness and marital satisfaction.  Many of the studies concluded that gender ideology influenced perceived fairness, such that individuals with an egalitarian attitude tended to judge inequalities in housework division that were unfavorable to the wife more negatively than traditional-minded respondents [@carriero2017interplay]. Men with egalitarian gender role attitudes were less satisfied than men with traditional gender role attitudes when the household labour division was specialized and not balanced [@blom2017couples]. On the other hand, husbands with a more traditional attitude towards gender roles had decreasing marital satisfaction over time and are more likely to have more conflicts about their relationship fairness and decision-making with their wives [@faulkner2005gender]. Conflicts about marital relationship and gender-based inequities were likely to be initiated by wives who felt unfair in the relationship. However, wives’ gender role attitudes did not predict their marital satisfaction or conflict across a period of time [@faulkner2005gender]. Wives’ marital experience were predictive of their husbands, and their ability to manage conflict was predictive of their husbands’ level of marital conflict, but for both cases it was not true the other way around [@faulkner2005gender]. In a research conducted by @fleche2020gender, results showed that women who work longer hours than their husbands reported significantly lower life satisfaction. In addition, for women who worked longer than their husbands, the time they spent on housework was not less than women who worked less or the same as their spouses [@fleche2020gender]. Only females who held a more egalitarian ideology and who worked more than their husbands perceive housework division to be unfair [@fleche2020gender]. When children were involved, nevertheless, the situation seemed a little bit different: the positive link between relationship satisfaction and specialization was not strong compared to when there are no children involved [@blom2017couples]. Women’s relationship satisfaction was also not influenced by hours-equity or specialization, and that only men seemed to be affected by it [@blom2017couples]. 
+On the other hand, some researchers thought that the ability to work from home also contributes to changes in couples’ work-family conflicts, and examined the relationship between teleworking and marital satisfaction. Research has shown that children are an important factor in a person’s division to telework when encountering work-family conflicts [@zhang2020work]. Unrelated to gender or marital status, people that have children are less likely to telework than people without children. Among the participants that don’t have children, males are more likely to telework than females, and it is more likely for people that are single to telework compared to people that are married [@zhang2020work]. However, for employed parents with children, females are more likely to telework, and it is more likely for partnered parents to telework compared to single parents [@zhang2020work]. @jeffrey2008exploring suggested that the usage of work flexibility had a curvilinear relationship with life stages, accounting for gender. Although there seemed to be no significant gender difference regarding work flexibility when the individuals were at an early career stage, women were more likely to work flexibly when their oldest children are over 6 years old and such gender differences continued in life until none of their children were younger than 6 years old [@jeffrey2008exploring]. Additionally, women seemed to value flexible work more than men at every stage. Overall, workers tended to experience a higher level of stress when teleworking than working in the workplace, which challenged the commonsense that teleworking brings more flexibility and should reduce stress for workers [@song2020does]. However, the effect of working from home was heterogeneous across gender and parental status, and varied on weekdays versus weekends; for instance, teleworking on weekends or holidays was less painful than working in the workplace for mothers. 
+
+Because of the pandemic that started in early 2020, a lot of the employees were forced to move online and work from home. Some recent studies looked into telework during the pandemic and how it affects couples’ daily life. According to @dunatchik2021gender, most parents, both female and male, reported spending more time in housework and child care tasks in the pandemic. They also found that the gender gap in chore fairness was still substantial, as most mothers reported being primarily responsible for the housework or child care. Additionally, even working mothers still took a lot of responsibility in housework, child care and homeschooling. When both parents worked remotely, some families had a greater egalitarian division of chores within the couple, but the pattern was not universal. Even when both parents were telecommuting, a gendered division of labor persisted, and the gap did not change from before. On the other hand, if only one parent was working from home, telecommuting fathers tended to report far less involvement in domestic work than did telecommuting mothers. @del2020women also suggested that unlike men, women working from home had to take the tasks both from their jobs and from families and were spending more time on housework chores during the pandemic, unless they continued to work at their usual workplace. Women with young children were especially vulnerable, because they bore the most burden.
+
+Overall, previous studies have suggested strong relationships between gender, gender ideology, ability to telework and marital satisfaction. However, because previous studies have not connected the relationship between remote working, household chore fairness, and satisfaction together, the current research will examine the influence of telework on relationship satisfaction, mediated by perceived fairness in chore division. The moderation effect of gender and gender ideology will also be investigated. We seek to investigate two questions: 1) whether the respondent or their partner is teleworking can affect their perceived fairness in household chores, and further influence their relationship quality; and 2) whether gender also plays a role in perceived chore fairness and consequently affects relationship quality. Different from existing studies on remote work and satisfaction, the present research will use longitudinal diary data with a span of fourteen days, which allows control for more individual variances. In addition, a multilevel Actor-Partner Interdependence Model will be adopted to account for effects from both the respondent themselves and their partner on the respondent. 
+
+
+
+
+
+
+
+We have used R [Version 4.0.3; @R-base] and the R-package *papaja* [Version 0.1.0.9997; @R-papaja] in this assignment. 
+
+
+\newpage
+
+# References
+
+\begingroup
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+
+<div id="refs" custom-style="Bibliography"></div>
+\endgroup
+
+

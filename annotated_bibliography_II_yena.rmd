@@ -1,0 +1,91 @@
+---
+title             : "Annotated Bibliography Part II"
+shorttitle        : "Annotated Bibliography"
+
+author: 
+  - name          : "Yena Li"
+    affiliation   : "1"
+    corresponding : yes    # Define only one corresponding author
+    address       : "Postal address"
+    email         : "my@email.com"
+    role:         # Contributorship roles (e.g., CRediT, https://casrai.org/credit/)
+      - Conceptualization
+      - Writing - Original Draft Preparation
+      - Writing - Review & Editing
+ 
+affiliation:
+  - id            : "1"
+    institution   : "Smith College"
+
+
+  
+keywords          : "keywords"
+wordcount         : "X"
+
+bibliography      : ["r-references-yena.bib","lit-review.bib"]
+
+floatsintext      : no
+figurelist        : no
+tablelist         : no
+footnotelist      : no
+linenumbers       : no
+mask              : no
+draft             : no
+
+documentclass     : "apa6"
+classoption       : "man"
+output            : papaja::apa6_pdf
+---
+
+```{r setup, include = FALSE}
+library("papaja")
+r_refs("r-references-yena.bib")
+cite_r("r-references-yena.bib")
+```
+
+```{r analysis-preferences}
+# Seed for random number generation
+set.seed(42)
+knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
+```
+
+
+
+## The Relationship Between Gender-Role Beliefs, Household Labor Division and Marital Satisfaction in Couples
+
+@nourani2019relationship investigated the relationship of couples’ gender role beliefs, household labor division and marital satisfaction in Iran. The researchers recruited couples with infant children and were able to get 120 couples to participate. Participants needed to fill out a set of surveys including a demographic form, the Persian version of ENRICH (Evaluation and Nurturing Relationship Issues, Communication, and Happiness) marital satisfaction scale, a Household Labor Division (HLD) questionnaire and a researcher-designed Gender-Role Belief (GRB) questionnaire both designed by the researchers. The scientist found a significant relationship between male participants’ satisfaction and their participation in household labor, but no significant relationship between female participants’ satisfaction and their participation in household labor. They also found female participants’ marital satisfaction to be higher when their male counterparts were involved in more family related tasks. As of the effects of gender-role beliefs on participation in household chores, they didn’t find it to be significant.
+
+We realized that although quite a lot of studies were conducted on household labor and satisfaction in couples, little research has been conducted on how working from home would affect romantic relationships or marital satisfaction. Due to the ongoing pandemic, many people have transitioned to work remotely, and we believe that it is critical to learn about the role that telework plays and compare the results from normal working situations and from telework situations. This study could give us insight under the normal working circumstances and make our comparisons. 
+
+
+## Gender-Related Predictors of Change in Marital Satisfaction and Marital Conflict
+
+@faulkner2005gender hoped to answer the following two questions in their study: 1) Whether gender has an influence on marital conflict and satisfaction over time or not and 2) Whether there is a gender difference in marriage experiences, and if so, whether the experiences of females could predict their male partner’s experiences. Data used in this study was from the NSFH (National Survey of Families and Households) dataset which were collected in 1987 and 1988. Participants who filled out the survey were randomly selected and were re-interviewed between 1992 and 1994. After exclusion criteria, 1561 couples remained in the data set. The survey included demographic variables (age, race, income, education, length of marriage, religiosity), psychological variables (depression, well-being, physical health), marital process (such as conflict strategies), and marital transitions (living together, birth of a new child, child leaving home). The researchers found that husbands with a more traditional attitude towards gender roles had decreasing marital satisfaction over time. They also had more conflicts about their relationship fairness and decision-making with their wives. Conflicts about marital relationship and gender-based inequities are likely to be initiated by wives who feel unfair in the relationship. However, wives’ gender role attitudes did not predict their marital satisfaction or conflict across a period of time. The researchers also found wives marital experience to be predictive of their husbands but not vice versa. Other than that, wives’ ability to manage conflict was predictive of their husbands’ level of marital conflict, but not vice versa. If a wife did not associate with a religion, their husbands tend to experience a decrease in marital satisfaction across time.
+	
+This paper identifies several ways gender could influence an individual’s satisfaction and conflict in a romantic relationship. Since we also would like to look at gender affects on house labor division and on marital satisfaction. We believe that we could learn from their conclusion and use it to make our hypotheses. It would also be interesting to compare the result we get from our data with their results. 
+
+## Race, class, and gender differences in marital satisfaction and divisions of house labor among dualeaner couples
+
+@dillaway2001race wanted to incorporate race and social status into their topic and investigate how they affect marriage and family. They hypothesized that 1) Compared to white couples, black couples are less satisfied in general; 2) In a relationship, compared to women, men are more satisfied in general; 3) With no regard to race or social status, men will be more dissatisfied in a relationship when they are involved in more house work; 4) Regardless to race, women might feel more satisfied if their husbands participated in some housework; 5) Higher social class will lead to lowered satisfaction in marriage, especially among women; and 6) Black women, white women, and men experience different levels of satisfaction. Data was extracted from 1986 America’s Changing Life Survey (ACL) which was taken in 1986, and 492 individuals remained after exclusion criteria. Questions for the participants included age, race, gender, education, family income, number of children, employment states, household tasks, genderrol beliefs and marital satisfaction. Although findings support that women have lower marital satisfaction than men, two important points appear: black women seem to have lower marital satisfaction than white women; and women's satisfaction is low regardless of how much house work they perform. Researchers also found that, compared to white men, black men do more housework. When black men and white men perform the same amount of housework, black men are less likely to report high marital satisfaction than white men. However, when not involved in as much housework, black men report higher marital satisfaction than white men. The researchers also reported that their findings on class were overall insignificant. 
+
+This study wanted to look at the effect of social class on marital satisfaction and chore division, but was unable to find a significant correlation between them. We are thinking about taking family income (which could be a part of social status) into consideration, and it would be interesting to see whether we will be able to find a different result than they did. 
+
+## Development of the Gender Role Beliefs Scale (GRBS)
+
+@kerr1996development aimed to create a gender role beliefs scale that has high validity and is brief and reliable. In study 1, they created a pool of 176 items from different scales that tested individuals’ gender ideology, and randomly selected 150 items from the pool. The researchers divided the participants into three groups and recruited differently for them. For participants in feminist group, they recruited students taking classes feminist courses (n=40, all females); participants in traditional groups were recruited from students taking traditional oriented courses (n=30, all femals); and undifferentiated participants were volunteers that were taking psychology courses (n=118, 102 females and 16 males). Participants each completed the collection of the 150 questionnaires individually. The researchers calculated a composite of goodness score for each item and included 20 items that had the highest score to be on the Gender Role Beliefs Scale (GRBS). In study 2, the researchers aimed to evaluate the test-retest reliability of the scale. They recruited 57 participants (9 males and 48 females) in a college and had each of them complete the GRBS twice, with a four week interval in between. After data analysis, high internal consistency was found and the result supported that the GRBS has high test-retest reliability.
+
+In our study, we have decided to include the GRBS as one of the measurements that we will use for data analysis. This study describes how the GRBS is developed, why these particular items are included, and it gives us insights on the scale’s validity and reliability. 
+
+\
+This assignment has used R [Version 4.0.3; @R-base] and the R-package *papaja* [Version 0.1.0.9997; @R-papaja].
+
+\newpage
+
+# References
+
+\begingroup
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+
+<div id="refs" custom-style="Bibliography"></div>
+\endgroup

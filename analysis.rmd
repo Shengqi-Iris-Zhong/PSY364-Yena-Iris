@@ -1,0 +1,138 @@
+---
+title: "analysis"
+author: "Iris Zhong"
+date: "4/27/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(nlme)
+library(tidyverse)
+library(report)
+library(stargazer)
+```
+
+```{r}
+library(readr)
+data_pair <- read_csv("data_pair.csv")
+data_pair$day_of_study_A <- as.numeric(data_pair$day_of_study_A)
+data_pair$day_of_study_P <- as.numeric(data_pair$day_of_study_P)
+data_pair <- data_pair %>%
+  mutate(day_of_study_A = day_of_study_A -1,
+         day_of_study_P = day_of_study_P - 1,
+         fair_chores_C_A = fair_chores_A - mean(fair_chores_A, na.rm = T),
+         fair_chores_C_P = fair_chores_P - mean(fair_chores_P, na.rm = T),
+         grbs_C_A = grbs_ss_A - mean(grbs_ss_A, na.rm = T),
+         grbs_C_P = grbs_ss_P - mean(grbs_ss_P, na.rm = T))
+```
+
+```{r}
+ggplot(data_pair, aes(x = fair_chores_A, y = qmi_ss_A)) +
+  geom_point()+
+  geom_jitter() +
+  geom_smooth(method = "lm")
+```
+
+
+
+```{r}
+mod_qmi_chore  <- lme(qmi_ss_A ~ gender_chr_A + gender_chr_A:day_of_study_A + fair_chores_C_A:gender_chr_A  - 1,
+                      data = data_pair, 
+                      random = ~ gender_chr_A - 1|dyadID,
+                      correlation = corCompSymm(form = ~1|dyadID/obsid),
+                      weights = varIdent(form = ~1|gender_chr_A),
+                      na.action = na.omit)
+
+summary(mod_qmi_chore)
+stargazer(mod_qmi_chore)
+```
+
+
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-2} 
+\\[-1.8ex] & qmi\_ss\_A \\ 
+\hline \\[-1.8ex] 
+ gender\_chr\_AM & 3.563$^{***}$ \\ 
+  & (0.070) \\ 
+  & \\ 
+ gender\_chr\_AW & 3.426$^{***}$ \\ 
+  & (0.066) \\ 
+  & \\ 
+ gender\_chr\_AM:day\_of\_study\_A & $-$0.003 \\ 
+  & (0.003) \\ 
+  & \\ 
+ gender\_chr\_AW:day\_of\_study\_A & 0.007$^{**}$ \\ 
+  & (0.003) \\ 
+  & \\ 
+ gender\_chr\_AM:fair\_chores\_C\_A & 0.069$^{***}$ \\ 
+  & (0.018) \\ 
+  & \\ 
+ gender\_chr\_AW:fair\_chores\_C\_A & 0.085$^{***}$ \\ 
+  & (0.019) \\ 
+  & \\ 
+\hline \\[-1.8ex] 
+Observations & 2,107 \\ 
+Log Likelihood & $-$1,157.993 \\ 
+Akaike Inf. Crit. & 2,339.985 \\ 
+Bayesian Inf. Crit. & 2,407.787 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+
+```{r}
+mod_qmi_chore_APIM  <- lme(qmi_ss_A ~ gender_chr_A + gender_chr_A:day_of_study_A + fair_chores_C_A:gender_chr_A+fair_chores_C_P:gender_chr_A  - 1,
+                      data = data_pair, 
+                      random = ~ gender_chr_A - 1|dyadID,
+                      correlation = corCompSymm(form = ~1|dyadID/obsid),
+                      weights = varIdent(form = ~1|gender_chr_A),
+                      na.action = na.omit)
+
+summary(mod_qmi_chore_APIM)
+```
+
+
+```{r}
+mod_qmi_chore_APIM_2  <- lme(qmi_ss_A ~ gender_chr_A + gender_chr_A:day_of_study_A + fair_chores_C_A:gender_chr_A+fair_chores_C_P:gender_chr_A + gender_chr_A:grbs_C_A+ grbs_C_A:gender_chr_A:fair_chores_C_A+grbs_C_A:gender_chr_A:fair_chores_C_P+  - 1,
+                      data = data_pair, 
+                      random = ~ gender_chr_A - 1|dyadID,
+                      correlation = corCompSymm(form = ~1|dyadID/obsid),
+                      weights = varIdent(form = ~1|gender_chr_A),
+                      na.action = na.omit)
+
+summary(mod_qmi_chore_APIM_2)
+report(mod_qmi_chore_APIM_2)
+```
+grbs_ss_A:fair_chores_C_A + grbs_ss_A:fair_chores_C_P
+
+```{r}
+mod_chore_work  <- lme(fair_chores_C_A ~ gender_chr_A + telework_A:gender_chr_A  - 1,
+                      data = data_pair, 
+                      random = ~ gender_chr_A - 1|dyadID,
+                      correlation = corCompSymm(form = ~1|dyadID/obsid),
+                      weights = varIdent(form = ~1|gender_chr_A),
+                      na.action = na.omit)
+
+summary(mod_chore_work)
+```
+
+```{r}
+mod_chore_work_2  <- lme(fair_chores_C_A ~ genderE_A + telework_A:genderE_A + childnum + r_years + income_A  - 1,
+                      data = data_pair, 
+                      random = ~ gender_chr_A - 1|dyadID,
+                      correlation = corCompSymm(form = ~1|dyadID/obsid),
+                      weights = varIdent(form = ~1|gender_chr_A),
+                      na.action = na.omit)
+
+summary(mod_chore_work_2)
+```

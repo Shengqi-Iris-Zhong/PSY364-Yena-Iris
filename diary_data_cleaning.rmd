@@ -74,8 +74,8 @@ temp <- diary %>%
          week = ifelse(day_of_study > 7, 2, 1)) %>%
   group_by(partID) %>%
   mutate(problems = sum(prob)) %>%
-  arrange(desc(problems), dyadID, partID, RecordedDate) %>%
-  select(ResponseID, partID, partID_given, problems, dyadID, RecordedDate, day, day_of_study)
+  arrange(desc(problems), dyadID, partID, RecordedDate) #%>%
+  #select(ResponseID, partID, partID_given, problems, dyadID, RecordedDate, day, day_of_study)
 ```
 
 
@@ -147,7 +147,10 @@ temp_small <- temp_small %>%
           day = ifelse(ResponseID == 3192, "Monday", day),
          day = ifelse(ResponseID == 3243, "Sunday", day),
          day = ifelse(ResponseID == 3385, "Wednesday", day),
-         day = ifelse(ResponseID == 3399, "Wednesday", day)
+         day = ifelse(ResponseID == 3399, "Wednesday", day),
+         # error spotted from obsid
+         day_of_study = ifelse(ResponseID == 904, 8, day_of_study),
+         day = ifelse(ResponseID == 1157, "Monday", day)
          )
 ```
 
@@ -197,7 +200,7 @@ other problematic cases to fix due to participant error:
 
 ```{r}
 #run again after clean:
-temp_small <- temp_small %>%
+temp_small_2 <- temp_small %>%
   arrange(dyadID, partID, day, RecordedDate) %>%
   mutate(ResponseID = seq_along(RecordedDate)) %>%
   group_by(partID, day) %>%
@@ -224,8 +227,8 @@ temp_small <- temp_small %>%
                         day == "Friday" ~ 5,
                         day == "Saturday" ~ 6,
                         day == "Sunday" ~ 7)),
-         week = ifelse(day_of_study > 7, 2, 1)) %>%
-  dplyr::select(ResponseID, dyadID, partID, RecordedDate, day, day_of_study)
+         week = ifelse(day_of_study > 7, 2, 1))# %>%
+  #dplyr::select(ResponseID, dyadID, partID, RecordedDate, day, day_of_study)
 ```
 
 Another round of cleaning
@@ -266,21 +269,24 @@ remove 32166157 because of recorded date
 remove 32997534 because of recorded date
 remove 33703455 because of recorded date
 remove 1836239 because of recorded date
+R_3J3nDgtBTAsgvAR: remove responseID == 6; responseID == 7 --> day_of_study = 14
+R_TuUDpU6tnQ77WPT: remove responseID == 4/5
 
 ```{r}
 # Day/day of study errors
-temp_small_2 <- temp_small %>%
+temp_small_2 <- temp_small_2 %>%
   mutate(day_of_study = ifelse(dyadID == 737834 & day_of_study == 1, 8,day_of_study),
          day_of_study = ifelse(partID == "R_D82yWXQCPehTYOd" & day_of_study == 14, 7, day_of_study),
          day_of_study = ifelse(partID == "R_r86LixcW9gMWsaB" & day_of_study == 14, 7, day_of_study),
-         day_of_study = ifelse(dyadID == 27005905 & day_of_study == 1, 8,day_of_study),
+        # day_of_study = ifelse(dyadID == 27005905 & day_of_study == 1, 8,day_of_study),
          day_of_study = ifelse(partID == "R_3J3nDgtBTAsgvAR" & ResponseID == 6, 1, day_of_study),
          day = ifelse(partID == "R_3J3nDgtBTAsgvAR" & ResponseID == 6, "Monday", day),
          day_of_study = ifelse(partID == "R_3J3nDgtBTAsgvAR" & ResponseID == 7, 7, day_of_study),
          day_of_study = ifelse(partID == "R_3J3nDgtBTAsgvAR" & day_of_study == 1, 8, day_of_study),
          day_of_study = ifelse(partID == "R_31MkJYIh2I3XWnP" & day_of_study == 2, 9, day_of_study),
          day_of_study = ifelse(partID == "R_XHsG67d7Lv5N09r" & day_of_study == 9, 4, day_of_study),
-         day = ifelse(partID == "R_XHsG67d7Lv5N09r" & day_of_study == 4, "Thursday", day))
+         day = ifelse(partID == "R_XHsG67d7Lv5N09r" & day_of_study == 4, "Thursday", day),
+        day_of_study = ifelse(partID == "R_3J3nDgtBTAsgvAR" & ResponseID == 7, 14, day_of_study))
          
          
 ```
@@ -296,19 +302,22 @@ temp_small_2$ResponseID_chr <- as.character(temp_small_2$ResponseID)
 temp_small_2 <- temp_small_2 %>%
   filter(partID != "R_PRsfimNYXTe5Jpn" | ResponseID != 1) %>%
   filter(partID != "R_2SIj7HaPcdaT1YB" | day_of_study != 13) %>%
-  filter(partID != "R_3J3nDgtBTAsgvAR" | day_of_study != 13) %>%
-  filter(partID != "R_3J3nDgtBTAsgvAR" | day_of_study != 14) %>%
+  #filter(partID != "R_3J3nDgtBTAsgvAR" | day_of_study != 13) %>%
+  #filter(partID != "R_3J3nDgtBTAsgvAR" | day_of_study != 14) %>%
   filter(partID != "R_3JCcOgGFZfWXkVD" | ResponseID != 3) %>%
   filter(dyadID != 29187228 | day_of_study != 10) %>%
   filter(dyadID != 29532872 | ResponseID != 5) %>%
   filter(dyadID != 31256405 | ResponseID != 9) %>%
   filter(partID != "R_2TBRBwuCwt5nHIB" | ResponseID != 1) %>%
-  filter(partID != "R_3NwwT3kjHCJHcge" | ResponseID != 14)
+  filter(partID != "R_3NwwT3kjHCJHcge" | ResponseID != 14) %>%
+  filter(partID != "R_3J3nDgtBTAsgvAR" | ResponseID != 6) %>%
+  filter(partID != "R_TuUDpU6tnQ77WPT" | ResponseID != 4) %>%
+  filter(partID != "R_TuUDpU6tnQ77WPT" | ResponseID != 5)
 #temp_small_2 <- temp_small_2 %>%
 
 
 ```
-
+R_3J3nDgtBTAsgvAR
 
 ```{r}
 # Remove dyads filling out surveys in different weeks
@@ -316,6 +325,19 @@ temp_small_2 <- temp_small_2 %>%
 temp_small_2 <- temp_small_2 %>%
   filter(dyadID != 7403083 & dyadID != 17986423 &dyadID != 19323251 & dyadID != 29169727 &dyadID != 29358468 & dyadID != 29469928 &dyadID != 29472035 & dyadID != 29536578 & dyadID != 29559028 & dyadID != 29577345 & dyadID != 29733249 &dyadID != 29758869 & dyadID != 29759818 & dyadID != 31635308 &dyadID != 32166157 & dyadID != 32997534 & dyadID != 33703455 & dyadID != 1836239)
 ```
+
+```{r}
+temp_small_2 <- temp_small_2 %>%
+  mutate(obsid = day_of_study+14*(dyadID-1))
+
+```
+
+
+```{r}
+write.csv(temp_small_2,"final_diary_data.csv", row.names = FALSE)
+```
+
+
 
 
 

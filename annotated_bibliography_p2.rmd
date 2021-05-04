@@ -1,0 +1,78 @@
+---
+title             : "PSY 364 - Annotated Bibliography Part II"
+shorttitle        : "Annotated Bibliography"
+
+author: 
+  - name          : "Iris Zhong"
+    affiliation   : "1"
+    corresponding : yes    # Define only one corresponding author
+    email         : "szhong@smith.edu"
+
+affiliation:
+  - id            : "1"
+    institution   : "Smith College"
+  
+keywords          : "keywords"
+wordcount         : "X"
+
+bibliography      : ["r-references-ab1.bib","psych-references-ab1.bib"]
+
+floatsintext      : no
+figurelist        : no
+tablelist         : no
+footnotelist      : no
+linenumbers       : no
+mask              : no
+draft             : no
+
+documentclass     : "apa6"
+classoption       : "man"
+output            : papaja::apa6_pdf
+---
+
+```{r setup, include = FALSE}
+library("papaja")
+r_refs("r-references-ab1.bib")
+cite_r("r-references-ab1.bib")
+```
+
+```{r analysis-preferences}
+# Seed for random number generation
+set.seed(42)
+knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
+```
+
+## Exploring the relationship of workplace flexibility, gender, and life stage to family-to-work conflict, and stress and burnout
+
+@jeffrey2008exploring studied how flexible working (flextime, compressed work week, telecommuting, part-time employment, and job sharing) was viewed and used by male and female, and how an individual’s life stage changed their use of work flexibility, and work-family conflict. The research utilized a multi-company dataset created by WFD Consulting, including 41,118 observations in 20 companies. Hierarchical linear modeling was adopted, as variables were added step by step to determine the change in the proportion of variance for each factor. The results shoed that the usage of work flexibility had a curvilinear relationship with life stages, accounting for gender. No significant gender difference was found regarding work flexibility when the individuals were at early career stage, but women were more likely to work flexibly when their oldest children were over 6 years old. Such gender difference continued in the life until none of their children were younger than 6 years old. Additionally, women valued flexible work more than men at every stage. The author did not find significant gender effect on work-family conflict, but the interaction between gender and life stage on work-family conflict was significant. In our study, it is worth to look at whether women participate in more teleworking than men during the exploratory analysis stage, as women value flexible work more than men in this research. Whether the couple has a child is a significant factor to consider as well, and we will incorporate it as a covariate in our model.
+
+## Gender, Parenting, and The Rise of Remote Work During the Pandemic: Implications for Domestic Inequality in the United States
+
+@dunatchik2021gender investigated whether the pandemic increased the amount of housework and child care duties, and whether housework division became more fair or less fair to women than pre-Covid time. The data was collected from an online poll by the New York Times in April 2020. The researchers selected the sample of 478 partnered parents with dependent children in the household. The analysis was mostly descriptive. The results demonstrated that most parents, both female and male, reported spending more time in housework and child care tasks in the pandemic. Gender gap in chore fairness was still substantial, as most mothers reported being primarily responsible for the housework or child care. Additionally, even working mothers still took a lot of responsibility in housework, child care and homeschooling. When both parents worked remotely, some families had a greater egalitarian division of chores within the couple, but the pattern was not universal. Even when both parents were telecommuting, a gendered division of labor persisted, and the gap did not change from before. If only one parent was working from home, telecommuting fathers tended to report far less involvement in domestic work than did telecommuting mothers. We could see that gender plays a great role in division of housework in heterosexual couples, such that females are usually responsible for most of the housework, no matter if she is teleworking or not, and no matter if her partner is teleworking or not. Therefore, we would predict that gender has a significant main effect on chore fairness. 
+
+## Women’s and men’s work, housework and childcare, before and during COVID-19
+
+@del2020women looked at how and to what extent family roles changed after the pandemic forced most individuals to stay at home due to the lockdown in Italy. The authors surveyed 800 Italian working women in April and July 2019, and April 2020. They adopted a linear probability model, with a dependent variable indicating whether the partner spent more time than pre-covid in housework activities. They found out that women spend more time on housework chores during the pandemic, unless when they continued to work at their usual workplace. Unlike men, women working from home had to take the tasks both from their jobs and from families. Finally, women with young children were especially vulnerable, because they bore the most burden. This research suggests that in a heterosexual couple, if the female continues to work on-site, it is possible that the housework division could be more fair to her, but in other circumstances, females might take on more housework chores. Besides,  whether the couple has children or not is a significant factor that needs to take control of. 
+
+## Gendered perceptions of fairness in housework and shared expenses: Implications for relationship satisfaction and sex frequency
+
+The research from @gillespie2019gendered studied the influence of housework and expense division on relationship satisfaction. The authors hypothesized that if the share was unfair to oneself, the person’s relationship quality would be lower. They also explored whether perceived ego unfairness or perceived partner unfairness could more strongly predict relationship quality, and whether division of housework or share of expenses can be a stronger predictor of relationship quality. They also studied the interplay of gender in these associations. Data was collected from a questionnaire called “Money, Sex & Love Survey” on NBC News, which was posted for ten days in 2008. The authors selected cohabiting heterosexual individuals, resulting in a sample size of 10236. OLS regressions were used to test the hypotheses. They found out that perceived unfairness in housework and expenses for both the respondents themselves and their partners could reduce relationship satisfaction in general, except for perceived unfairness for partner in shared expenses. Furthermore,  perceived ego unfairness was a stronger predictor of relationship quality than perceived partner unfairness, and perceived fairness about shared expenses was a stronger predictor of relationship quality than housework. Finally, no interaction between gender and perceived fairness was found on relationship quality. This research could help us predict the relationship between gender, perceived fairness, and relationship satisfaction in an actor partner independence model. For instance, perceived unfairness could reduce QMI, and the actor effect of perceived fairness could have a stronger influence on relationship quality than the partner effect.
+
+
+
+\
+\
+
+This assignment has used R [Version 4.0.3; @R-base] and the R-package *papaja* [Version 0.1.0.9997; @R-papaja].
+
+
+\newpage
+
+# References
+
+\begingroup
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+
+<div id="refs" custom-style="Bibliography"></div>
+\endgroup

@@ -1,0 +1,229 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  english,
+  man]{apa6}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={PSY 364 -- Introduction},
+  pdfauthor={Iris Zhong1 \& Yena Li1},
+  pdflang={en-EN},
+  pdfkeywords={keywords},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+% Manuscript styling
+\usepackage{upgreek}
+\captionsetup{font=singlespacing,justification=justified}
+
+% Table formatting
+\usepackage{longtable}
+\usepackage{lscape}
+% \usepackage[counterclockwise]{rotating}   % Landscape page setup for large tables
+\usepackage{multirow}		% Table styling
+\usepackage{tabularx}		% Control Column width
+\usepackage[flushleft]{threeparttable}	% Allows for three part tables with a specified notes section
+\usepackage{threeparttablex}            % Lets threeparttable work with longtable
+
+% Create new environments so endfloat can handle them
+% \newenvironment{ltable}
+%   {\begin{landscape}\begin{center}\begin{threeparttable}}
+%   {\end{threeparttable}\end{center}\end{landscape}}
+\newenvironment{lltable}{\begin{landscape}\begin{center}\begin{ThreePartTable}}{\end{ThreePartTable}\end{center}\end{landscape}}
+
+% Enables adjusting longtable caption width to table width
+% Solution found at http://golatex.de/longtable-mit-caption-so-breit-wie-die-tabelle-t15767.html
+\makeatletter
+\newcommand\LastLTentrywidth{1em}
+\newlength\longtablewidth
+\setlength{\longtablewidth}{1in}
+\newcommand{\getlongtablewidth}{\begingroup \ifcsname LT@\roman{LT@tables}\endcsname \global\longtablewidth=0pt \renewcommand{\LT@entry}[2]{\global\advance\longtablewidth by ##2\relax\gdef\LastLTentrywidth{##2}}\@nameuse{LT@\roman{LT@tables}} \fi \endgroup}
+
+% \setlength{\parindent}{0.5in}
+% \setlength{\parskip}{0pt plus 0pt minus 0pt}
+
+% \usepackage{etoolbox}
+\makeatletter
+\patchcmd{\HyOrg@maketitle}
+  {\section{\normalfont\normalsize\abstractname}}
+  {\section*{\normalfont\normalsize\abstractname}}
+  {}{\typeout{Failed to patch abstract.}}
+\patchcmd{\HyOrg@maketitle}
+  {\section{\protect\normalfont{\@title}}}
+  {\section*{\protect\normalfont{\@title}}}
+  {}{\typeout{Failed to patch title.}}
+\makeatother
+\shorttitle{Introduction}
+\keywords{keywords\newline\indent Word count: X}
+\DeclareDelayedFloatFlavor{ThreePartTable}{table}
+\DeclareDelayedFloatFlavor{lltable}{table}
+\DeclareDelayedFloatFlavor*{longtable}{table}
+\makeatletter
+\renewcommand{\efloat@iwrite}[1]{\immediate\expandafter\protected@write\csname efloat@post#1\endcsname{}}
+\makeatother
+\usepackage{csquotes}
+\ifxetex
+  % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
+  \usepackage{polyglossia}
+  \setmainlanguage[]{english}
+\else
+  \usepackage[shorthands=off,main=english]{babel}
+\fi
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newenvironment{cslreferences}%
+  {\setlength{\parindent}{0pt}%
+  \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces}%
+  {\par}
+
+\title{PSY 364 -- Introduction}
+\author{Iris Zhong\textsuperscript{1} \& Yena Li\textsuperscript{1}}
+\date{}
+
+
+\affiliation{\vspace{0.5cm}\textsuperscript{1} Smith College}
+
+\begin{document}
+\maketitle
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+Even though issues related to gender equality have been hugely discussed, women still face many unfair treatments conducted both consciously or unconsciously. For example, even with a job, women do the majority of household chores at home. Given that many workplaces' modes have transitioned to remote telework due to the pandemic (COVID-19), with their partner also having more flexibility from teleworking, would it elevate the amount of chores women perform on a daily basis? Apparently, this issue is more complicated than what people have thought it would be, since the inequalities in divisions of housework from pre-COVID times remained for women (Dunatchik, Gerson, Glass, Jacobs, \& Stritzel, 2021). Past studies have shown that fairness in housework can influence relationship satisfaction. Does the switch to telework influence people's perspectives on how fairly household tasks are divided? If the change of work mode because of the pandemic alters the perceived fairness in chore division, would it affect the couple's relationship as well? Does it give any insight into post-covid period? We believe that these are important questions to investigate and could be useful information for preventing or solving problems that occur in the relationship. Although there are studies on how gender, gender ideology or telework and chore fairness relates to marital satisfaction, no research has connected all three elements -- telework, household chore fairness, and satisfaction -- together. In this study, we seek to investigate the relationship between all of the elements using pairwise data and an actor-partner interdependence model.
+
+Household labor division is something that has to be faced by the majority of couples all around the world. In order to explore the relationship between the two, researchers have been conducting a lot of studies on how factors such as gender could mediate or moderate how chore fairness could affect couples' marital satisfaction. An interesting finding related to this topic was by Erchull, Liss, Axelson, Staebell, and Askari (2010), in which they suggested that the desire for marriage predicted anticipated household labour participation for females, but not for males; similarly, the desire for children predicted anticipated child care work participation for females, but not for males. However, they also found that anticipated chores and other tasks did not equal to what each individual in the relationship actually took on (Erchull et al., 2010). According to Hu and Yucel (2018), women across thirty countries reported a higher level of family life satisfaction when they perceived the housework division between the partners to be fair rather than unfair. Similar to subjective burden from house work, the actual amount of housework women take on could also affect marital satisfaction. For example, agreeing with observations made with U.S. data, marital satisfaction of wives was negatively correlated with the burden of housework they take on (Oshio, Nozaki, \& Kobayashi, 2013). A study conducted by Nourani, Seraj, Shakeri, and Mokhber (2019) in Iran also found a significant relationship between male participants' satisfaction and their participation in household labor, but not between female participants' satisfaction and their participation in household labor. According to the researchers, female participants' marital satisfaction seemed to be higher when their male counterparts were involved in more family related tasks (Nourani et al., 2019). More specifically, perceived unfairness in housework and expenses for both the respondents themselves and their partners could reduce relationship satisfaction in general, except for perceived unfairness for partners in shared expenses (Gillespie, Peterson, \& Lever, 2019). Furthermore, perceived self unfairness was a stronger predictor of relationship quality than perceived partner unfairness (Gillespie et al., 2019). Interestingly, Dillaway and Broman (2001) found that women had lower marital satisfaction than men overall, and their satisfaction was low regardless of how much house work they performed. When they incorporated race into the framework, they realized that black women seemed to have lower marital satisfaction than white women, and that when black men and white men performed the same amount of housework, black men were less likely to report high marital satisfaction than white men (Dillaway \& Broman, 2001). Compared to white men, black men did more housework in general; however, when they are not involved in as much housework, black men reported higher marital satisfaction than white men.
+
+Other than gender, researchers have also investigated how gender ideology could explain or predict labor division in the household, as well as the link between chore fairness and marital satisfaction. Many of the studies concluded that gender ideology influenced perceived fairness, such that individuals with an egalitarian attitude tended to judge inequalities in housework division that were unfavorable to the wife more negatively than traditional-minded respondents (Carriero \& Todesco, 2017). Men with egalitarian gender role attitudes were less satisfied than men with traditional gender role attitudes when the household labour division was specialized and not balanced (Blom, Kraaykamp, \& Verbakel, 2017). On the other hand, husbands with a more traditional attitude towards gender roles had decreasing marital satisfaction over time and are more likely to have more conflicts about their relationship fairness and decision-making with their wives (Faulkner, Davey, \& Davey, 2005). Conflicts about marital relationship and gender-based inequities were likely to be initiated by wives who felt unfair in the relationship. However, wives' gender role attitudes did not predict their marital satisfaction or conflict across a period of time (Faulkner et al., 2005). Wives' marital experience were predictive of their husbands, and their ability to manage conflict was predictive of their husbands' level of marital conflict, but for both cases it was not true the other way around (Faulkner et al., 2005). In a research conducted by Fleche, Lepinteur, and Powdthavee (2020), results showed that women who work longer hours than their husbands reported significantly lower life satisfaction. In addition, for women who worked longer than their husbands, the time they spent on housework was not less than women who worked less or the same as their spouses (Fleche et al., 2020). Only females who held a more egalitarian ideology and who worked more than their husbands perceive housework division to be unfair (Fleche et al., 2020). When children were involved, nevertheless, the situation seemed a little bit different: the positive link between relationship satisfaction and specialization was not strong compared to when there are no children involved (Blom et al., 2017). Women's relationship satisfaction was also not influenced by hours-equity or specialization, and that only men seemed to be affected by it (Blom et al., 2017).
+On the other hand, some researchers thought that the ability to work from home also contributes to changes in couples' work-family conflicts, and examined the relationship between teleworking and marital satisfaction. Research has shown that children are an important factor in a person's division to telework when encountering work-family conflicts (Zhang, Moeckel, Moreno, Shuai, \& Gao, 2020). Unrelated to gender or marital status, people that have children are less likely to telework than people without children. Among the participants that don't have children, males are more likely to telework than females, and it is more likely for people that are single to telework compared to people that are married (Zhang et al., 2020). However, for employed parents with children, females are more likely to telework, and it is more likely for partnered parents to telework compared to single parents (Zhang et al., 2020). Jeffrey Hill et al. (2008) suggested that the usage of work flexibility had a curvilinear relationship with life stages, accounting for gender. Although there seemed to be no significant gender difference regarding work flexibility when the individuals were at an early career stage, women were more likely to work flexibly when their oldest children are over 6 years old and such gender differences continued in life until none of their children were younger than 6 years old (Jeffrey Hill et al., 2008). Additionally, women seemed to value flexible work more than men at every stage. Overall, workers tended to experience a higher level of stress when teleworking than working in the workplace, which challenged the commonsense that teleworking brings more flexibility and should reduce stress for workers (Song \& Gao, 2020). However, the effect of working from home was heterogeneous across gender and parental status, and varied on weekdays versus weekends; for instance, teleworking on weekends or holidays was less painful than working in the workplace for mothers.
+
+Because of the pandemic that started in early 2020, a lot of the employees were forced to move online and work from home. Some recent studies looked into telework during the pandemic and how it affects couples' daily life. According to Dunatchik et al. (2021), most parents, both female and male, reported spending more time in housework and child care tasks in the pandemic. They also found that the gender gap in chore fairness was still substantial, as most mothers reported being primarily responsible for the housework or child care. Additionally, even working mothers still took a lot of responsibility in housework, child care and homeschooling. When both parents worked remotely, some families had a greater egalitarian division of chores within the couple, but the pattern was not universal. Even when both parents were telecommuting, a gendered division of labor persisted, and the gap did not change from before. On the other hand, if only one parent was working from home, telecommuting fathers tended to report far less involvement in domestic work than did telecommuting mothers. Del Boca, Oggero, Profeta, and Rossi (2020) also suggested that unlike men, women working from home had to take the tasks both from their jobs and from families and were spending more time on housework chores during the pandemic, unless they continued to work at their usual workplace. Women with young children were especially vulnerable, because they bore the most burden.
+
+Overall, previous studies have suggested strong relationships between gender, gender ideology, ability to telework and marital satisfaction. However, because previous studies have not connected the relationship between remote working, household chore fairness, and satisfaction together, the current research will examine the influence of telework on relationship satisfaction, mediated by perceived fairness in chore division. The moderation effect of gender and gender ideology will also be investigated. We seek to investigate two questions: 1) whether the respondent or their partner is teleworking can affect their perceived fairness in household chores, and further influence their relationship quality; and 2) whether gender also plays a role in perceived chore fairness and consequently affects relationship quality. Different from existing studies on remote work and satisfaction, the present research will use longitudinal diary data with a span of fourteen days, which allows control for more individual variances. In addition, a multilevel Actor-Partner Interdependence Model will be adopted to account for effects from both the respondent themselves and their partner on the respondent.
+
+We have used R (Version 4.0.3; R Core Team, 2020) and the R-package \emph{papaja} (Version 0.1.0.9997; Aust \& Barth, 2020) in this assignment.
+
+\newpage
+
+\hypertarget{references}{%
+\section{References}\label{references}}
+
+\begingroup
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+
+\hypertarget{refs}{}
+\begin{cslreferences}
+\leavevmode\hypertarget{ref-R-papaja}{}%
+Aust, F., \& Barth, M. (2020). \emph{papaja: Create APA manuscripts with R Markdown}. Retrieved from \url{https://github.com/crsh/papaja}
+
+\leavevmode\hypertarget{ref-blom2017couples}{}%
+Blom, N., Kraaykamp, G., \& Verbakel, E. (2017). Couples' division of employment and household chores and relationship satisfaction: A test of the specialization and equity hypotheses. \emph{European Sociological Review}, \emph{33}(2), 195--208.
+
+\leavevmode\hypertarget{ref-carriero2017interplay}{}%
+Carriero, R., \& Todesco, L. (2017). The interplay between equity and gender ideology in perceived housework fairness: Evidence from an experimental vignette design. \emph{Sociological Inquiry}, \emph{87}(4), 561--585.
+
+\leavevmode\hypertarget{ref-del2020women}{}%
+Del Boca, D., Oggero, N., Profeta, P., \& Rossi, M. (2020). Women's and men's work, housework and childcare, before and during covid-19. \emph{Review of Economics of the Household}, \emph{18}(4), 1001--1017.
+
+\leavevmode\hypertarget{ref-dillaway2001race}{}%
+Dillaway, H., \& Broman, C. (2001). Race, class, and gender differences in marital satisfaction and divisions of household labor among dual-earner couples: A case for intersectional analysis. \emph{Journal of Family Issues}, \emph{22}(3), 309--327.
+
+\leavevmode\hypertarget{ref-dunatchik2021gender}{}%
+Dunatchik, A., Gerson, K., Glass, J., Jacobs, J. A., \& Stritzel, H. (2021). Gender, parenting, and the rise of remote work during the pandemic: Implications for domestic inequality in the united states. \emph{Gender \& Society}, 08912432211001301.
+
+\leavevmode\hypertarget{ref-erchull2010well}{}%
+Erchull, M. J., Liss, M., Axelson, S. J., Staebell, S. E., \& Askari, S. F. (2010). Well\ldots{} she wants it more: Perceptions of social norms about desires for marriage and children and anticipated chore participation. \emph{Psychology of Women Quarterly}, \emph{34}(2), 253--260.
+
+\leavevmode\hypertarget{ref-faulkner2005gender}{}%
+Faulkner, R. A., Davey, M., \& Davey, A. (2005). Gender-related predictors of change in marital satisfaction and marital conflict. \emph{The American Journal of Family Therapy}, \emph{33}(1), 61--83.
+
+\leavevmode\hypertarget{ref-fleche2020gender}{}%
+Fleche, S., Lepinteur, A., \& Powdthavee, N. (2020). Gender norms, fairness and relative working hours within households. \emph{Labour Economics}, \emph{65}, 101866.
+
+\leavevmode\hypertarget{ref-gillespie2019gendered}{}%
+Gillespie, B. J., Peterson, G., \& Lever, J. (2019). Gendered perceptions of fairness in housework and shared expenses: Implications for relationship satisfaction and sex frequency. \emph{Plos One}, \emph{14}(3), e0214204.
+
+\leavevmode\hypertarget{ref-hu2018fairness}{}%
+Hu, Y., \& Yucel, D. (2018). What fairness? Gendered division of housework and family life satisfaction across 30 countries. \emph{European Sociological Review}, \emph{34}(1), 92--105.
+
+\leavevmode\hypertarget{ref-jeffrey2008exploring}{}%
+Jeffrey Hill, E., Jacob, J. I., Shannon, L. L., Brennan, R. T., Blanchard, V. L., \& Martinengo, G. (2008). Exploring the relationship of workplace flexibility, gender, and life stage to family-to-work conflict, and stress and burnout. \emph{Community, Work and Family}, \emph{11}(2), 165--181.
+
+\leavevmode\hypertarget{ref-nourani2019relationship}{}%
+Nourani, S., Seraj, F., Shakeri, M. T., \& Mokhber, N. (2019). The relationship between gender-role beliefs, household labor division and marital satisfaction in couples. \emph{Journal of Holistic Nursing and Midwifery}, \emph{29}(1), 43--49.
+
+\leavevmode\hypertarget{ref-oshio2013division}{}%
+Oshio, T., Nozaki, K., \& Kobayashi, M. (2013). Division of household labor and marital satisfaction in china, japan, and korea. \emph{Journal of Family and Economic Issues}, \emph{34}(2), 211--223.
+
+\leavevmode\hypertarget{ref-R-base}{}%
+R Core Team. (2020). \emph{R: A language and environment for statistical computing}. Vienna, Austria: R Foundation for Statistical Computing. Retrieved from \url{https://www.R-project.org/}
+
+\leavevmode\hypertarget{ref-song2020does}{}%
+Song, Y., \& Gao, J. (2020). Does telework stress employees out? A study on working at home and subjective well-being for wage/salary workers. \emph{Journal of Happiness Studies}, \emph{21}(7), 2649--2668.
+
+\leavevmode\hypertarget{ref-zhang2020work}{}%
+Zhang, S., Moeckel, R., Moreno, A. T., Shuai, B., \& Gao, J. (2020). A work-life conflict perspective on telework. \emph{Transportation Research Part A: Policy and Practice}, \emph{141}, 51--68.
+\end{cslreferences}
+
+\endgroup
+
+
+\end{document}

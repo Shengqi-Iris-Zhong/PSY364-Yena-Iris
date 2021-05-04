@@ -1,0 +1,204 @@
+---
+title: "restructuring data"
+author: "Iris Zhong"
+date: "4/15/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r load libraries}
+library(tidyverse)
+library(mosaic)
+library(dplyr)
+library(janitor)
+```
+
+```{r read data}
+library(readr)
+final_diary <- read_csv("final_diary_data.csv")
+prem <- read_csv("TeleCom_Dyad_premeasures.csv")
+```
+
+```{r create partnum}
+final_diary <- final_diary %>%
+  group_by(obsid) %>%
+  mutate(partnum = seq_along(obsid)) %>%
+  ungroup()
+```
+
+obsid: the couple receive the same obsid for the same day 
+partnum: number within each dyad, 1 or 2
+
+
+```{r check partnum}
+final_diary %>%
+  filter(partnum > 2)
+```
+
+```{r wrangle prem data}
+prem$r_length <- as.Date(as.character(prem$RecordedDate), format="%m/%d/%y")-
+                  as.Date(as.character(prem$relation_length), format="%m/%d/%y")
+
+prem$r_years <- as.numeric(prem$r_length) 
+prem <- prem %>%
+  mutate(r_years = r_years/365) %>%
+  dplyr::select(partID = ResponseId, dyadID, gender, telework = Q139, age = birthday, r_years, childnum = people_5_TEXT, income = indinc, grbs_1:grbs_20) %>%
+  mutate(telework = case_when(
+    telework == "Yes, I am teleworking but my partner is not" ~ 1,
+    telework == "Yes, my partner is teleworking but I am not" ~ 0,
+    telework == "We are both teleworking" ~ 1),
+    childnum = ifelse(is.na(childnum) == T, 0, childnum),
+    gender_chr = case_when(gender == "Woman" ~ "W",
+                       gender == "Woman,Cis gendered" ~ "W",
+                       gender == "Man" ~ "M",
+                       gender == "Man,Cis gendered" ~ "M"),
+    gender = case_when(gender_chr == "W" ~ 1,
+                       gender_chr ==  "M" ~ -1)) %>%
+  mutate(telework = as.factor(telework),
+         gender_chr = as.factor(gender_chr))
+
+```
+
+
+```{r wrangle scales}
+final_diary <- final_diary %>%
+  mutate(qmi1.r = recode(qmi1, "Not true about me" = 1, "A little true about me" = 2, "Somewhat true about me" = 3, "Mostly true about me" = 4),
+         qmi2.r = recode(qmi2, "Not true about me" = 1, "A little true about me" = 2, "Somewhat true about me" = 3, "Mostly true about me" = 4),
+         qmi3.r = recode(qmi3, "Not true about me" = 1, "A little true about me" = 2, "Somewhat true about me" = 3, "Mostly true about me" = 4),
+         qmi4.r = recode(qmi4, "Not true about me" = 1, "A little true about me" = 2, "Somewhat true about me" = 3, "Mostly true about me" = 4))
+final_diary$qmi_ss <- rowMeans(select(final_diary, qmi1.r, qmi2.r, qmi3.r, qmi4.r), na.rm = TRUE)
+
+final_diary <- final_diary %>%
+  mutate(fair_chores = recode(fair_chores, "Very unfair to you" = 1, "Slightly unfair to you" = 2, "Fair to both you and your partner" = 3, "Pretty much fair to me" = 4, "Very fair to me" = 5))
+  
+
+prem <- prem %>%
+  mutate(grbs_1.r = recode(grbs_1,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+         grbs_2.r = recode(grbs_2,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+         grbs_3.r = recode(grbs_3,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+         grbs_4.r = recode(grbs_4,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+         grbs_5.r = recode(grbs_5,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+         grbs_6.r = recode(grbs_6,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+         grbs_7.r = recode(grbs_7,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+         grbs_8.r = recode(grbs_8,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+         grbs_9.r = recode(grbs_9,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+         grbs_10.r = recode(grbs_10,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+         grbs_11.r = recode(grbs_11,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+         grbs_12.r = recode(grbs_12,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+         grbs_13.r = recode(grbs_13,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+         grbs_14.r = recode(grbs_14,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+         grbs_15.r = recode(grbs_15,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+         grbs_16.r = recode(grbs_16,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+          grbs_17.r = recode(grbs_17,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+         grbs_18.r = recode(grbs_18,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+         grbs_19.r = recode(grbs_19,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5),
+         grbs_20.r = recode(grbs_20,  "Strongly disagree" = 1, "Somewhat disagree" = 2, "Neither agree nor disagree" = 3, "Somewhat agree" = 4, "Strongly agree" = 5))
+
+prem <- prem %>%
+  mutate(grbs_2.r = (1 + 5) - grbs_2.r,
+         grbs_3.r = (1 + 5) - grbs_3.r,
+         grbs_7.r = (1 + 5) - grbs_7.r,
+         grbs_10.r = (1 + 5) - grbs_10.r,
+         grbs_12.r = (1 + 5) - grbs_12.r,
+         grbs_17.r = (1 + 5) - grbs_17.r)
+
+prem$grbs_ss <- rowMeans(select(prem, grbs_1.r, grbs_2.r, grbs_3.r, grbs_4.r, grbs_5.r, grbs_6.r, grbs_7.r, grbs_8.r, grbs_9.r, grbs_10.r, grbs_11.r, grbs_12.r, grbs_13.r, grbs_14.r, grbs_15.r, grbs_16.r, grbs_17.r, grbs_18.r, grbs_19.r, grbs_20.r), na.rm = TRUE)
+```
+
+
+```{r select variables}
+prem <- prem %>%
+  dplyr::select(-c(grbs_1:grbs_20, grbs_1.r:grbs_20.r))
+
+final_diary <- final_diary %>%
+  dplyr::select(partID, dyadID, day, day_of_study, obsid, partnum, fair_chores, qmi_ss)
+
+```
+
+
+check couple with different childnum
+```{r check childnum}
+prem %>%
+  group_by(dyadID) %>%
+  mutate(child_num = mean(childnum)) %>%
+  ungroup() %>%
+  filter(childnum != child_num)
+```
+
+
+There are couples that wrote different r_years/childnum. Replace with mean. 
+
+```{r average r_length childnum}
+prem <- prem %>%
+  group_by(dyadID) %>%
+  mutate(r_years = mean(r_years)) %>%
+  mutate(childnum = mean(childnum)) %>%
+  ungroup()
+  
+```
+
+
+Remove same-sex couple data.
+
+```{r remove same-sex couple data}
+prem <- prem %>%
+  group_by(dyadID) %>%
+  mutate(gender_sum = sum(gender)) # effect coding: heterosexual couple gender_sum == 0
+
+```
+
+
+```{r join dataset}
+prem_diary <- final_diary %>%
+  inner_join(prem, by = "partID") %>%
+  filter(gender_sum == 0) %>%
+  dplyr::select(dyadID = dyadID.x, obsid, r_years, childnum, gender, gender_chr,partID, day, day_of_study, partnum,  telework, income, grbs_ss, fair_chores, qmi_ss)
+```
+
+```{r make individual dyadic}
+prem_diary2 <- prem_diary %>%
+  gather(variable, value, telework:qmi_ss)
+
+prem_diary3 <- prem_diary2 %>%
+  unite(var_gender, variable, gender_chr)
+
+prem_diary4 <- prem_diary3 %>%
+  spread(var_gender, value)
+
+rm(prem_diary2, prem_diary3)
+```
+
+```{r}
+write.csv(prem_diary,"prem_diary.csv")
+```
+
+
+
+```{r}
+tempA <- prem_diary %>%  
+  mutate(genderE = gender, partnum = 1, 
+         gender = ifelse(gender == 1, "A", "P")) %>%
+  gather(variable, value, gender_chr:qmi_ss) %>%
+  unite(var_gender, variable, gender) %>%
+  spread(var_gender, value)
+
+tempB <- prem_diary %>% 
+  mutate(genderE = gender, partnum = 2,
+         gender = ifelse(gender == 1, "P", "A")) %>%
+  gather(variable, value, gender_chr:qmi_ss)%>%
+  unite(var_gender, variable, gender) %>%
+  spread(var_gender, value)
+
+data_pair <- bind_rows(tempA, tempB) %>%
+  arrange(obsid) 
+  
+#rm(tempA, tempB)
+#head(acitelli_pair)
+```
+
+
+
+

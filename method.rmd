@@ -35,6 +35,13 @@ draft             : no
 documentclass     : "apa6"
 classoption       : "man"
 output            : papaja::apa6_pdf
+
+header-includes:
+- \usepackage{caption}
+- \captionsetup[figure]{labelformat=empty}
+- \usepackage[safe]{tipa}
+- \newcommand{\bcenter}{\begin{center}}
+- \newcommand{\ecenter}{\end{center}}
 ---
 
 ```{r setup, include = FALSE}
@@ -161,10 +168,12 @@ In sum, 364 people from 182 pairs of couples filled out the pre-measure survey. 
 \
 This assignment has used R [Version 4.0.3; @R-base] and the R-packages *dplyr* [Version 1.0.2; @R-dplyr], *forcats* [Version 0.5.0; @R-forcats], *ggformula* [Version 0.10.1; @R-ggformula], *ggplot2* [Version 3.3.2; @R-ggplot2], *ggridges* [Version 0.5.2; @R-ggridges], *ggstance* [Version 0.3.5; @R-ggstance], *here* [Version 1.0.1; @R-here], *lattice* [Version 0.20.41; @R-lattice], *Matrix* [Version 1.2.18; @R-Matrix], *mosaic* [Version 1.8.3; @R-mosaic; @R-mosaicData], *mosaicData* [Version 0.20.2; @R-mosaicData], *papaja* [Version 0.1.0.9997; @R-papaja], *psychTools* [Version 2.1.3; @R-psychTools], *purrr* [Version 0.3.4; @R-purrr], *readr* [Version 1.4.0; @R-readr], *RJ-2017-037* [@R-RJ-2017-037; @R-RJ-2017-037; @R-RJ-2017-037; @R-RJ-2017-037; @R-RJ-2017-037], *stargazer* [Version 5.2.2; @R-stargazer], *stringr* [Version 1.4.0; @R-stringr], *tibble* [Version 3.0.4; @R-tibble], *tidyr* [Version 1.1.2; @R-tidyr], and *tidyverse* [Version 1.3.0; @R-tidyverse].
 
+\renewcommand{\arraystretch}{0.5}
 \begin{table}[ ht ] 
 \centering 
 \caption{}\label{}
 \begin{tabular}{ l c }
+
 \toprule
  &   \multicolumn{ 1 }{c}{ Total }\\ 
  & n = 364 \\ 
