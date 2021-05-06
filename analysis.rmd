@@ -30,7 +30,7 @@ data_pair <- data_pair %>%
 ```
 
 ```{r}
-ggplot(data_pair, aes(x = fair_chores_A, y = qmi_ss_A)) +
+ggplot(data_pair, aes(x = fair_chores_A, y = qmi_ss_A, color= gender_chr_A, shape= gender_chr_A)) +
   geom_point()+
   geom_jitter() +
   geom_smooth(method = "lm")
@@ -137,7 +137,23 @@ mod_qmi_chore_APIM_2  <- lme(qmi_ss_A ~ gender_chr_A +
 summary(mod_qmi_chore_APIM_2)
 report(mod_qmi_chore_APIM_2)
 ```
-grbs_ss_A:fair_chores_C_A + grbs_ss_A:fair_chores_C_P
+
+```{r}
+mod_qmi_chore_empty<- lme(qmi_ss_A ~ gender_chr_A - 1,
+                     data = data_pair,
+                     random = ~ gender_chr_A - 1|dyadID,
+                     correlation = corCompSymm(form = ~1|dyadID/obsid), 
+                     weights = varIdent(form = ~1|gender_chr_A), 
+                     na.action = na.omit)
+
+summary(mod_qmi_chore_empty)
+```
+
+
+residual standard deviation for women: 0.4064918
+residual standard deviation for men: 0.4064918 * 0.8740537 
+residual variance: square them
+
 
 ```{r}
 mod_chore_work  <- lme(fair_chores_C_A ~ gender_chr_A + telework_A:gender_chr_A  - 1,
@@ -151,7 +167,7 @@ summary(mod_chore_work)
 ```
 
 ```{r}
-mod_chore_work_2  <- lme(fair_chores_C_A ~ genderE_A + telework_A:genderE_A + childnum + r_years + income_A  - 1,
+mod_chore_work_2  <- lme(fair_chores_C_A ~ gender_chr_A + telework_A:gender_chr_A + childnum + r_years + income_A  - 1,
                       data = data_pair, 
                       random = ~ gender_chr_A - 1|dyadID,
                       correlation = corCompSymm(form = ~1|dyadID/obsid),
@@ -161,6 +177,10 @@ mod_chore_work_2  <- lme(fair_chores_C_A ~ genderE_A + telework_A:genderE_A + ch
 summary(mod_chore_work_2)
 report(mod_chore_work_2)
 ```
+
+
+
+
 
 ```{r}
 mod_work_qmi  <- lme(qmi_ss_A ~ gender_chr_A + telework_A + telework_P,
