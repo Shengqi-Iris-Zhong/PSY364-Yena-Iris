@@ -37,6 +37,13 @@ ggplot(data_pair, aes(x = fair_chores_A, y = qmi_ss_A)) +
 ```
 
 
+```{r}
+ggplot(data_pair, aes(x = fair_chores_A)) +
+  geom_histogram()
+```
+
+
+
 
 ```{r}
 mod_qmi_chore  <- lme(qmi_ss_A ~ gender_chr_A + gender_chr_A:day_of_study_A + fair_chores_C_A:gender_chr_A  - 1,
@@ -47,51 +54,15 @@ mod_qmi_chore  <- lme(qmi_ss_A ~ gender_chr_A + gender_chr_A:day_of_study_A + fa
                       na.action = na.omit)
 
 summary(mod_qmi_chore)
-stargazer(mod_qmi_chore)
+#stargazer(mod_qmi_chore)
 ```
 
 
-\begin{table}[!htbp] \centering 
-  \caption{} 
-  \label{} 
-\begin{tabular}{@{\extracolsep{5pt}}lc} 
-\\[-1.8ex]\hline 
-\hline \\[-1.8ex] 
- & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
-\cline{2-2} 
-\\[-1.8ex] & qmi\_ss\_A \\ 
-\hline \\[-1.8ex] 
- gender\_chr\_AM & 3.563$^{***}$ \\ 
-  & (0.070) \\ 
-  & \\ 
- gender\_chr\_AW & 3.426$^{***}$ \\ 
-  & (0.066) \\ 
-  & \\ 
- gender\_chr\_AM:day\_of\_study\_A & $-$0.003 \\ 
-  & (0.003) \\ 
-  & \\ 
- gender\_chr\_AW:day\_of\_study\_A & 0.007$^{**}$ \\ 
-  & (0.003) \\ 
-  & \\ 
- gender\_chr\_AM:fair\_chores\_C\_A & 0.069$^{***}$ \\ 
-  & (0.018) \\ 
-  & \\ 
- gender\_chr\_AW:fair\_chores\_C\_A & 0.085$^{***}$ \\ 
-  & (0.019) \\ 
-  & \\ 
-\hline \\[-1.8ex] 
-Observations & 2,107 \\ 
-Log Likelihood & $-$1,157.993 \\ 
-Akaike Inf. Crit. & 2,339.985 \\ 
-Bayesian Inf. Crit. & 2,407.787 \\ 
-\hline 
-\hline \\[-1.8ex] 
-\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
-\end{tabular} 
-\end{table} 
-
 ```{r}
-mod_qmi_chore_APIM  <- lme(qmi_ss_A ~ gender_chr_A + gender_chr_A:day_of_study_A + fair_chores_C_A:gender_chr_A+fair_chores_C_P:gender_chr_A  - 1,
+mod_qmi_chore_APIM  <- lme(qmi_ss_A ~ gender_chr_A + 
+                             gender_chr_A:day_of_study_A + 
+                             fair_chores_C_A:gender_chr_A +
+                             fair_chores_C_P:gender_chr_A  - 1,
                       data = data_pair, 
                       random = ~ gender_chr_A - 1|dyadID,
                       correlation = corCompSymm(form = ~1|dyadID/obsid),
@@ -99,11 +70,64 @@ mod_qmi_chore_APIM  <- lme(qmi_ss_A ~ gender_chr_A + gender_chr_A:day_of_study_A
                       na.action = na.omit)
 
 summary(mod_qmi_chore_APIM)
+#stargazer(mod_qmi_chore,mod_qmi_chore_APIM)
 ```
 
 
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lcc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{2}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-3} 
+\\[-1.8ex] & \multicolumn{2}{c}{qmi\_ss\_A} \\ 
+\\[-1.8ex] & (1) & (2)\\ 
+\hline \\[-1.8ex] 
+ gender\_chr\_AM & 3.563$^{***}$ & 3.563$^{***}$ \\ 
+  & (0.070) & (0.070) \\ 
+  & & \\ 
+ gender\_chr\_AW & 3.426$^{***}$ & 3.426$^{***}$ \\ 
+  & (0.066) & (0.067) \\ 
+  & & \\ 
+ gender\_chr\_AM:day\_of\_study\_A & $-$0.003 & $-$0.003 \\ 
+  & (0.003) & (0.003) \\ 
+  & & \\ 
+ gender\_chr\_AW:day\_of\_study\_A & 0.007$^{**}$ & 0.007$^{**}$ \\ 
+  & (0.003) & (0.003) \\ 
+  & & \\ 
+ gender\_chr\_AM:fair\_chores\_C\_A & 0.069$^{***}$ & 0.069$^{***}$ \\ 
+  & (0.018) & (0.019) \\ 
+  & & \\ 
+ gender\_chr\_AW:fair\_chores\_C\_A & 0.085$^{***}$ & 0.082$^{***}$ \\ 
+  & (0.019) & (0.020) \\ 
+  & & \\ 
+ gender\_chr\_AM:fair\_chores\_C\_P &  & $-$0.008 \\ 
+  &  & (0.018) \\ 
+  & & \\ 
+ gender\_chr\_AW:fair\_chores\_C\_P &  & $-$0.003 \\ 
+  &  & (0.021) \\ 
+  & & \\ 
+\hline \\[-1.8ex] 
+Observations & 2,107 & 2,107 \\ 
+Log Likelihood & $-$1,157.993 & $-$1,163.909 \\ 
+Akaike Inf. Crit. & 2,339.985 & 2,355.818 \\ 
+Bayesian Inf. Crit. & 2,407.787 & 2,434.907 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{2}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+
 ```{r}
-mod_qmi_chore_APIM_2  <- lme(qmi_ss_A ~ gender_chr_A + gender_chr_A:day_of_study_A + fair_chores_C_A:gender_chr_A+fair_chores_C_P:gender_chr_A + gender_chr_A:grbs_C_A+ grbs_C_A:gender_chr_A:fair_chores_C_A+grbs_C_A:gender_chr_A:fair_chores_C_P+  - 1,
+mod_qmi_chore_APIM_2  <- lme(qmi_ss_A ~ gender_chr_A + 
+                               gender_chr_A:day_of_study_A +
+                               fair_chores_C_A:gender_chr_A +
+                               fair_chores_C_P:gender_chr_A + 
+                               gender_chr_A:grbs_C_A+             
+                               grbs_C_A:gender_chr_A:fair_chores_C_A+
+                               grbs_C_A:gender_chr_A:fair_chores_C_P+  - 1,
                       data = data_pair, 
                       random = ~ gender_chr_A - 1|dyadID,
                       correlation = corCompSymm(form = ~1|dyadID/obsid),
@@ -135,10 +159,11 @@ mod_chore_work_2  <- lme(fair_chores_C_A ~ genderE_A + telework_A:genderE_A + ch
                       na.action = na.omit)
 
 summary(mod_chore_work_2)
+report(mod_chore_work_2)
 ```
 
 ```{r}
-mod_work_qmi  <- lme(qmi_ss_A ~ gender_chr_A + telework_A,
+mod_work_qmi  <- lme(qmi_ss_A ~ gender_chr_A + telework_A + telework_P,
                       data = data_pair, 
                       random = ~ gender_chr_A - 1|dyadID,
                       correlation = corCompSymm(form = ~1|dyadID/obsid),
@@ -146,4 +171,72 @@ mod_work_qmi  <- lme(qmi_ss_A ~ gender_chr_A + telework_A,
                       na.action = na.omit)
 
 summary(mod_work_qmi)
+#stargazer(mod_work_qmi, mod_chore_work_2, mod_qmi_chore,mod_qmi_chore_APIM)
 ```
+
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lcccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-5} 
+\\[-1.8ex] & qmi\_ss\_A & fair\_chores\_C\_A & \multicolumn{2}{c}{qmi\_ss\_A} \\ 
+\\[-1.8ex] & (1) & (2) & (3) & (4)\\ 
+\hline \\[-1.8ex] 
+ gender\_chr\_AM &  &  & 3.563$^{***}$ & 3.563$^{***}$ \\ 
+  &  &  & (0.070) & (0.070) \\ 
+  & & & & \\ 
+ gender\_chr\_AW & $-$0.084$^{*}$ &  & 3.426$^{***}$ & 3.426$^{***}$ \\ 
+  & (0.049) &  & (0.066) & (0.067) \\ 
+  & & & & \\ 
+ telework\_A & $-$0.020 &  &  &  \\ 
+  & (0.057) &  &  &  \\ 
+  & & & & \\ 
+ genderE\_A &  & $-$0.053 &  &  \\ 
+  &  & (0.126) &  &  \\ 
+  & & & & \\ 
+ childnum &  & 0.048 &  &  \\ 
+  &  & (0.073) &  &  \\ 
+  & & & & \\ 
+ r\_years &  & $-$0.006 &  &  \\ 
+  &  & (0.005) &  &  \\ 
+  & & & & \\ 
+ income\_A &  & 0.00000 &  &  \\ 
+  &  & (0.00000) &  &  \\ 
+  & & & & \\ 
+ genderE\_A:telework\_A &  & $-$0.028 &  &  \\ 
+  &  & (0.158) &  &  \\ 
+  & & & & \\ 
+ gender\_chr\_AM:day\_of\_study\_A &  &  & $-$0.003 & $-$0.003 \\ 
+  &  &  & (0.003) & (0.003) \\ 
+  & & & & \\ 
+ gender\_chr\_AW:day\_of\_study\_A &  &  & 0.007$^{**}$ & 0.007$^{**}$ \\ 
+  &  &  & (0.003) & (0.003) \\ 
+  & & & & \\ 
+ gender\_chr\_AM:fair\_chores\_C\_A &  &  & 0.069$^{***}$ & 0.069$^{***}$ \\ 
+  &  &  & (0.018) & (0.019) \\ 
+  & & & & \\ 
+ gender\_chr\_AW:fair\_chores\_C\_A &  &  & 0.085$^{***}$ & 0.082$^{***}$ \\ 
+  &  &  & (0.019) & (0.020) \\ 
+  & & & & \\ 
+ gender\_chr\_AM:fair\_chores\_C\_P &  &  &  & $-$0.008 \\ 
+  &  &  &  & (0.018) \\ 
+  & & & & \\ 
+ gender\_chr\_AW:fair\_chores\_C\_P &  &  &  & $-$0.003 \\ 
+  &  &  &  & (0.021) \\ 
+  & & & & \\ 
+ Constant & 3.560$^{***}$ &  &  &  \\ 
+  & (0.077) &  &  &  \\ 
+  & & & & \\ 
+\hline \\[-1.8ex] 
+Observations & 2,107 & 1,807 & 2,107 & 2,107 \\ 
+Log Likelihood & $-$1,162.963 & $-$1,847.812 & $-$1,157.993 & $-$1,163.909 \\ 
+Akaike Inf. Crit. & 2,343.926 & 3,717.624 & 2,339.985 & 2,355.818 \\ 
+Bayesian Inf. Crit. & 2,394.790 & 3,778.087 & 2,407.787 & 2,434.907 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{4}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
