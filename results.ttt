@@ -1,0 +1,77 @@
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+[!htbp] \centering
+  \caption{Relationship between telework and relationship satisfaction}
+  \label{}
+\begin{tabular}{@{\extracolsep{5pt}}lc}
+\\[-1.8ex]\hline
+\hline \\[-1.8ex]
+ & \multicolumn{1}{c}{\textit{Dependent variable:}} \\
+\cline{2-2}
+\\[-1.8ex] & Relationship satisfaction (QMI)\\
+\hline \\[-1.8ex]
+ Men & 3.594$^{***}$ \\
+  & (0.089) \\
+  & \\
+ Women & 3.427$^{***}$ \\
+  & (0.100) \\
+  & \\
+ Men * Telework & $-$0.082 \\
+  & (0.099) \\
+  & \\
+ Women * Telework & 0.048 \\
+  & (0.104) \\
+  & \\
+\hline \\[-1.8ex]
+Observations & 2,107 \\
+Log Likelihood & $-$1,163.534 \\
+Akaike Inf. Crit. & 2,347.068 \\
+Bayesian Inf. Crit. & 2,403.579 \\
+\hline
+\hline \\[-1.8ex]
+\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\
+\end{tabular}
+\end{table*}
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+[!htbp] \centering
+  \caption{Relationship between telework and perceived chore fairness}
+  \label{}
+\begin{tabular}{@{\extracolsep{5pt}}lc}
+\\[-1.8ex]\hline
+\hline \\[-1.8ex]
+ & \multicolumn{1}{c}{\textit{Dependent variable:}} \\
+\cline{2-2}
+\\[-1.8ex] & Perceived chore fairness \\
+\hline \\[-1.8ex]
+ Men & 0.294 \\
+  & (0.236) \\
+  & \\
+ Women & 0.346 \\
+  & (0.306) \\
+  & \\
+ Number of children & 0.014 \\
+  & (0.084) \\
+  & \\
+ Relationship length & $-$0.012 \\
+  & (0.008) \\
+  & \\
+ Income & 0.00000 \\
+  & (0.00000) \\
+  & \\
+ Men * Telework & $-$0.071 \\
+  & (0.189) \\
+  & \\
+ Women * Telework & $-$0.289 \\
+  & (0.257) \\
+  & \\
+\hline \\[-1.8ex]
+Observations & 1,807 \\
+Log Likelihood & $-$1,846.967 \\
+Akaike Inf. Crit. & 3,719.933 \\
+Bayesian Inf. Crit. & 3,791.375 \\
+\hline
+\hline \\[-1.8ex]
+\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\
+\end{tabular}
+\end{table*}

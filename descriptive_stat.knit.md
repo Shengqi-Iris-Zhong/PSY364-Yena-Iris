@@ -7,19 +7,148 @@ output:
   html_document: default
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+
+
+
+```r
+library(tidyverse)
 ```
 
-```{r load libraries}
-library(tidyverse)
+```
+## -- Attaching packages --------------------------------------- tidyverse 1.3.0 --
+```
+
+```
+## v ggplot2 3.3.2     v purrr   0.3.4
+## v tibble  3.0.4     v dplyr   1.0.2
+## v tidyr   1.1.2     v stringr 1.4.0
+## v readr   1.4.0     v forcats 0.5.0
+```
+
+```
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+```
+
+```r
 library(tidyr)
 library(mosaic)
+```
+
+```
+## Warning: package 'mosaic' was built under R version 4.0.4
+```
+
+```
+## Registered S3 method overwritten by 'mosaic':
+##   method                           from   
+##   fortify.SpatialPolygonsDataFrame ggplot2
+```
+
+```
+## 
+## The 'mosaic' package masks several functions from core packages in order to add 
+## additional features.  The original behavior of these functions should not be affected by this.
+```
+
+```
+## 
+## Attaching package: 'mosaic'
+```
+
+```
+## The following object is masked from 'package:Matrix':
+## 
+##     mean
+```
+
+```
+## The following objects are masked from 'package:dplyr':
+## 
+##     count, do, tally
+```
+
+```
+## The following object is masked from 'package:purrr':
+## 
+##     cross
+```
+
+```
+## The following object is masked from 'package:ggplot2':
+## 
+##     stat
+```
+
+```
+## The following objects are masked from 'package:stats':
+## 
+##     binom.test, cor, cor.test, cov, fivenum, IQR, median, prop.test,
+##     quantile, sd, t.test, var
+```
+
+```
+## The following objects are masked from 'package:base':
+## 
+##     max, mean, min, prod, range, sample, sum
+```
+
+```r
 library(ggplot2)
 library(here)
+```
+
+```
+## Warning: package 'here' was built under R version 4.0.4
+```
+
+```
+## here() starts at C:/Users/iris_/OneDrive/Desktop/Smith/Spring 2021/PSY 364/Proj/PSY364-Yena-Iris
+```
+
+```r
 library(stargazer)
+```
+
+```
+## 
+## Please cite as:
+```
+
+```
+##  Hlavac, Marek (2018). stargazer: Well-Formatted Regression and Summary Statistics Tables.
+```
+
+```
+##  R package version 5.2.2. https://CRAN.R-project.org/package=stargazer
+```
+
+```r
 library(psychTools)
+```
+
+```
+## Warning: package 'psychTools' was built under R version 4.0.4
+```
+
+```
+## 
+## Attaching package: 'psychTools'
+```
+
+```
+## The following object is masked from 'package:mosaic':
+## 
+##     read.file
+```
+
+```r
 library(furniture)
+```
+
+```
+## Warning: package 'furniture' was built under R version 4.0.4
 ```
 
 \begin{table}[ ht ] 
@@ -57,29 +186,19 @@ income &   &   &  \\
 
 \end{tabular}
 \end{table}
-```{r import data}
+
+```r
 # import premeasures
 prem <- read.csv("TeleCom_Dyad_premeasures.csv",fileEncoding = 'UTF-8-BOM')
 # import daily diary
 diary <- read.csv("TeleCom_Dyad_dailydiary.csv")
 ```
 
-```{r clean partID, include = F}
-diary <- diary %>%
-  mutate(partID = case_when(partID_given == "" ~ partID,
-                            partID_given != "" ~ partID_given))
-diary <- diary %>%
-  mutate(partID = str_replace_all(partID, " ", ""),
-         partID = str_replace_all(partID, ":", ""),
-         partID = str_replace(partID, "R-", "R_"),
-         partID = str_remove(partID,"\\."),
-         partID = ifelse(str_starts(partID,"R", negate = T ),
-                         paste0("R_",partID), partID))
-         
-```
 
 
-```{r create relationship length}
+
+
+```r
 prem$r_length <- as.Date(as.character(prem$RecordedDate), format="%m/%d/%y")-
                   as.Date(as.character(prem$relation_length), format="%m/%d/%y")
 
@@ -89,12 +208,14 @@ prem <- prem %>%
 ```
 
 
-```{r select var in prem}
+
+```r
 prem_select <- prem %>%
   dplyr::select(partID = ResponseId, dyadID, gender, telework = Q139, age = birthday, r_years, race, childnum = people_5_TEXT, income = indinc)
 ```
 
-```{r clean variables}
+
+```r
 prem_select <- prem_select %>%
   mutate(telework = case_when(
     telework == "Yes, I am teleworking but my partner is not" ~ 1,
@@ -107,14 +228,41 @@ prem_select <- prem_select %>%
                        gender == "Man,Cis gendered" ~ 0))
 ```
 
-```{r}
+
+```r
 prem_select %>%
   group_by(dyadID) %>%
   mutate(gender_sum = sum(gender)) %>%
   filter(gender_sum != 1)
 ```
 
-```{r factorize variables}
+```
+## # A tibble: 18 x 10
+## # Groups:   dyadID [9]
+##    partID dyadID gender telework   age r_years race  childnum  income gender_sum
+##    <chr>   <int>  <dbl>    <dbl> <int>   <dbl> <chr>    <dbl>   <int>      <dbl>
+##  1 R_1Fr~ 2.90e7      1        1    35    15.6 Whit~        1   80000          2
+##  2 R_cZs~ 2.90e7      1        1    35    15.6 Whit~        0      NA          2
+##  3 R_56W~ 2.91e7      0        1    59    26.0 Whit~        0   62000          0
+##  4 R_3JC~ 2.91e7      0        0    54    26.0 Whit~        0      NA          0
+##  5 R_29s~ 2.94e7      1        1    50    26.9 Asia~        0  145000          2
+##  6 R_VPd~ 2.94e7      1        1    50    26.9 Asia~        0  145000          2
+##  7 R_1pX~ 2.95e7      0        1    55    43.0 Whit~        0   65000          0
+##  8 R_pQS~ 2.95e7      0        1    55    43.2 Whit~        0   50000          0
+##  9 R_1LF~ 3.29e7      1        1    55    37.4 Blac~        0      NA          2
+## 10 R_2eP~ 3.29e7      1        0    55    38.2 Blac~        2   76000          2
+## 11 R_1DA~ 3.34e7      1        0    37    17.5 Midd~        4      NA          2
+## 12 R_2uP~ 3.34e7      1        0    37    17.5 Midd~        4      NA          2
+## 13 R_3rY~ 3.36e7      0        1    40    19.5 Whit~        1  175000          0
+## 14 R_3Lj~ 3.36e7      0        1    40    19.5 Whit~        1  175000          0
+## 15 R_OIl~ 3.37e7      1        1    40    20.6 Lati~        0 1490000          2
+## 16 R_3fA~ 3.37e7      1        1    40    20.6 Lati~        0  149000          2
+## 17 R_11h~ 3.37e7      1        0    36    11.1 Whit~        2      NA          2
+## 18 R_aWc~ 3.37e7      1        0    36    11.1 Whit~        2      NA          2
+```
+
+
+```r
 prem_select <- prem_select %>%
   mutate(telework = as.factor(telework),
          gender = as.factor(gender))
@@ -126,15 +274,10 @@ prem_select <- prem_select %>%
 
 
 
-```{r, results = 'asis', include = F}
-stargazer(prem_select, type = "latex")
-```
 
 
-```{r, results = "asis", include = F}
-table1(prem_select, gender, age, r_years, race, childnum, income, splitby = ~telework, format_number = T, output = "markdown")
-  
-```
+
+
 
 
 
@@ -192,7 +335,8 @@ income &   &  \\
 
 
 
-```{r, results = 'asis'}
+
+```r
 #df2latex(summary_tbl)
 ```
 

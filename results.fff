@@ -1,0 +1,28 @@
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{C:/Users/iris_/OneDrive/Desktop/Smith/Spring 2021/PSY 364/Proj/PSY364-Yena-Iris/telework_qmi_mod.JPG}
+\caption{The figure shows the model we estimated between telework mode and relationship satisfaction. We did not include the partner effect (represented in dashed lines) because the actor effect was already insignificant.}
+\end{figure*}
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{C:/Users/iris_/OneDrive/Desktop/Smith/Spring 2021/PSY 364/Proj/PSY364-Yena-Iris/telework_fairness_mod.JPG}
+\caption{The figure shows the model we estimated between telework mode and perceived chore fairness. We did not include the partner effect (represented in dashed lines) because the actor effect was already insignificant.}
+\end{figure*}
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{C:/Users/iris_/OneDrive/Desktop/Smith/Spring 2021/PSY 364/Proj/PSY364-Yena-Iris/fairness_qmi_mod.JPG}
+\caption{The figure shows the model we estimated between percieved chore fairness, gender ideology, and relationship satisfaction. The first model estimated actor effect represented by the solid lines; the second model added partner effect represented by the dashed lines; the last model added gender ideology as moderator, represented by the dotted lines.}
+\end{figure*}
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{C:/Users/iris_/OneDrive/Desktop/Smith/Spring 2021/PSY 364/Proj/PSY364-Yena-Iris/qmi_fairness.png}
+\caption{The figure shows that perceived chore fairness is positively correlated with satisfaction. Women in general reported lower satisfaction than men.}
+\end{figure*}

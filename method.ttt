@@ -39,3 +39,36 @@ income &  \\
 
 \end{tabular}
 \end{table*}
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+[ ht ]
+\centering
+\caption{}\label{}
+\begin{tabular}{ l c }
+\toprule
+ &   \multicolumn{ 1 }{c}{ Total }\\
+  & Mean/Count (SD/\%) \\
+ & n = 162 \\
+ \midrule
+Gender &  \\
+\hspace{6pt}    Men & 81 (50\%)\\
+\hspace{6pt}    Women & 81 (50\%)\\
+\hspace{6pt}    \emph{missing} & 0 (0\%)\\
+Age &  \\
+\hspace{6pt}   & 45.6 (8.1)\\
+Telework &  \\
+\hspace{6pt}    No & 60 (37\%)\\
+\hspace{6pt}    Yes & 102 (63\%)\\
+\hspace{6pt}    \emph{missing} & 0 (0\%)\\
+Relationship length &  \\
+\hspace{6pt}   & 18.2 (9.9)\\
+Number of children &  \\
+\hspace{6pt}   & 0.8 (0.9)\\
+Income &  \\
+\hspace{6pt}   & 67,857.4 (70,655.2)\\
+Gender role belief score &  \\
+\hspace{6pt}   & 2.7 (0.7)\\
+\bottomrule
+
+\end{tabular}
+\end{table*}

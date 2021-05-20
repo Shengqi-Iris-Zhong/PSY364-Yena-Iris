@@ -301,7 +301,7 @@ income &   &   &  \\
 \CommentTok{\# import premeasures}
 \NormalTok{prem \textless{}{-}}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"TeleCom\_Dyad\_premeasures.csv"}\NormalTok{,}\DataTypeTok{fileEncoding =} \StringTok{\textquotesingle{}UTF{-}8{-}BOM\textquotesingle{}}\NormalTok{)}
 \CommentTok{\# import daily diary}
-\NormalTok{diary \textless{}{-}}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\KeywordTok{here}\NormalTok{(}\StringTok{"TeleCom\_Dyad\_dailydiary.csv"}\NormalTok{))}
+\NormalTok{diary \textless{}{-}}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"TeleCom\_Dyad\_dailydiary.csv"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -337,6 +337,40 @@ income &   &   &  \\
 \NormalTok{                       gender }\OperatorTok{==}\StringTok{ "Man,Cis gendered"} \OperatorTok{\textasciitilde{}}\StringTok{ }\DecValTok{0}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{prem\_select }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(dyadID) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{gender\_sum =} \KeywordTok{sum}\NormalTok{(gender)) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(gender\_sum }\OperatorTok{!=}\StringTok{ }\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 18 x 10
+## # Groups:   dyadID [9]
+##    partID dyadID gender telework   age r_years race  childnum  income gender_sum
+##    <chr>   <int>  <dbl>    <dbl> <int>   <dbl> <chr>    <dbl>   <int>      <dbl>
+##  1 R_1Fr~ 2.90e7      1        1    35    15.6 Whit~        1   80000          2
+##  2 R_cZs~ 2.90e7      1        1    35    15.6 Whit~        0      NA          2
+##  3 R_56W~ 2.91e7      0        1    59    26.0 Whit~        0   62000          0
+##  4 R_3JC~ 2.91e7      0        0    54    26.0 Whit~        0      NA          0
+##  5 R_29s~ 2.94e7      1        1    50    26.9 Asia~        0  145000          2
+##  6 R_VPd~ 2.94e7      1        1    50    26.9 Asia~        0  145000          2
+##  7 R_1pX~ 2.95e7      0        1    55    43.0 Whit~        0   65000          0
+##  8 R_pQS~ 2.95e7      0        1    55    43.2 Whit~        0   50000          0
+##  9 R_1LF~ 3.29e7      1        1    55    37.4 Blac~        0      NA          2
+## 10 R_2eP~ 3.29e7      1        0    55    38.2 Blac~        2   76000          2
+## 11 R_1DA~ 3.34e7      1        0    37    17.5 Midd~        4      NA          2
+## 12 R_2uP~ 3.34e7      1        0    37    17.5 Midd~        4      NA          2
+## 13 R_3rY~ 3.36e7      0        1    40    19.5 Whit~        1  175000          0
+## 14 R_3Lj~ 3.36e7      0        1    40    19.5 Whit~        1  175000          0
+## 15 R_OIl~ 3.37e7      1        1    40    20.6 Lati~        0 1490000          2
+## 16 R_3fA~ 3.37e7      1        1    40    20.6 Lati~        0  149000          2
+## 17 R_11h~ 3.37e7      1        0    36    11.1 Whit~        2      NA          2
+## 18 R_aWc~ 3.37e7      1        0    36    11.1 Whit~        2      NA          2
+\end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -405,5 +439,33 @@ income &   &  \\
 \end{Highlighting}
 \end{Shaded}
 
+\textbackslash begin\{table\}{[} ht {]} \centering 
+
+\caption{}\label{}
+
+\textbackslash begin\{tabular\}\{ l c c \} \toprule \&
+\multicolumn{ 2 }{c}{ gender_chr }\textbackslash{} \& M \& W
+\textbackslash{} \& n = 81 \& n = 81 \textbackslash{} \midrule
+gender\_chr \& \& \textbackslash{} \hspace{6pt} M \& 81 (100\%) \& 0
+(0\%)\textbackslash{} \hspace{6pt} W \& 0 (0\%) \& 81
+(100\%)\textbackslash{} \hspace{6pt} \emph{missing} \& 0 (0\%) \& 0
+(0\%)\textbackslash{} age \& \& \textbackslash{} \hspace{6pt} \& 46.6
+(8.5) \& 44.5 (7.6)\textbackslash{} telework \& \& \textbackslash{}
+\hspace{6pt} 0 \& 37 (45.7\%) \& 23 (28.4\%)\textbackslash{}
+\hspace{6pt} 1 \& 44 (54.3\%) \& 58 (71.6\%)\textbackslash{}
+\hspace{6pt} \emph{missing} \& 0 (0\%) \& 0 (0\%)\textbackslash{}
+r\_years \& \& \textbackslash{} \hspace{6pt} \& 18.2 (9.9) \& 18.2
+(9.9)\textbackslash{} childnum \& \& \textbackslash{} \hspace{6pt} \&
+0.8 (0.9) \& 0.8 (0.9)\textbackslash{} income \& \& \textbackslash{}
+\hspace{6pt} \& 70,698.6 (41,079.3) \& 64,933.8
+(91,925.6)\textbackslash{} grbs\_ss \& \& \textbackslash{} \hspace{6pt}
+\& 2.9 (0.6) \& 2.6 (0.7)\textbackslash{} race \& \& \textbackslash{}
+\hspace{6pt} Asian or Asian American \& 6 (7.4\%) \& 8
+(9.9\%)\textbackslash{} \hspace{6pt} Black or African American \& 6
+(7.4\%) \& 6 (7.4\%)\textbackslash{} \hspace{6pt} Latinx or Hispanic \&
+5 (6.2\%) \& 6 (7.4\%)\textbackslash{} \hspace{6pt} Prefer not to answer
+\& 2 (2.5\%) \& 0 (0\%)\textbackslash{} \hspace{6pt} White or European
+American \& 62 (76.5\%) \& 61 (75.3\%)\textbackslash{} \hspace{6pt}
+\emph{missing} \& 0 (0\%) \& 0 (0\%)\textbackslash{}
 
 \end{document}

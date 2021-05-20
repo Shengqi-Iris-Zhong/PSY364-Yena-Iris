@@ -2,7 +2,9 @@
 title: "restructuring data"
 author: "Iris Zhong"
 date: "4/15/2021"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -14,12 +16,15 @@ library(tidyverse)
 library(mosaic)
 library(dplyr)
 library(janitor)
+library(furniture)
+library(psych)
 ```
 
 ```{r read data}
 library(readr)
 final_diary <- read_csv("final_diary_data.csv")
 prem <- read_csv("TeleCom_Dyad_premeasures.csv")
+prem1 <- read_csv("TeleCom_Dyad_premeasures.csv") %>% dplyr::select(ResponseId, race)
 ```
 
 ```{r create partnum}
@@ -109,14 +114,19 @@ prem$grbs_ss <- rowMeans(select(prem, grbs_1.r, grbs_2.r, grbs_3.r, grbs_4.r, gr
 ```
 
 
+
+
 ```{r select variables}
 prem <- prem %>%
   dplyr::select(-c(grbs_1:grbs_20, grbs_1.r:grbs_20.r))
 
 final_diary <- final_diary %>%
-  dplyr::select(partID, dyadID, day, day_of_study, obsid, partnum, fair_chores, qmi_ss)
+  dplyr::select(partID, dyadID, day, day_of_study, obsid, partnum, fair_chores, qmi_ss,qmi1.r,qmi2.r,qmi3.r,qmi4.r)
 
 ```
+
+
+
 
 
 check couple with different childnum
@@ -155,7 +165,7 @@ prem <- prem %>%
 prem_diary <- final_diary %>%
   inner_join(prem, by = "partID") %>%
   filter(gender_sum == 0) %>%
-  dplyr::select(dyadID = dyadID.x, r_years, childnum, obsid, gender, gender_chr,partID, day, day_of_study, partnum,  telework, income, grbs_ss, fair_chores, qmi_ss)
+  dplyr::select(dyadID = dyadID.x, r_years, childnum, obsid, gender, gender_chr,partID, day, day_of_study, partnum,  telework, income, grbs_ss, fair_chores, qmi_ss,qmi1.r,qmi2.r,qmi3.r,qmi4.r)
 ```
 
 ```{r}
@@ -196,6 +206,110 @@ data_pair %>%
 
 81 dyads, 162 participants; observation = 2108/2 = 1054
 
+Calculate cronbach's alpha for QMI
+
+```{r qmi alpha loop}
+for (i in seq(1,14)) {
+  data_pair_day <- data_pair %>% 
+    filter(as.numeric(day_of_study_A) == i) %>%
+    mutate(qmi1.r_A = as.numeric(qmi1.r_A),
+           qmi2.r_A = as.numeric(qmi2.r_A),
+           qmi3.r_A = as.numeric(qmi3.r_A),
+           qmi4.r_A = as.numeric(qmi4.r_A))
+  alpha_day <- summary(psych::alpha(select(data_pair_day,qmi1.r_A,qmi2.r_A,qmi3.r_A,qmi4.r_A)))
+  print(alpha_day)
+  
+}
+```
+
+
+```{r qmi alpha list}
+qmi_alpha_list <- c(0.9520131, 0.9488328, 0.9542424, 0.9539048, 0.9593593, 0.9572168, 0.9520815, 0.9574969, 0.9625255, 0.9564343, 0.9565186, 0.9613013, 0.9510638, 0.9500988)
+favstats(qmi_alpha_list)
+```
+
+Calculate ICC for QMI
+
+```{r qmi icc loop}
+library(nlme)
+for (i in seq(1,14)) {
+  data_pair_day <- data_pair %>% 
+    filter(as.numeric(day_of_study_A) == i) %>%
+    mutate(qmi1.r_A = as.numeric(qmi1.r_A),
+           qmi2.r_A = as.numeric(qmi2.r_A),
+           qmi3.r_A = as.numeric(qmi3.r_A),
+           qmi4.r_A = as.numeric(qmi4.r_A),
+           qmi_ss_A = as.numeric(qmi_ss_A))
+  qmi_empty <- summary(gls(qmi_ss_A ~ 1,
+                     data = data_pair_day,
+                     correlation = corCompSymm(form=~1|dyadID),
+                     na.action = na.omit))
+print(i)
+
+print(qmi_empty)
+  
+}
+```
+
+```{r qmi rho list}
+qmi_rho_list <- c(0.553748, 0.4583136, 0.4769906, 0.6246875, 0.6317043, 0.6832614, 0.7025777, 0.7002305, 0.8170844, 0.7811004, 0.6854845, 0.6485336, 0.5174749, 0.7647032)
+fav_stats(qmi_rho_list)
+```
+
+```{r chores icc}
+
+for (i in seq(1,14)) {
+  data_pair_day <- data_pair %>% 
+    mutate(fair_chores_A = as.numeric(fair_chores_A)) %>%
+    filter(as.numeric(day_of_study_A) == i) 
+  chore_empty <- summary(gls(fair_chores_A ~ 1,
+                     data = data_pair_day,
+                     correlation = corCompSymm(form=~1|dyadID),
+                     na.action = na.omit))
+print(i)
+
+print(chore_empty)
+  
+}
+```
+
+```{r chore alpha list}
+chore_rho_list <- c(0.225103, 0.3100977, 0.1824616, 0.2197593, 0.1942566, 0.3200085, 0.2288993, 0.3249174, 0.2794192, 0.4065563, 0.3238814, 0.4781606, 0.3765069, 0.4155806)
+fav_stats(chore_rho_list)
+```
+
+```{r remove qmi items}
+data_pair <- data_pair %>%
+  dplyr::select(-c(qmi1.r_A:qmi4.r_P))
+```
+
+
+Make descriptive table:
+
+```{r}
+descriptive <- data_pair %>%
+  group_by(partID_A) %>%
+  summarize(n = n())
+
+descriptive <- descriptive %>%
+  inner_join(prem, by = c("partID_A" = "partID")) %>%
+  inner_join(prem1, by = c("partID_A" = "ResponseId"))
+```
+
+```{r}
+table1(descriptive, gender_chr, age, telework,r_years, childnum, income, grbs_ss,race, format_number = T, na.rm = FALSE, total = T, splitby = ~gender_chr, output = "latex2")
+```
+
+```{r}
+table1(descriptive, gender_chr, age, telework,r_years, childnum, income, grbs_ss,race, format_number = T, na.rm = FALSE, test = T, total = T, splitby = ~gender_chr, output = "markdown")
+```
+
+```{r}
+describe.by(descriptive$grbs_ss)
+describe.by(descriptive$grbs_ss, descriptive$gender_chr)
+```
+
+
 
 ```{r make individual dyadic}
 # prem_diary2 <- prem_diary %>%
@@ -211,7 +325,7 @@ data_pair %>%
 ```
 
 ```{r}
-write.csv(data_pair,"data_pair.csv")
+#write.csv(data_pair,"data_pair.csv")
 ```
 
 

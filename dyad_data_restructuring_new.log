@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2021.3.31)  18 MAY 2021 22:39
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2021.3.31)  13 MAY 2021 01:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**descriptive_stat.tex
-(./descriptive_stat.tex
+**dyad_data_restructuring_new.tex
+(./dyad_data_restructuring_new.tex
 LaTeX2e <2020-10-01> patch level 4
 L3 programming layer <2021-02-18> (c:/Users/iris_/AppData/Roaming/TinyTeX/texmf
 -dist/tex/latex/base/article.cls
@@ -406,8 +406,8 @@ File: l3backend-pdftex.def 2021-03-18 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count281
 \l__pdf_internal_box=\box50
 )
-No file descriptive_stat.aux.
-\openout1 = `descriptive_stat.aux'.
+No file dyad_data_restructuring_new.aux.
+\openout1 = `dyad_data_restructuring_new.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 107.
 LaTeX Font Info:    ... okay on input line 107.
@@ -459,7 +459,7 @@ LaTeX Info: Redefining \ref on input line 107.
 LaTeX Info: Redefining \pageref on input line 107.
 LaTeX Info: Redefining \nameref on input line 107.
 \@outlinefile=\write4
-\openout4 = `descriptive_stat.out'.
+\openout4 = `dyad_data_restructuring_new.out'.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -539,11 +539,11 @@ File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
 (Font)              Font shape `T1/lmtt/b/n' tried instead on input line 112.
 LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 
-142.
+141.
 (c:/Users/iris_/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ts1lmtt.fd
 File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-Overfull \hbox (39.4935pt too wide) in paragraph at lines 154--154
+Overfull \hbox (39.4935pt too wide) in paragraph at lines 153--153
 []\T1/lmtt/m/n/10 ## additional features.  The original behavior of these funct
 ions should not be affected by this.[] 
  []
@@ -551,34 +551,27 @@ ions should not be affected by this.[]
 [1
 
 {c:/Users/iris_/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdfte
-x.map}]
-Overfull \hbox (49.99347pt too wide) in paragraph at lines 211--211
-[]\T1/lmtt/m/n/10 ## here() starts at C:/Users/iris_/OneDrive/Desktop/Smith/Spr
-ing 2021/PSY 364/Proj/PSY364-Yena-Iris[] 
+x.map}] [2] [3]
+Overfull \vbox (0.60541pt too high) detected at line 409
  []
 
-
-Overfull \hbox (18.49356pt too wide) in paragraph at lines 226--226
-[]\T1/lmtt/m/n/10 ##  Hlavac, Marek (2018). stargazer: Well-Formatted Regressio
-n and Summary Statistics Tables.[] 
- []
-
+[4] [5] [6] [7]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 266.
+(Font)              <10> on input line 641.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 266.
+(Font)              <7> on input line 641.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 266.
+(Font)              <5> on input line 641.
 ! Undefined control sequence.
-l.267 \toprule
+l.642 \toprule
                
 Here is how much of TeX's memory you used:
- 10400 strings out of 480937
- 152504 string characters out of 5904822
- 462499 words of memory out of 5000000
- 27465 multiletter control sequences out of 15000+600000
- 437667 words of font info for 64 fonts, out of 8000000 for 9000
+ 10409 strings out of 480937
+ 152659 string characters out of 5904822
+ 494943 words of memory out of 5000000
+ 27467 multiletter control sequences out of 15000+600000
+ 437986 words of font info for 65 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 71i,6n,74p,250b,464s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 71i,6n,74p,955b,465s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 !  ==> Fatal error occurred, no output PDF file produced!

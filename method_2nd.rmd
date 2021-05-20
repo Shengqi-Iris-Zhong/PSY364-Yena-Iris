@@ -151,9 +151,9 @@ The GRBS measures one’s gender ideology, which is his or her beliefs for what 
 
 # Participants
 
-In sum, 364 people from 182 pairs of couples filled out the pre-measure survey. Then, 263 people from 155 dyads participated in the daily diary survey, producing 3482 responses in total. Responses with entry error (wrong day of the week, extra or redundant data, survey finished in different weeks within the dyads) were removed, leaving 2745 valid responses from 211 individuals in 127 dyads. The actor-partner independence model is unable to operate in situations where on a particular day, only one person from the couple fills out the diary. Therefore, xx people of xx dyads were further excluded. The final dataset consisted of xx people from xx dyads, with xx same-sex couples and xx heterosexual couples. 
+In sum, 364 people from 182 pairs of couples completed the pre-measure survey. Then, 263 people from 155 dyads participated in the daily diary survey, producing 3482 responses in total. Responses with entry error (wrong day of the week, extra or redundant data, survey finished in different weeks within the dyads) were removed, leaving 2745 valid responses from 211 individuals in 127 dyads. The actor-partner independence model is unable to operate in situations where on a particular day, only one person from the couple fills out the diary. Therefore, xx people of xx dyads were further excluded. The final dataset consisted of xx people from xx dyads, with xx same-sex couples and xx heterosexual couples. 
 
-*Table 1* shows the sample demographics in terms of participants’ gender, telework status, age, relationship length, race, number of children (less than 13 years old) at home, and income level (**Note: Table 1 shows data from pre-measure dataset without any exclusion. We will update this part after the dataset is fully cleaned.**) There were 185 female and 179 male in this sample. Participants’ age varied from 26 to 74 years, with an average of 45.80 (*SD = 8.35*). Their relationship length was approximately 18.45 years on average (*SD = 10.19*). Due to the pandemic, more than 60% of the respondents teleworked. The sample consisted of 269 White or European Americans, 24 Black or African Americans, 37 Asian or Asian Americans, 21 Latinx or Hispanic, 4 Middle Eastern, 4 identified as both White or European American and Latinx or Hispanic, 1 identified as other race or ethnicity, and 4 preferred not to answer. On average, the participants had 0.8 children raised in the household (*SD = 1.35*). The average income level of the sample was 76618.8 dollars (*SD = 105,704.1*). 
+*Table 1* shows the sample demographics in terms of participants’ gender, telework status, age, relationship length, race, number of children (less than 13 years old) at home, and income level. There were 185 female and 179 male in this sample. Participants’ age varied from 26 to 74 years, with an average of 45.80 (*SD = 8.35*). Their relationship length was approximately 18.45 years on average (*SD = 10.19*). Due to the pandemic, more than 60% of the respondents teleworked. The sample consisted of 269 White or European Americans, 24 Black or African Americans, 37 Asian or Asian Americans, 21 Latinx or Hispanic, 4 Middle Eastern, 4 identified as both White or European American and Latinx or Hispanic, 1 identified as other race or ethnicity, and 4 preferred not to answer. On average, the participants had 0.8 children raised in the household (*SD = 1.35*). The average income level of the sample was 76618.8 dollars (*SD = 105,704.1*). 
 
 
 
@@ -245,7 +245,73 @@ Gender role belief score &  \\
 \end{table}
 
 
+\begin{table}[ ht ] 
+\centering 
+\caption{}\label{}
+\begin{tabular}{ l c c }
+\toprule
+ &   \multicolumn{ 2 }{c}{ Gender }\\ 
+  & Men & Women \\ 
+  & Mean/Count (SD/\%) & Mean/Count (SD/\%) \\
+ & n = 81 & n = 81 \\ 
+ \midrule
+Age &   &  \\ 
+\hspace{6pt}   & 46.6 (8.5) & 44.5 (7.6)\\ 
+Telework &   &  \\ 
+\hspace{6pt}    Yes & 44 (54.3\%) & 58 (71.6\%)\\ 
+\hspace{6pt}    No & 37 (45.7\%) & 23 (28.4\%)\\ 
+Relationship length &   &  \\ 
+\hspace{6pt}   & 18.2 (9.9) & 18.2 (9.9)\\ 
+Number of children &   &  \\ 
+\hspace{6pt}   & 0.8 (0.9) & 0.8 (0.9)\\ 
+Individual income &   &  \\ 
+\hspace{6pt}   & 70,698.6 (41,079.3) & 64,933.8 (91,925.6)\\ 
+Gender ideology &   &  \\ 
+\hspace{6pt}   & 2.9 (0.6) & 2.6 (0.7)\\ 
+Race &   &  \\ 
+\hspace{6pt}    Asian or Asian American & 6 (7.4\%) & 8 (9.9\%)\\ 
+\hspace{6pt}    Black or African American & 6 (7.4\%) & 6 (7.4\%)\\ 
+\hspace{6pt}    Latinx or Hispanic & 5 (6.2\%) & 6 (7.4\%)\\ 
+\hspace{6pt}    White or European American & 62 (76.5\%) & 61 (75.3\%)\\ 
+\hspace{6pt}    Prefer not to answer & 2 (2.5\%) & 0 (0\%)\\ 
+\bottomrule
 
+\end{tabular}
+\end{table}
+
+\begin{table}[ ht ] 
+\centering 
+\caption{}\label{}
+\begin{tabular}{ l c c c }
+\toprule
+ &   &  \multicolumn{ 2 }{c}{ Gender }\\ 
+  & Total & Men & Women \\ 
+& Mean/Count (SD/\%)  &  \multicolumn{ 2 }{c}{ Mean/Count (SD/\%) }\\
+ & n = 162 & n = 81 & n = 81 \\ 
+ \midrule
+Age &   &   &  \\ 
+\hspace{6pt}   & 45.57 (8.11) & 46.62 (8.49) & 44.52 (7.62)\\ 
+Telework &   &   &  \\ 
+\hspace{6pt}    Yes & 102 (63\%) & 44 (54.3\%) & 58 (71.6\%)\\ 
+\hspace{6pt}    No & 60 (37\%) & 37 (45.7\%) & 23 (28.4\%)\\ 
+Relationship length &   &   &  \\ 
+\hspace{6pt}   & 18.22 (9.93) & 18.22 (9.93) & 18.22 (9.93)\\ 
+Number of children &   &   &  \\ 
+\hspace{6pt}   & 0.75 (0.95) & 0.75 (0.95) & 0.75 (0.95)\\ 
+Individual income &   &   &  \\ 
+\hspace{6pt}   & 67,857.39 (70,655.21) & 70,698.59 (41,079.3) & 64,933.83 (91,925.61)\\ 
+Gender ideology &   &   &  \\ 
+\hspace{6pt}   & 2.73 (0.66) & 2.86 (0.63) & 2.59 (0.67)\\ 
+Race and ethnicity &   &   &  \\ 
+\hspace{6pt}    Asian or Asian American & 14 (8.6\%) & 6 (7.4\%) & 8 (9.9\%)\\ 
+\hspace{6pt}    Black or African American & 12 (7.4\%) & 6 (7.4\%) & 6 (7.4\%)\\ 
+\hspace{6pt}    Latinx or Hispanic & 11 (6.8\%) & 5 (6.2\%) & 6 (7.4\%)\\ 
+\hspace{6pt}    White or European American & 123 (75.9\%) & 62 (76.5\%) & 61 (75.3\%)\\ 
+\hspace{6pt}    Prefer not to answer & 2 (1.2\%) & 2 (2.5\%) & 0 (0\%)\\ 
+\bottomrule
+
+\end{tabular}
+\end{table}
 
 \newpage
 

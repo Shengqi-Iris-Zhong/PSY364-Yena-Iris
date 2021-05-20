@@ -1,0 +1,310 @@
+---
+title             : "The Actor-Partner Effect of Gender, Telework and Perceived Chore Fairness on Relationship Satisfaction Among Couples"
+shorttitle        : "Gender, Telework, Chore Fairness and Satisfaction"
+
+author: 
+  - name          : "Iris Zhong"
+    affiliation   : "1"
+    corresponding : yes   
+    
+  - name          : "Yena Li"
+    affiliation   : "1"
+
+
+affiliation:
+  - id            : "1"
+    institution   : "Smith College"
+
+
+keywords          : "keywords"
+wordcount         : "X"
+
+bibliography      : ["r-references.bib", "psych-references.bib"]
+
+floatsintext      : no
+figurelist        : no
+tablelist         : no
+footnotelist      : no
+linenumbers       : no
+mask              : no
+draft             : no
+
+documentclass     : "apa6"
+classoption       : "man"
+output            : papaja::apa6_pdf
+---
+
+```{r setup, include = FALSE}
+library("papaja")
+library(nlme)
+library(tidyverse)
+library(report)
+library(stargazer)
+library(ggplot2)
+r_refs("r-references.bib")
+cite_r("r-references.bib")
+```
+
+```{r analysis-preferences}
+# Seed for random number generation
+set.seed(42)
+knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
+```
+
+```{r}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+```{r include=FALSE}
+library(readr)
+data_pair <- read_csv("data_pair.csv")
+data_pair$day_of_study_A <- as.numeric(data_pair$day_of_study_A)
+data_pair$day_of_study_P <- as.numeric(data_pair$day_of_study_P)
+data_pair <- data_pair %>%
+  mutate(day_of_study_A = day_of_study_A -1,
+         day_of_study_P = day_of_study_P - 1,
+         fair_chores_C_A = fair_chores_A - mean(fair_chores_A, na.rm = T),
+         fair_chores_C_P = fair_chores_P - mean(fair_chores_P, na.rm = T),
+         grbs_C_A = grbs_ss_A - mean(grbs_ss_A, na.rm = T),
+         grbs_C_P = grbs_ss_P - mean(grbs_ss_P, na.rm = T))
+```
+
+# Results
+
+## Analysis Strategy
+
+Our research questions were: 1) whether telework influenced a person’s relationship satisfaction, and 2) how it was mediated by perceived chore fairness. ^[This paper has used: R [Version 4.0.3; @R-base] and the R-packages *dplyr* [Version 1.0.2; @R-dplyr], *forcats* [Version 0.5.0; @R-forcats], *ggformula* [Version 0.10.1; @R-ggformula], *ggplot2* [Version 3.3.2; @R-ggplot2], *ggridges* [Version 0.5.2; @R-ggridges], *ggstance* [Version 0.3.5; @R-ggstance], *lattice* [Version 0.20.41; @R-lattice], *Matrix* [Version 1.2.18; @R-Matrix], *mitml* [Version 0.4.1; @R-mitml], *mosaic* [Version 1.8.3; @R-mosaic; @R-mosaicData], *mosaicData* [Version 0.20.2; @R-mosaicData], *nlme* [Version 3.1.151; @R-nlme], *papaja* [Version 0.1.0.9997; @R-papaja], *psysds364data* [Version 0.0.0.9000; @R-psysds364data], *purrr* [Version 0.3.4; @R-purrr], *r2glmm* [Version 0.1.2; @R-r2glmm], *readr* [Version 1.4.0; @R-readr], *report* [Version 0.3.0; @R-report], *sjstats* [Version 0.18.1; @R-sjstats], *stargazer* [Version 5.2.2; @R-stargazer], *stringr* [Version 1.4.0; @R-stringr], *tibble* [Version 3.0.4; @R-tibble], *tidyr* [Version 1.1.2; @R-tidyr], and *tidyverse* [Version 1.3.0; @R-tidyverse].]
+. 
+
+To study the mediation effect, the analyses were further divided into: 1) exploring the relationship between telework and satisfaction, 2) investigating the relationship between telework and perceived fairness in chore division, and 3) analyzing the relationship between perceived chore fairness and satisfaction, with gender ideology as a moderator. 
+
+Since the data was dyadic, actor-partner models were used. In particular, since perceived chore fairness and relationship satisfaction were recorded daily, dyadic growth curve analyses were conducted. 
+
+Thus, the following models were estimated:
+
+To study the relationship between telework and satisfaction, we used gender, and the interaction between actor’s gender and telework mode to predict actor’s relationship satisfaction (i.e., QMI) (see *Figure 1*).
+
+![The figure shows the model we estimated between telework mode and relationship satisfaction. We did not include the partner effect (represented in dashed lines) because the actor effect was already insignificant. ](C:/Users/iris_/OneDrive/Desktop/Smith/Spring 2021/PSY 364/Proj/PSY364-Yena-Iris/telework_qmi_mod.JPG)
+
+To test how telework influenced perceived chore fairness, we fit a two-intercept model with gender, the interaction term between actor’s gender and actor’s telework mode, and other controls such as number of children, relationship length, and actor’s income (see *Figure 2*). 
+
+![The figure shows the model we estimated between telework mode and perceived chore fairness. We did not include the partner effect (represented in dashed lines) because the actor effect was already insignificant. ](C:/Users/iris_/OneDrive/Desktop/Smith/Spring 2021/PSY 364/Proj/PSY364-Yena-Iris/telework_fairness_mod.JPG)
+
+To investigate the relationship between perceived chore fairness, gender ideology, and relationship satisfaction, we first fit a simple two-intercept model, using gender, the interaction between gender and day of study, and the interaction between actor perceived chore fairness and gender to predict QMI (see *Figure 3*). 
+
+![The figure shows the model we estimated between percieved chore fairness, gender ideology, and relationship satisfaction. The first model estimated actor effect represented by the solid lines; the second model added partner effect represented by the dashed lines; the last model added gender ideology as moderator, represented by the dotted lines. ](C:/Users/iris_/OneDrive/Desktop/Smith/Spring 2021/PSY 364/Proj/PSY364-Yena-Iris/fairness_qmi_mod.JPG)
+
+Then, we proceeded to add a partner effect, by fitting a two-intercept model with gender, the interaction between actor’s gender and day of study, the interaction between actor’s perceived chore fairness and gender, the interaction between partner’s perceived chore fairness and actor’s gender, to predict actor’s QMI (see *Figure 3*). 
+
+Finally, gender ideology was added into the model as a moderator. The model included the following independent variables: gender, the interaction between actor’s gender and day of study, the interaction between actor’s perceived chore fairness and gender, the interaction between partner’s perceived chore fairness and actor’s gender, the interaction between actor’s gender ideology (i.e., average gender role belief score) and actor’s gender, the interaction between actor’s gender ideology, actor’s gender, and actor’s perceived chore fairness, and the interaction between actor’s gender ideology, actor’s gender, and partner’s perceived chore fairness, and actor’s QMI was the dependent variable (see *Figure 3*). 
+
+Each of the above models were estimated in two approaches -- two-intercept approach, which estimated different intercepts for men and women, and moderation approach, which produced one intercept, but also including gender as a main factor [@kenny2020dyadic]. The results reported below were from the two-intercept approach, but the moderation approach was used as well to test whether the gender difference was significant. 
+
+Each model allowed random intercepts for men and women, and for each dyad. They also accounted for the correlation between the residuals within the dyads on the same day. Lastly, different residual variances were estimated for men and women. 
+
+The scores of perceived fairness in chore division and gender ideology were centered by subtracting the original score from the grand mean, and one was subtracted from day of study, in order to make the interaction effect interpretable. 
+
+
+## Main Results
+
+### Relationship Satisfaction and Telework
+
+```{r qmi work, include = F}
+mod_work_qmi  <- lme(qmi_ss_A ~ gender_chr_A + telework_A:gender_chr_A-1,
+                      data = data_pair, 
+                      random = ~ gender_chr_A - 1|dyadID,
+                      correlation = corCompSymm(form = ~1|dyadID/obsid),
+                      weights = varIdent(form = ~1|gender_chr_A),
+                      na.action = na.omit)
+
+summary(mod_work_qmi)
+
+```
+
+First, the actor's gender and telework mode were used to predict their own QMI score (see *Table 1*). The model was relatively weak in explaining the variances in relationship satisfaction, as its pseudo-$R^2$ was $3.12*10^{-5}$ for men and $3.79*10^{-5}$ for women. The intercept for men and women were 3.59 and 3.43, and gender difference was not significant (*t* = -1.43, *p* = 0.15). We discovered that whether the actor was teleworking did not significantly predict their own satisfaction score (men: *b* = -0.082, *SE* = 0.099, *p* = 0.40; women: *b* = 0.048, *SE* = 0.10, *p* = 0.65), therefore no partner effect was further investigated. 
+
+
+\renewcommand{\arraystretch}{0.5}
+\begin{table}[!htbp] \centering 
+  \caption{Relationship between telework and relationship satisfaction} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-2} 
+\\[-1.8ex] & Relationship satisfaction (QMI)\\ 
+\hline \\[-1.8ex] 
+ Men & 3.594$^{***}$ \\ 
+  & (0.089) \\ 
+  & \\ 
+ Women & 3.427$^{***}$ \\ 
+  & (0.100) \\ 
+  & \\ 
+ Men * Telework & $-$0.082 \\ 
+  & (0.099) \\ 
+  & \\ 
+ Women * Telework & 0.048 \\ 
+  & (0.104) \\ 
+  & \\ 
+\hline \\[-1.8ex] 
+Observations & 2,107 \\ 
+Log Likelihood & $-$1,163.534 \\ 
+Akaike Inf. Crit. & 2,347.068 \\ 
+Bayesian Inf. Crit. & 2,403.579 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+
+### Perceived Chore Fairness and Telework
+
+```{r chore work, include=FALSE}
+mod_chore_work_2  <- lme(fair_chores_C_A ~ gender_chr_A + telework_A:gender_chr_A + childnum + r_years + income_A  - 1,
+                      data = data_pair, 
+                      random = ~ gender_chr_A - 1|dyadID,
+                      correlation = corCompSymm(form = ~1|dyadID/obsid),
+                      weights = varIdent(form = ~1|gender_chr_A),
+                      na.action = na.omit)
+
+summary(mod_chore_work_2)
+report(mod_chore_work_2)
+```
+
+Next, we predicted actor’s perceived chore fairness with their gender, telework mode, number of children, their relationship in years, and income (see *Table 2*). The model's total explanatory power was weak because pseudo-$R^2$ was 0.032 for men and 0.011 for women. According to the results, the intercept for men was 0.29 and the intercept for women was 0.35, but the difference of intercept between men and women was not significant (*t* = 0.19, *p* = 0.85). Whether the individual was teleworking or not was not a significant predictor of relationship satisfaction (men: *b* = -0.07, *SE* = 0.19, *p* = 0.71; women: *b* = -0.29, *SE* = 0.26, *p* = 0.26). 
+
+The control variables did not have a significant effect on perceived chore fairness either. The coefficient for the number of children was 0.014, yet it was not significant (*SE* = 0.084, *p* = 0.87). Similarly, the relationship length and income did not significantly predict perceived chore fairness either (relationship length: *b* = -0.012, *SE* = 0.0081, *p* = 0.14).
+
+Since the actor effect of teleworking was already insignificant, we did not continue testing the partner effect of teleworking on perceived chore fairness. 
+
+\begin{table}[!htbp] \centering 
+  \caption{Relationship between telework and perceived chore fairness} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-2} 
+\\[-1.8ex] & Perceived chore fairness \\ 
+\hline \\[-1.8ex] 
+ Men & 0.294 \\ 
+  & (0.236) \\ 
+  & \\ 
+ Women & 0.346 \\ 
+  & (0.306) \\ 
+  & \\ 
+ Number of children & 0.014 \\ 
+  & (0.084) \\ 
+  & \\ 
+ Relationship length & $-$0.012 \\ 
+  & (0.008) \\ 
+  & \\ 
+ Income & 0.00000 \\ 
+  & (0.00000) \\ 
+  & \\ 
+ Men * Telework & $-$0.071 \\ 
+  & (0.189) \\ 
+  & \\ 
+ Women * Telework & $-$0.289 \\ 
+  & (0.257) \\ 
+  & \\ 
+\hline \\[-1.8ex] 
+Observations & 1,807 \\ 
+Log Likelihood & $-$1,846.967 \\ 
+Akaike Inf. Crit. & 3,719.933 \\ 
+Bayesian Inf. Crit. & 3,791.375 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\
+\end{tabular} 
+\end{table} 
+
+### Relationship Satisfaction, Perceived Chore Fairness and Gender Ideology
+
+
+
+```{r qmi chore 1, include = F}
+mod_qmi_chore_1  <- lme(qmi_ss_A ~ gender_chr_A + 
+                          gender_chr_A:day_of_study_A + 
+                          fair_chores_C_A:gender_chr_A -1,
+                      data = data_pair, 
+                      random = ~ gender_chr_A - 1|dyadID,
+                      correlation = corCompSymm(form = ~1|dyadID/obsid),
+                      weights = varIdent(form = ~1|gender_chr_A),
+                      na.action = na.omit)
+
+summary(mod_qmi_chore_1)
+
+```
+
+![The figure shows that perceived chore fairness is positively correlated with satisfaction. Women in general reported lower satisfaction than men.](C:/Users/iris_/OneDrive/Desktop/Smith/Spring 2021/PSY 364/Proj/PSY364-Yena-Iris/qmi_fairness.png)
+
+
+To investigate the relationship between relationship satisfaction and chore fairness, a two-intercept multilevel model without accounting for partner effect was first estimated (see *Table 3*). The results showed that the intercepts for men and women were 3.56 and 3.43 respectively, and according to the moderation approach model, women's intercept was significantly lower than men (*SE* = 0.050, *p* = 0.0059) (see *Figure 4*). The interaction term between gender and day of study demonstrated that for men, their satisfaction score was not significantly predicted by day of study (*b* = -0.0029, *SE* = 0.0027, *p* = 0.29), but day of study was a significant positive predictor for women’s satisfaction score (*b* = 0.0066, *SE* = 0.0031, *p* = 0.036). In addition, perceived chore fairness score significantly positively predicted both male and female’s QMI for a given day (see *Figure 4*), and the coefficient for women was higher than that for men, indicating that a one point increase in perceived chore fairness score could led to a higher increase in satisfaction score for women than for men (men: *b* = 0.069, *SE* = 0.018, *p* = 0.0001; women: *b* = 0.085, *SE* = 0.019, *p* = 0.0000). The pseudo-$R^2$ in this model was 0.0065 for women, and 0.0063 for men. 
+
+
+
+```{r qmi chore 2, include=FALSE}
+mod_qmi_chore_2  <- lme(qmi_ss_A ~ gender_chr_A + 
+                             gender_chr_A:day_of_study_A + 
+                             fair_chores_C_A:gender_chr_A +
+                             fair_chores_C_P:gender_chr_A  - 1,
+                      data = data_pair, 
+                      random = ~ gender_chr_A - 1|dyadID,
+                      correlation = corCompSymm(form = ~1|dyadID/obsid),
+                      weights = varIdent(form = ~1|gender_chr_A),
+                      na.action = na.omit)
+
+#summary(mod_qmi_chore_2)
+
+```
+
+
+We continued testing the relationship between perceived chore fairness and QMI with partner effect added (see *Table 3*). The associations found in the previous model were retained. Partner’s perceived fairness in chore division was negatively correlated with actor’s satisfaction for both women and men, implying that the less unfair the partner perceived for their own chore, the lower satisfaction the actor felt, but the effect was insignificant for either men (*b* = -0.0083, *SE* = 0.018, *p* = 0.65) or women (*b* = -0.0034, *SE* = 0.021, *p* = 0.87). The pseudo-$R^2$ in this model was 0.0059 for women, and 0.0057 for men. 
+
+
+```{r qmi chore 3, include=FALSE}
+mod_qmi_chore_3  <- lme(qmi_ss_A ~ gender_chr_A + 
+                               gender_chr_A:day_of_study_A +
+                               fair_chores_C_A:gender_chr_A +
+                               fair_chores_C_P:gender_chr_A + 
+                               gender_chr_A:grbs_C_A+             
+                               grbs_C_A:gender_chr_A:fair_chores_C_A+
+                               grbs_C_A:gender_chr_A:fair_chores_C_P+  - 1,
+                      data = data_pair, 
+                      random = ~ gender_chr_A - 1|dyadID,
+                      correlation = corCompSymm(form = ~1|dyadID/obsid),
+                      weights = varIdent(form = ~1|gender_chr_A),
+                      na.action = na.omit)
+
+
+```
+
+The effect of gender ideology was further incorporated into the model (see *Table 3*). First, a positive association was found between centered gender role belief score and relationship satisfaction for both gender, meaning that the model would predict an individual holding a more traditional gender ideology to have a higher relationship satisfaction score. However, the relationship was not statistically significant (men: *b* = 0.072, *SE* = 0.082, *p* = 0.38; women: *b* = 0.043, *SE* = 0.073, *p* = 0.56). To test whether gender ideology was a moderator, we also included the interaction between actor’s gender, actor’s gender ideology, and actor’s perceived chore fairness, yet the term was not significant for both men (*b* = -0.036, *SE* = 0.025, *p* = 0.16) and women (*b* = -0.036, *SE* = 0.030, *p* = 0.23). The interaction between actor’s gender, actor’s gender ideology, and partner’s perceived chore fairness did not significantly predict actor’s relationship satisfaction either (men: *b* = 0.00059, *SE* = 0.028, *p* = 0.98; women: *b* = -0.016, *SE* = 0.029, *p* = 0.58). The model’s pseudo-$R^2$ was 0.0048 for men and 0.0045 for women, which demonstrated that it did not account for much variance compared to an empty model with no explanatory variables. ^[The more complicated models had even lower $R^2$; is something wrong here?]
+
+
+```{r, results = "asis", include = F}
+#stargazer(mod_work_qmi, title = "Relationship between telework and relationship satisfaction")
+#stargazer(mod_chore_work_2)
+#stargazer(mod_qmi_chore_1, mod_qmi_chore_2, mod_qmi_chore_3)
+          #notes.append = FALSE, notes.align = "l",
+         # notes = "\\parbox[t]{\\textwidth}{Numbers in the table without parentheses are #coefficients; numbers inside the parentheses are standard errors.}")
+```
+
+
+
+
+
+
+\newpage
+
+# References
+
+\begingroup
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+
+<div id="refs" custom-style="Bibliography"></div>
+\endgroup

@@ -1,0 +1,144 @@
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+[ ht ]
+\centering
+\caption{}\label{}
+\begin{tabular}{ l c }
+
+\toprule
+ &   \multicolumn{ 1 }{c}{ Total }\\
+ & n = 364 \\
+ \midrule
+gender &  \\
+\hspace{6pt}    male & 179 (49.2\%)\\
+\hspace{6pt}    female & 185 (50.8\%)\\
+\hspace{6pt}    \emph{missing} & 0 (0\%)\\
+age &  \\
+\hspace{6pt}   & 45.8 (8.4)\\
+telework &  \\
+\hspace{6pt}    no & 129 (35.4\%)\\
+\hspace{6pt}    yes & 235 (64.6\%)\\
+\hspace{6pt}    \emph{missing} & 0 (0\%)\\
+relationship\_length &  \\
+\hspace{6pt}   & 18.4 (10.2)\\
+race &  \\
+\hspace{6pt}    Asian or Asian American & 37 (10.2\%)\\
+\hspace{6pt}    Black or African American & 24 (6.6\%)\\
+\hspace{6pt}    Latinx or Hispanic & 21 (5.8\%)\\
+\hspace{6pt}    Middle Eastern & 4 (1.1\%)\\
+\hspace{6pt}    Other & 1 (0.3\%)\\
+\hspace{6pt}    Prefer not to answer & 4 (1.1\%)\\
+\hspace{6pt}    White or European American & 269 (73.9\%)\\
+\hspace{6pt}    White or European American,Latinx or Hispanic & 4 (1.1\%)\\
+\hspace{6pt}    \emph{missing} & 0 (0\%)\\
+number\_of\_children &  \\
+\hspace{6pt}   & 0.8 (1.3)\\
+income &  \\
+\hspace{6pt}   & 76,618.8 (105,704.1)\\
+\bottomrule
+
+\end{tabular}
+\end{table*}
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+[ ht ]
+\centering
+\caption{}\label{}
+\begin{tabular}{ l c }
+\toprule
+ &   \multicolumn{ 1 }{c}{ Total }\\
+  & Mean/Count (SD/\%) \\
+ & n = 162 \\
+ \midrule
+Gender &  \\
+\hspace{6pt}    Men & 81 (50\%)\\
+\hspace{6pt}    Women & 81 (50\%)\\
+\hspace{6pt}    \emph{missing} & 0 (0\%)\\
+Age &  \\
+\hspace{6pt}   & 45.6 (8.1)\\
+Telework &  \\
+\hspace{6pt}    No & 60 (37\%)\\
+\hspace{6pt}    Yes & 102 (63\%)\\
+\hspace{6pt}    \emph{missing} & 0 (0\%)\\
+Relationship length &  \\
+\hspace{6pt}   & 18.2 (9.9)\\
+Number of children &  \\
+\hspace{6pt}   & 0.8 (0.9)\\
+Income &  \\
+\hspace{6pt}   & 67,857.4 (70,655.2)\\
+Gender role belief score &  \\
+\hspace{6pt}   & 2.7 (0.7)\\
+\bottomrule
+
+\end{tabular}
+\end{table*}
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+[ ht ]
+\centering
+\caption{}\label{}
+\begin{tabular}{ l c c }
+\toprule
+ &   \multicolumn{ 2 }{c}{ Gender }\\
+  & Men & Women \\
+  & Mean/Count (SD/\%) & Mean/Count (SD/\%) \\
+ & n = 81 & n = 81 \\
+ \midrule
+Age &   &  \\
+\hspace{6pt}   & 46.6 (8.5) & 44.5 (7.6)\\
+Telework &   &  \\
+\hspace{6pt}    Yes & 44 (54.3\%) & 58 (71.6\%)\\
+\hspace{6pt}    No & 37 (45.7\%) & 23 (28.4\%)\\
+Relationship length &   &  \\
+\hspace{6pt}   & 18.2 (9.9) & 18.2 (9.9)\\
+Number of children &   &  \\
+\hspace{6pt}   & 0.8 (0.9) & 0.8 (0.9)\\
+Individual income &   &  \\
+\hspace{6pt}   & 70,698.6 (41,079.3) & 64,933.8 (91,925.6)\\
+Gender ideology &   &  \\
+\hspace{6pt}   & 2.9 (0.6) & 2.6 (0.7)\\
+Race &   &  \\
+\hspace{6pt}    Asian or Asian American & 6 (7.4\%) & 8 (9.9\%)\\
+\hspace{6pt}    Black or African American & 6 (7.4\%) & 6 (7.4\%)\\
+\hspace{6pt}    Latinx or Hispanic & 5 (6.2\%) & 6 (7.4\%)\\
+\hspace{6pt}    White or European American & 62 (76.5\%) & 61 (75.3\%)\\
+\hspace{6pt}    Prefer not to answer & 2 (2.5\%) & 0 (0\%)\\
+\bottomrule
+
+\end{tabular}
+\end{table*}
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+[ ht ]
+\centering
+\caption{}\label{}
+\begin{tabular}{ l c c c }
+\toprule
+ &   &  \multicolumn{ 2 }{c}{ Gender }\\
+  & Total & Men & Women \\
+& Mean/Count (SD/\%)  &  \multicolumn{ 2 }{c}{ Mean/Count (SD/\%) }\\
+ & n = 162 & n = 81 & n = 81 \\
+ \midrule
+Age &   &   &  \\
+\hspace{6pt}   & 45.57 (8.11) & 46.62 (8.49) & 44.52 (7.62)\\
+Telework &   &   &  \\
+\hspace{6pt}    Yes & 102 (63\%) & 44 (54.3\%) & 58 (71.6\%)\\
+\hspace{6pt}    No & 60 (37\%) & 37 (45.7\%) & 23 (28.4\%)\\
+Relationship length &   &   &  \\
+\hspace{6pt}   & 18.22 (9.93) & 18.22 (9.93) & 18.22 (9.93)\\
+Number of children &   &   &  \\
+\hspace{6pt}   & 0.75 (0.95) & 0.75 (0.95) & 0.75 (0.95)\\
+Individual income &   &   &  \\
+\hspace{6pt}   & 67,857.39 (70,655.21) & 70,698.59 (41,079.3) & 64,933.83 (91,925.61)\\
+Gender ideology &   &   &  \\
+\hspace{6pt}   & 2.73 (0.66) & 2.86 (0.63) & 2.59 (0.67)\\
+Race and ethnicity &   &   &  \\
+\hspace{6pt}    Asian or Asian American & 14 (8.6\%) & 6 (7.4\%) & 8 (9.9\%)\\
+\hspace{6pt}    Black or African American & 12 (7.4\%) & 6 (7.4\%) & 6 (7.4\%)\\
+\hspace{6pt}    Latinx or Hispanic & 11 (6.8\%) & 5 (6.2\%) & 6 (7.4\%)\\
+\hspace{6pt}    White or European American & 123 (75.9\%) & 62 (76.5\%) & 61 (75.3\%)\\
+\hspace{6pt}    Prefer not to answer & 2 (1.2\%) & 2 (2.5\%) & 0 (0\%)\\
+\bottomrule
+
+\end{tabular}
+\end{table*}

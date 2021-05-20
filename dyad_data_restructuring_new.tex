@@ -1,0 +1,690 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={restructuring data},
+  pdfauthor={Iris Zhong},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\title{restructuring data}
+\author{Iris Zhong}
+\date{4/15/2021}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching packages --------------------------------------- tidyverse 1.3.0 --
+\end{verbatim}
+
+\begin{verbatim}
+## v ggplot2 3.3.2     v purrr   0.3.4
+## v tibble  3.0.4     v dplyr   1.0.2
+## v tidyr   1.1.2     v stringr 1.4.0
+## v readr   1.4.0     v forcats 0.5.0
+\end{verbatim}
+
+\begin{verbatim}
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(mosaic)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'mosaic' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{verbatim}
+## Registered S3 method overwritten by 'mosaic':
+##   method                           from   
+##   fortify.SpatialPolygonsDataFrame ggplot2
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## The 'mosaic' package masks several functions from core packages in order to add 
+## additional features.  The original behavior of these functions should not be affected by this.
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'mosaic'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:Matrix':
+## 
+##     mean
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:dplyr':
+## 
+##     count, do, tally
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:purrr':
+## 
+##     cross
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:ggplot2':
+## 
+##     stat
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     binom.test, cor, cor.test, cov, fivenum, IQR, median, prop.test,
+##     quantile, sd, t.test, var
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     max, mean, min, prod, range, sample, sum
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(dplyr)}
+\KeywordTok{library}\NormalTok{(janitor)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'janitor'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     chisq.test, fisher.test
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(furniture)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'furniture' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(readr)}
+\NormalTok{final\_diary \textless{}{-}}\StringTok{ }\KeywordTok{read\_csv}\NormalTok{(}\StringTok{"final\_diary\_data.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## -- Column specification --------------------------------------------------------
+## cols(
+##   .default = col_character(),
+##   dyadID = col_double(),
+##   Progress = col_double(),
+##   Duration = col_double(),
+##   RecordedDate = col_datetime(format = ""),
+##   gender_6_TEXT = col_logical(),
+##   ResponseID = col_double(),
+##   RecordedDate_lag = col_datetime(format = ""),
+##   dist = col_double(),
+##   first_sec = col_double(),
+##   prob = col_double(),
+##   rec_num = col_double(),
+##   weekish = col_double(),
+##   day_of_study = col_double(),
+##   week = col_double(),
+##   problems = col_double(),
+##   ID_check = col_double(),
+##   ResponseID_chr = col_double(),
+##   obsid = col_double()
+## )
+## i Use `spec()` for the full column specifications.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{prem \textless{}{-}}\StringTok{ }\KeywordTok{read\_csv}\NormalTok{(}\StringTok{"TeleCom\_Dyad\_premeasures.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## -- Column specification --------------------------------------------------------
+## cols(
+##   .default = col_character(),
+##   dyadID = col_double(),
+##   Progress = col_double(),
+##   `Duration (in seconds)` = col_double(),
+##   cohabitation_3_TEXT = col_logical(),
+##   birthday = col_double(),
+##   gender_6_TEXT = col_logical(),
+##   sexualor_6_TEXT = col_logical(),
+##   people_2_TEXT = col_double(),
+##   people_3_TEXT = col_double(),
+##   people_4_TEXT = col_double(),
+##   people_5_TEXT = col_double(),
+##   residence_rooms_3_TEXT = col_double(),
+##   residence_rooms_6_TEXT = col_double(),
+##   residence_rooms_10_TEXT = col_double(),
+##   payhours = col_double(),
+##   indinc = col_double(),
+##   `self-object_1` = col_double(),
+##   `self-object_2` = col_double(),
+##   `self-object_3` = col_double(),
+##   `self-object_4` = col_double()
+##   # ... with 20 more columns
+## )
+## i Use `spec()` for the full column specifications.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{final\_diary \textless{}{-}}\StringTok{ }\NormalTok{final\_diary }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(obsid) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{partnum =} \KeywordTok{seq\_along}\NormalTok{(obsid)) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{ungroup}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+obsid: the couple receive the same obsid for the same day partnum:
+number within each dyad, 1 or 2
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{final\_diary }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(partnum }\OperatorTok{\textgreater{}}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 0 x 84
+## # ... with 84 variables: partID_given <chr>, partID <chr>, dyadID <dbl>,
+## #   gender_baseline <chr>, Progress <dbl>, Duration <dbl>, RecordedDate <dttm>,
+## #   DistributionChannel <chr>, day <chr>, gender <chr>, gender_6_TEXT <lgl>,
+## #   gate1 <chr>, gate2 <chr>, gate3 <chr>, gate4 <chr>, gate5 <chr>,
+## #   gate6 <chr>, beds <chr>, vaccum <chr>, food <chr>, dishes <chr>,
+## #   garbage <chr>, yardwork <chr>, pets <chr>, laundry <chr>, errands <chr>,
+## #   cars <chr>, finances <chr>, events <chr>, calls <chr>, other_chores <chr>,
+## #   fair_chores <chr>, satisfied_chores <chr>, homeschool <chr>,
+## #   attention <chr>, worrying <chr>, activities <chr>, clothes <chr>,
+## #   sick <chr>, getting_up <chr>, put_to_bed <chr>, discipline <chr>,
+## #   reading <chr>, playing <chr>, picking_up <chr>, hygiene <chr>,
+## #   dressing <chr>, comforting <chr>, feeding <chr>, other_childcare <chr>,
+## #   fair_childcare <chr>, satisfied_childcare <chr>, wfibs1 <chr>,
+## #   wfibs2 <chr>, wfibs3 <chr>, covid_pres1 <chr>, covid_pres2 <chr>,
+## #   covid_pres3 <chr>, covid_pres4 <chr>, covid_pres5 <chr>, covid_pres6 <chr>,
+## #   qmi1 <chr>, qmi2 <chr>, qmi3 <chr>, qmi4 <chr>, comm1 <chr>, comm2 <chr>,
+## #   comm3 <chr>, comm4 <chr>, comments <chr>, ResponseID <dbl>,
+## #   RecordedDate_lag <dttm>, dist <dbl>, first_sec <dbl>, prob <dbl>,
+## #   rec_num <dbl>, weekish <dbl>, day_of_study <dbl>, week <dbl>,
+## #   problems <dbl>, ID_check <dbl>, ResponseID_chr <dbl>, obsid <dbl>,
+## #   partnum <int>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{prem}\OperatorTok{$}\NormalTok{r\_length \textless{}{-}}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{as.character}\NormalTok{(prem}\OperatorTok{$}\NormalTok{RecordedDate), }\DataTypeTok{format=}\StringTok{"\%m/\%d/\%y"}\NormalTok{)}\OperatorTok{{-}}
+\StringTok{                  }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{as.character}\NormalTok{(prem}\OperatorTok{$}\NormalTok{relation\_length), }\DataTypeTok{format=}\StringTok{"\%m/\%d/\%y"}\NormalTok{)}
+
+\NormalTok{prem}\OperatorTok{$}\NormalTok{r\_years \textless{}{-}}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(prem}\OperatorTok{$}\NormalTok{r\_length) }
+\NormalTok{prem \textless{}{-}}\StringTok{ }\NormalTok{prem }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{r\_years =}\NormalTok{ r\_years}\OperatorTok{/}\DecValTok{365}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{select}\NormalTok{(}\DataTypeTok{partID =}\NormalTok{ ResponseId, dyadID, gender, }\DataTypeTok{telework =}\NormalTok{ Q139, }\DataTypeTok{age =}\NormalTok{ birthday, r\_years, }\DataTypeTok{childnum =}\NormalTok{ people\_}\DecValTok{5}\NormalTok{\_TEXT, }\DataTypeTok{income =}\NormalTok{ indinc, grbs\_}\DecValTok{1}\OperatorTok{:}\NormalTok{grbs\_}\DecValTok{20}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{telework =} \KeywordTok{case\_when}\NormalTok{(}
+\NormalTok{    telework }\OperatorTok{==}\StringTok{ "Yes, I am teleworking but my partner is not"} \OperatorTok{\textasciitilde{}}\StringTok{ }\DecValTok{1}\NormalTok{,}
+\NormalTok{    telework }\OperatorTok{==}\StringTok{ "Yes, my partner is teleworking but I am not"} \OperatorTok{\textasciitilde{}}\StringTok{ }\DecValTok{0}\NormalTok{,}
+\NormalTok{    telework }\OperatorTok{==}\StringTok{ "We are both teleworking"} \OperatorTok{\textasciitilde{}}\StringTok{ }\DecValTok{1}\NormalTok{),}
+    \DataTypeTok{childnum =} \KeywordTok{ifelse}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(childnum) }\OperatorTok{==}\StringTok{ }\NormalTok{T, }\DecValTok{0}\NormalTok{, childnum),}
+    \DataTypeTok{gender\_chr =} \KeywordTok{case\_when}\NormalTok{(gender }\OperatorTok{==}\StringTok{ "Woman"} \OperatorTok{\textasciitilde{}}\StringTok{ "W"}\NormalTok{,}
+\NormalTok{                       gender }\OperatorTok{==}\StringTok{ "Woman,Cis gendered"} \OperatorTok{\textasciitilde{}}\StringTok{ "W"}\NormalTok{,}
+\NormalTok{                       gender }\OperatorTok{==}\StringTok{ "Man"} \OperatorTok{\textasciitilde{}}\StringTok{ "M"}\NormalTok{,}
+\NormalTok{                       gender }\OperatorTok{==}\StringTok{ "Man,Cis gendered"} \OperatorTok{\textasciitilde{}}\StringTok{ "M"}\NormalTok{),}
+    \DataTypeTok{gender =} \KeywordTok{case\_when}\NormalTok{(gender\_chr }\OperatorTok{==}\StringTok{ "W"} \OperatorTok{\textasciitilde{}}\StringTok{ }\DecValTok{1}\NormalTok{,}
+\NormalTok{                       gender\_chr }\OperatorTok{==}\StringTok{  "M"} \OperatorTok{\textasciitilde{}}\StringTok{ }\DecValTok{{-}1}\NormalTok{)) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{telework =} \KeywordTok{as.factor}\NormalTok{(telework),}
+         \DataTypeTok{gender\_chr =} \KeywordTok{as.factor}\NormalTok{(gender\_chr))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{final\_diary \textless{}{-}}\StringTok{ }\NormalTok{final\_diary }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{qmi1.r =} \KeywordTok{recode}\NormalTok{(qmi1, }\StringTok{"Not true about me"}\NormalTok{ =}\StringTok{ }\DecValTok{1}\NormalTok{, }\StringTok{"A little true about me"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{, }\StringTok{"Somewhat true about me"}\NormalTok{ =}\StringTok{ }\DecValTok{3}\NormalTok{, }\StringTok{"Mostly true about me"}\NormalTok{ =}\StringTok{ }\DecValTok{4}\NormalTok{),}
+         \DataTypeTok{qmi2.r =} \KeywordTok{recode}\NormalTok{(qmi2, }\StringTok{"Not true about me"}\NormalTok{ =}\StringTok{ }\DecValTok{1}\NormalTok{, }\StringTok{"A little true about me"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{, }\StringTok{"Somewhat true about me"}\NormalTok{ =}\StringTok{ }\DecValTok{3}\NormalTok{, }\StringTok{"Mostly true about me"}\NormalTok{ =}\StringTok{ }\DecValTok{4}\NormalTok{),}
+         \DataTypeTok{qmi3.r =} \KeywordTok{recode}\NormalTok{(qmi3, }\StringTok{"Not true about me"}\NormalTok{ =}\StringTok{ }\DecValTok{1}\NormalTok{, }\StringTok{"A little true about me"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{, }\StringTok{"Somewhat true about me"}\NormalTok{ =}\StringTok{ }\DecValTok{3}\NormalTok{, }\StringTok{"Mostly true about me"}\NormalTok{ =}\StringTok{ }\DecValTok{4}\NormalTok{),}
+         \DataTypeTok{qmi4.r =} \KeywordTok{recode}\NormalTok{(qmi4, }\StringTok{"Not true about me"}\NormalTok{ =}\StringTok{ }\DecValTok{1}\NormalTok{, }\StringTok{"A little true about me"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{, }\StringTok{"Somewhat true about me"}\NormalTok{ =}\StringTok{ }\DecValTok{3}\NormalTok{, }\StringTok{"Mostly true about me"}\NormalTok{ =}\StringTok{ }\DecValTok{4}\NormalTok{))}
+\NormalTok{final\_diary}\OperatorTok{$}\NormalTok{qmi\_ss \textless{}{-}}\StringTok{ }\KeywordTok{rowMeans}\NormalTok{(}\KeywordTok{select}\NormalTok{(final\_diary, qmi1.r, qmi2.r, qmi3.r, qmi4.r), }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
+
+\NormalTok{final\_diary \textless{}{-}}\StringTok{ }\NormalTok{final\_diary }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{fair\_chores =} \KeywordTok{recode}\NormalTok{(fair\_chores, }\StringTok{"Very unfair to you"}\NormalTok{ =}\StringTok{ }\DecValTok{1}\NormalTok{, }\StringTok{"Slightly unfair to you"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{, }\StringTok{"Fair to both you and your partner"}\NormalTok{ =}\StringTok{ }\DecValTok{3}\NormalTok{, }\StringTok{"Pretty much fair to me"}\NormalTok{ =}\StringTok{ }\DecValTok{4}\NormalTok{, }\StringTok{"Very fair to me"}\NormalTok{ =}\StringTok{ }\DecValTok{5}\NormalTok{))}
+  
+
+\NormalTok{prem \textless{}{-}}\StringTok{ }\NormalTok{prem }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{grbs\_1.r =} \KeywordTok{recode}\NormalTok{(grbs\_}\DecValTok{1}\NormalTok{,  }\StringTok{"Strongly disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{1}\NormalTok{, }\StringTok{"Somewhat disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{, }\StringTok{"Neither agree nor disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{3}\NormalTok{, }\StringTok{"Somewhat agree"}\NormalTok{ =}\StringTok{ }\DecValTok{4}\NormalTok{, }\StringTok{"Strongly agree"}\NormalTok{ =}\StringTok{ }\DecValTok{5}\NormalTok{),}
+         \DataTypeTok{grbs\_2.r =} \KeywordTok{recode}\NormalTok{(grbs\_}\DecValTok{2}\NormalTok{,  }\StringTok{"Strongly disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{1}\NormalTok{, }\StringTok{"Somewhat disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{, }\StringTok{"Neither agree nor disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{3}\NormalTok{, }\StringTok{"Somewhat agree"}\NormalTok{ =}\StringTok{ }\DecValTok{4}\NormalTok{, }\StringTok{"Strongly agree"}\NormalTok{ =}\StringTok{ }\DecValTok{5}\NormalTok{),}
+         \DataTypeTok{grbs\_3.r =} \KeywordTok{recode}\NormalTok{(grbs\_}\DecValTok{3}\NormalTok{,  }\StringTok{"Strongly disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{1}\NormalTok{, }\StringTok{"Somewhat disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{, }\StringTok{"Neither agree nor disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{3}\NormalTok{, }\StringTok{"Somewhat agree"}\NormalTok{ =}\StringTok{ }\DecValTok{4}\NormalTok{, }\StringTok{"Strongly agree"}\NormalTok{ =}\StringTok{ }\DecValTok{5}\NormalTok{),}
+         \DataTypeTok{grbs\_4.r =} \KeywordTok{recode}\NormalTok{(grbs\_}\DecValTok{4}\NormalTok{,  }\StringTok{"Strongly disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{1}\NormalTok{, }\StringTok{"Somewhat disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{, }\StringTok{"Neither agree nor disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{3}\NormalTok{, }\StringTok{"Somewhat agree"}\NormalTok{ =}\StringTok{ }\DecValTok{4}\NormalTok{, }\StringTok{"Strongly agree"}\NormalTok{ =}\StringTok{ }\DecValTok{5}\NormalTok{),}
+         \DataTypeTok{grbs\_5.r =} \KeywordTok{recode}\NormalTok{(grbs\_}\DecValTok{5}\NormalTok{,  }\StringTok{"Strongly disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{1}\NormalTok{, }\StringTok{"Somewhat disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{, }\StringTok{"Neither agree nor disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{3}\NormalTok{, }\StringTok{"Somewhat agree"}\NormalTok{ =}\StringTok{ }\DecValTok{4}\NormalTok{, }\StringTok{"Strongly agree"}\NormalTok{ =}\StringTok{ }\DecValTok{5}\NormalTok{),}
+         \DataTypeTok{grbs\_6.r =} \KeywordTok{recode}\NormalTok{(grbs\_}\DecValTok{6}\NormalTok{,  }\StringTok{"Strongly disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{1}\NormalTok{, }\StringTok{"Somewhat disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{, }\StringTok{"Neither agree nor disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{3}\NormalTok{, }\StringTok{"Somewhat agree"}\NormalTok{ =}\StringTok{ }\DecValTok{4}\NormalTok{, }\StringTok{"Strongly agree"}\NormalTok{ =}\StringTok{ }\DecValTok{5}\NormalTok{),}
+         \DataTypeTok{grbs\_7.r =} \KeywordTok{recode}\NormalTok{(grbs\_}\DecValTok{7}\NormalTok{,  }\StringTok{"Strongly disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{1}\NormalTok{, }\StringTok{"Somewhat disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{, }\StringTok{"Neither agree nor disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{3}\NormalTok{, }\StringTok{"Somewhat agree"}\NormalTok{ =}\StringTok{ }\DecValTok{4}\NormalTok{, }\StringTok{"Strongly agree"}\NormalTok{ =}\StringTok{ }\DecValTok{5}\NormalTok{),}
+         \DataTypeTok{grbs\_8.r =} \KeywordTok{recode}\NormalTok{(grbs\_}\DecValTok{8}\NormalTok{,  }\StringTok{"Strongly disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{1}\NormalTok{, }\StringTok{"Somewhat disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{, }\StringTok{"Neither agree nor disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{3}\NormalTok{, }\StringTok{"Somewhat agree"}\NormalTok{ =}\StringTok{ }\DecValTok{4}\NormalTok{, }\StringTok{"Strongly agree"}\NormalTok{ =}\StringTok{ }\DecValTok{5}\NormalTok{),}
+         \DataTypeTok{grbs\_9.r =} \KeywordTok{recode}\NormalTok{(grbs\_}\DecValTok{9}\NormalTok{,  }\StringTok{"Strongly disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{1}\NormalTok{, }\StringTok{"Somewhat disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{, }\StringTok{"Neither agree nor disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{3}\NormalTok{, }\StringTok{"Somewhat agree"}\NormalTok{ =}\StringTok{ }\DecValTok{4}\NormalTok{, }\StringTok{"Strongly agree"}\NormalTok{ =}\StringTok{ }\DecValTok{5}\NormalTok{),}
+         \DataTypeTok{grbs\_10.r =} \KeywordTok{recode}\NormalTok{(grbs\_}\DecValTok{10}\NormalTok{,  }\StringTok{"Strongly disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{1}\NormalTok{, }\StringTok{"Somewhat disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{, }\StringTok{"Neither agree nor disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{3}\NormalTok{, }\StringTok{"Somewhat agree"}\NormalTok{ =}\StringTok{ }\DecValTok{4}\NormalTok{, }\StringTok{"Strongly agree"}\NormalTok{ =}\StringTok{ }\DecValTok{5}\NormalTok{),}
+         \DataTypeTok{grbs\_11.r =} \KeywordTok{recode}\NormalTok{(grbs\_}\DecValTok{11}\NormalTok{,  }\StringTok{"Strongly disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{1}\NormalTok{, }\StringTok{"Somewhat disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{, }\StringTok{"Neither agree nor disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{3}\NormalTok{, }\StringTok{"Somewhat agree"}\NormalTok{ =}\StringTok{ }\DecValTok{4}\NormalTok{, }\StringTok{"Strongly agree"}\NormalTok{ =}\StringTok{ }\DecValTok{5}\NormalTok{),}
+         \DataTypeTok{grbs\_12.r =} \KeywordTok{recode}\NormalTok{(grbs\_}\DecValTok{12}\NormalTok{,  }\StringTok{"Strongly disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{1}\NormalTok{, }\StringTok{"Somewhat disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{, }\StringTok{"Neither agree nor disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{3}\NormalTok{, }\StringTok{"Somewhat agree"}\NormalTok{ =}\StringTok{ }\DecValTok{4}\NormalTok{, }\StringTok{"Strongly agree"}\NormalTok{ =}\StringTok{ }\DecValTok{5}\NormalTok{),}
+         \DataTypeTok{grbs\_13.r =} \KeywordTok{recode}\NormalTok{(grbs\_}\DecValTok{13}\NormalTok{,  }\StringTok{"Strongly disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{1}\NormalTok{, }\StringTok{"Somewhat disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{, }\StringTok{"Neither agree nor disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{3}\NormalTok{, }\StringTok{"Somewhat agree"}\NormalTok{ =}\StringTok{ }\DecValTok{4}\NormalTok{, }\StringTok{"Strongly agree"}\NormalTok{ =}\StringTok{ }\DecValTok{5}\NormalTok{),}
+         \DataTypeTok{grbs\_14.r =} \KeywordTok{recode}\NormalTok{(grbs\_}\DecValTok{14}\NormalTok{,  }\StringTok{"Strongly disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{1}\NormalTok{, }\StringTok{"Somewhat disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{, }\StringTok{"Neither agree nor disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{3}\NormalTok{, }\StringTok{"Somewhat agree"}\NormalTok{ =}\StringTok{ }\DecValTok{4}\NormalTok{, }\StringTok{"Strongly agree"}\NormalTok{ =}\StringTok{ }\DecValTok{5}\NormalTok{),}
+         \DataTypeTok{grbs\_15.r =} \KeywordTok{recode}\NormalTok{(grbs\_}\DecValTok{15}\NormalTok{,  }\StringTok{"Strongly disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{1}\NormalTok{, }\StringTok{"Somewhat disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{, }\StringTok{"Neither agree nor disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{3}\NormalTok{, }\StringTok{"Somewhat agree"}\NormalTok{ =}\StringTok{ }\DecValTok{4}\NormalTok{, }\StringTok{"Strongly agree"}\NormalTok{ =}\StringTok{ }\DecValTok{5}\NormalTok{),}
+         \DataTypeTok{grbs\_16.r =} \KeywordTok{recode}\NormalTok{(grbs\_}\DecValTok{16}\NormalTok{,  }\StringTok{"Strongly disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{1}\NormalTok{, }\StringTok{"Somewhat disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{, }\StringTok{"Neither agree nor disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{3}\NormalTok{, }\StringTok{"Somewhat agree"}\NormalTok{ =}\StringTok{ }\DecValTok{4}\NormalTok{, }\StringTok{"Strongly agree"}\NormalTok{ =}\StringTok{ }\DecValTok{5}\NormalTok{),}
+          \DataTypeTok{grbs\_17.r =} \KeywordTok{recode}\NormalTok{(grbs\_}\DecValTok{17}\NormalTok{,  }\StringTok{"Strongly disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{1}\NormalTok{, }\StringTok{"Somewhat disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{, }\StringTok{"Neither agree nor disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{3}\NormalTok{, }\StringTok{"Somewhat agree"}\NormalTok{ =}\StringTok{ }\DecValTok{4}\NormalTok{, }\StringTok{"Strongly agree"}\NormalTok{ =}\StringTok{ }\DecValTok{5}\NormalTok{),}
+         \DataTypeTok{grbs\_18.r =} \KeywordTok{recode}\NormalTok{(grbs\_}\DecValTok{18}\NormalTok{,  }\StringTok{"Strongly disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{1}\NormalTok{, }\StringTok{"Somewhat disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{, }\StringTok{"Neither agree nor disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{3}\NormalTok{, }\StringTok{"Somewhat agree"}\NormalTok{ =}\StringTok{ }\DecValTok{4}\NormalTok{, }\StringTok{"Strongly agree"}\NormalTok{ =}\StringTok{ }\DecValTok{5}\NormalTok{),}
+         \DataTypeTok{grbs\_19.r =} \KeywordTok{recode}\NormalTok{(grbs\_}\DecValTok{19}\NormalTok{,  }\StringTok{"Strongly disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{1}\NormalTok{, }\StringTok{"Somewhat disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{, }\StringTok{"Neither agree nor disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{3}\NormalTok{, }\StringTok{"Somewhat agree"}\NormalTok{ =}\StringTok{ }\DecValTok{4}\NormalTok{, }\StringTok{"Strongly agree"}\NormalTok{ =}\StringTok{ }\DecValTok{5}\NormalTok{),}
+         \DataTypeTok{grbs\_20.r =} \KeywordTok{recode}\NormalTok{(grbs\_}\DecValTok{20}\NormalTok{,  }\StringTok{"Strongly disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{1}\NormalTok{, }\StringTok{"Somewhat disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{, }\StringTok{"Neither agree nor disagree"}\NormalTok{ =}\StringTok{ }\DecValTok{3}\NormalTok{, }\StringTok{"Somewhat agree"}\NormalTok{ =}\StringTok{ }\DecValTok{4}\NormalTok{, }\StringTok{"Strongly agree"}\NormalTok{ =}\StringTok{ }\DecValTok{5}\NormalTok{))}
+
+\NormalTok{prem \textless{}{-}}\StringTok{ }\NormalTok{prem }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{grbs\_2.r =}\NormalTok{ (}\DecValTok{1} \OperatorTok{+}\StringTok{ }\DecValTok{5}\NormalTok{) }\OperatorTok{{-}}\StringTok{ }\NormalTok{grbs\_}\FloatTok{2.}\NormalTok{r,}
+         \DataTypeTok{grbs\_3.r =}\NormalTok{ (}\DecValTok{1} \OperatorTok{+}\StringTok{ }\DecValTok{5}\NormalTok{) }\OperatorTok{{-}}\StringTok{ }\NormalTok{grbs\_}\FloatTok{3.}\NormalTok{r,}
+         \DataTypeTok{grbs\_7.r =}\NormalTok{ (}\DecValTok{1} \OperatorTok{+}\StringTok{ }\DecValTok{5}\NormalTok{) }\OperatorTok{{-}}\StringTok{ }\NormalTok{grbs\_}\FloatTok{7.}\NormalTok{r,}
+         \DataTypeTok{grbs\_10.r =}\NormalTok{ (}\DecValTok{1} \OperatorTok{+}\StringTok{ }\DecValTok{5}\NormalTok{) }\OperatorTok{{-}}\StringTok{ }\NormalTok{grbs\_}\FloatTok{10.}\NormalTok{r,}
+         \DataTypeTok{grbs\_12.r =}\NormalTok{ (}\DecValTok{1} \OperatorTok{+}\StringTok{ }\DecValTok{5}\NormalTok{) }\OperatorTok{{-}}\StringTok{ }\NormalTok{grbs\_}\FloatTok{12.}\NormalTok{r,}
+         \DataTypeTok{grbs\_17.r =}\NormalTok{ (}\DecValTok{1} \OperatorTok{+}\StringTok{ }\DecValTok{5}\NormalTok{) }\OperatorTok{{-}}\StringTok{ }\NormalTok{grbs\_}\FloatTok{17.}\NormalTok{r)}
+
+\NormalTok{prem}\OperatorTok{$}\NormalTok{grbs\_ss \textless{}{-}}\StringTok{ }\KeywordTok{rowMeans}\NormalTok{(}\KeywordTok{select}\NormalTok{(prem, grbs\_}\FloatTok{1.}\NormalTok{r, grbs\_}\FloatTok{2.}\NormalTok{r, grbs\_}\FloatTok{3.}\NormalTok{r, grbs\_}\FloatTok{4.}\NormalTok{r, grbs\_}\FloatTok{5.}\NormalTok{r, grbs\_}\FloatTok{6.}\NormalTok{r, grbs\_}\FloatTok{7.}\NormalTok{r, grbs\_}\FloatTok{8.}\NormalTok{r, grbs\_}\FloatTok{9.}\NormalTok{r, grbs\_}\FloatTok{10.}\NormalTok{r, grbs\_}\FloatTok{11.}\NormalTok{r, grbs\_}\FloatTok{12.}\NormalTok{r, grbs\_}\FloatTok{13.}\NormalTok{r, grbs\_}\FloatTok{14.}\NormalTok{r, grbs\_}\FloatTok{15.}\NormalTok{r, grbs\_}\FloatTok{16.}\NormalTok{r, grbs\_}\FloatTok{17.}\NormalTok{r, grbs\_}\FloatTok{18.}\NormalTok{r, grbs\_}\FloatTok{19.}\NormalTok{r, grbs\_}\FloatTok{20.}\NormalTok{r), }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{prem \textless{}{-}}\StringTok{ }\NormalTok{prem }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{select}\NormalTok{(}\OperatorTok{{-}}\KeywordTok{c}\NormalTok{(grbs\_}\DecValTok{1}\OperatorTok{:}\NormalTok{grbs\_}\DecValTok{20}\NormalTok{, grbs\_}\FloatTok{1.}\NormalTok{r}\OperatorTok{:}\NormalTok{grbs\_}\FloatTok{20.}\NormalTok{r))}
+
+\NormalTok{final\_diary \textless{}{-}}\StringTok{ }\NormalTok{final\_diary }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{select}\NormalTok{(partID, dyadID, day, day\_of\_study, obsid, partnum, fair\_chores, qmi\_ss)}
+\end{Highlighting}
+\end{Shaded}
+
+check couple with different childnum
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{prem }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(dyadID) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{child\_num =} \KeywordTok{mean}\NormalTok{(childnum)) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{ungroup}\NormalTok{() }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(childnum }\OperatorTok{!=}\StringTok{ }\NormalTok{child\_num)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 30 x 11
+##    partID dyadID gender telework   age r_years childnum income gender_chr
+##    <chr>   <dbl>  <dbl> <fct>    <dbl>   <dbl>    <dbl>  <dbl> <fct>     
+##  1 R_3Jg~ 7.40e6      1 1           33   10.6        10  40000 W         
+##  2 R_2rC~ 7.40e6     -1 0           40    5.64        0  25000 M         
+##  3 R_2al~ 1.83e7      1 1           37    2.52        1  45000 W         
+##  4 R_qWa~ 1.83e7     -1 0           42    2.52        2  30000 M         
+##  5 R_1Fv~ 1.88e7     -1 0           46   11.3         2  52000 M         
+##  6 R_rqg~ 1.88e7      1 1           46   12.3         4  50000 W         
+##  7 R_1Fr~ 2.90e7      1 1           35   15.6         1  80000 W         
+##  8 R_cZs~ 2.90e7      1 1           35   15.6         0     NA W         
+##  9 R_30i~ 2.91e7     -1 0           48   26.4         3  50000 M         
+## 10 R_1Fg~ 2.91e7      1 1           43   26.4         2  50000 W         
+## # ... with 20 more rows, and 2 more variables: grbs_ss <dbl>, child_num <dbl>
+\end{verbatim}
+
+There are couples that wrote different r\_years/childnum. Replace with
+mean.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{prem \textless{}{-}}\StringTok{ }\NormalTok{prem }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(dyadID) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{r\_years =} \KeywordTok{mean}\NormalTok{(r\_years)) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{childnum =} \KeywordTok{mean}\NormalTok{(childnum)) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{ungroup}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+Remove same-sex couple data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{prem \textless{}{-}}\StringTok{ }\NormalTok{prem }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(dyadID) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{gender\_sum =} \KeywordTok{sum}\NormalTok{(gender)) }\CommentTok{\# effect coding: heterosexual couple gender\_sum == 0}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{prem\_diary \textless{}{-}}\StringTok{ }\NormalTok{final\_diary }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{inner\_join}\NormalTok{(prem, }\DataTypeTok{by =} \StringTok{"partID"}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(gender\_sum }\OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{select}\NormalTok{(}\DataTypeTok{dyadID =}\NormalTok{ dyadID.x, r\_years, childnum, obsid, gender, gender\_chr,partID, day, day\_of\_study, partnum,  telework, income, grbs\_ss, fair\_chores, qmi\_ss)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tempA \textless{}{-}}\StringTok{ }\NormalTok{prem\_diary }\OperatorTok{\%\textgreater{}\%}\StringTok{  }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{genderE =}\NormalTok{ gender,}
+         \DataTypeTok{gender =} \KeywordTok{ifelse}\NormalTok{(gender }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{, }\StringTok{"A"}\NormalTok{, }\StringTok{"P"}\NormalTok{)) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{gather}\NormalTok{(variable, value, gender\_chr}\OperatorTok{:}\NormalTok{genderE) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{unite}\NormalTok{(var\_gender, variable, gender) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{spread}\NormalTok{(var\_gender, value)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: attributes are not identical across measure variables;
+## they will be dropped
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tempB \textless{}{-}}\StringTok{ }\NormalTok{prem\_diary }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{genderE =}\NormalTok{ gender,}
+         \DataTypeTok{gender =} \KeywordTok{ifelse}\NormalTok{(gender }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{, }\StringTok{"P"}\NormalTok{, }\StringTok{"A"}\NormalTok{)) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{gather}\NormalTok{(variable, value, gender\_chr}\OperatorTok{:}\NormalTok{genderE) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{unite}\NormalTok{(var\_gender, variable, gender) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{spread}\NormalTok{(var\_gender, value)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: attributes are not identical across measure variables;
+## they will be dropped
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data\_pair \textless{}{-}}\StringTok{ }\KeywordTok{bind\_rows}\NormalTok{(tempA, tempB) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(obsid) }
+  
+\KeywordTok{rm}\NormalTok{(tempA, tempB)}
+\KeywordTok{head}\NormalTok{(data\_pair)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 26
+##   dyadID r_years childnum  obsid day_A day_of_study_A day_of_study_P day_P
+##    <dbl>   <dbl>    <dbl>  <dbl> <chr> <chr>          <chr>          <chr>
+## 1 377033    31.2        0 5.28e6 Mond~ 1              1              Mond~
+## 2 377033    31.2        0 5.28e6 Mond~ 1              1              Mond~
+## 3 377033    31.2        0 5.28e6 Tues~ 2              2              Tues~
+## 4 377033    31.2        0 5.28e6 Tues~ 2              2              Tues~
+## 5 377033    31.2        0 5.28e6 Wedn~ 3              3              Wedn~
+## 6 377033    31.2        0 5.28e6 Wedn~ 3              3              Wedn~
+## # ... with 18 more variables: fair_chores_A <chr>, fair_chores_P <chr>,
+## #   gender_chr_A <chr>, gender_chr_P <chr>, genderE_A <chr>, genderE_P <chr>,
+## #   grbs_ss_A <chr>, grbs_ss_P <chr>, income_A <chr>, income_P <chr>,
+## #   partID_A <chr>, partID_P <chr>, partnum_A <chr>, partnum_P <chr>,
+## #   qmi_ss_A <chr>, qmi_ss_P <chr>, telework_A <chr>, telework_P <chr>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data\_pair \textless{}{-}}\StringTok{ }\NormalTok{data\_pair }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(partID\_A) }\OperatorTok{==}\StringTok{ }\NormalTok{F }\OperatorTok{\&}\StringTok{ }\KeywordTok{is.na}\NormalTok{(partID\_P) }\OperatorTok{==}\StringTok{ }\NormalTok{F)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data\_pair }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(partID\_A) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{n =} \KeywordTok{n}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` ungrouping output (override with `.groups` argument)
+\end{verbatim}
+
+\begin{verbatim}
+## # A tibble: 162 x 2
+##    partID_A              n
+##    <chr>             <int>
+##  1 R_10VkcP24LP6ulbr    14
+##  2 R_12osxTiyNsPNtVh    14
+##  3 R_1d9NtVBXX5F4mBr    14
+##  4 R_1daE4d4d9u9Taro    14
+##  5 R_1dmkvpjXAgSrDQk    14
+##  6 R_1EgFYVO7fHGIsVz    14
+##  7 R_1fg8GJt7EuE109n    14
+##  8 R_1FgsjdCCvzB4STG    14
+##  9 R_1Fv4Yl9kvXpUxbj     2
+## 10 R_1GBIymMTPzJlX0X    14
+## # ... with 152 more rows
+\end{verbatim}
+
+81 dyads, 162 participants; observation = 2108/2 = 1054
+
+Make descriptive table:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{descriptive \textless{}{-}}\StringTok{ }\NormalTok{data\_pair }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(partID\_A) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{n =} \KeywordTok{n}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` ungrouping output (override with `.groups` argument)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{descriptive \textless{}{-}}\StringTok{ }\NormalTok{descriptive }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{inner\_join}\NormalTok{(prem, }\DataTypeTok{by =} \KeywordTok{c}\NormalTok{(}\StringTok{"partID\_A"}\NormalTok{ =}\StringTok{ "partID"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{table1}\NormalTok{(descriptive, gender\_chr, age, telework,r\_years, childnum, income, }\DataTypeTok{format\_number =}\NormalTok{ T, }\DataTypeTok{na.rm =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{output =} \StringTok{"latex2"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## \begin{table}[ ht ] 
+## \centering 
+## \caption{}\label{}
+## \begin{tabular}{ l c }
+## \toprule
+##  &   \multicolumn{ 1 }{c}{ Total }\\ 
+##   & Mean/Count (SD/\%) \\ 
+##  & n = 162 \\ 
+##  \midrule
+## gender\_chr &  \\ 
+## \hspace{6pt}    M & 81 (50\%)\\ 
+## \hspace{6pt}    W & 81 (50\%)\\ 
+## \hspace{6pt}    \emph{missing} & 0 (0\%)\\ 
+## age &  \\ 
+## \hspace{6pt}   & 45.6 (8.1)\\ 
+## telework &  \\ 
+## \hspace{6pt}    0 & 60 (37\%)\\ 
+## \hspace{6pt}    1 & 102 (63\%)\\ 
+## \hspace{6pt}    \emph{missing} & 0 (0\%)\\ 
+## r\_years &  \\ 
+## \hspace{6pt}   & 18.2 (9.9)\\ 
+## childnum &  \\ 
+## \hspace{6pt}   & 0.8 (0.9)\\ 
+## income &  \\ 
+## \hspace{6pt}   & 67,857.4 (70,655.2)\\ 
+## \bottomrule
+## 
+## \end{tabular}
+## \end{table}
+\end{verbatim}
+
+\begin{table}[ ht ] 
+\centering 
+\caption{}\label{}
+\begin{tabular}{ l c }
+\toprule
+ &   \multicolumn{ 1 }{c}{ Total }\\ 
+  & Mean/Count (SD/\%) \\ 
+ & n = 162 \\ 
+ \midrule
+Gender &  \\ 
+\hspace{6pt}    Men & 81 (50\%)\\ 
+\hspace{6pt}    Women & 81 (50\%)\\ 
+\hspace{6pt}    \emph{missing} & 0 (0\%)\\ 
+Age &  \\ 
+\hspace{6pt}   & 45.6 (8.1)\\ 
+Telework &  \\ 
+\hspace{6pt}    No & 60 (37\%)\\ 
+\hspace{6pt}    Yes & 102 (63\%)\\ 
+\hspace{6pt}    \emph{missing} & 0 (0\%)\\ 
+Relationship length &  \\ 
+\hspace{6pt}   & 18.2 (9.9)\\ 
+Number of children &  \\ 
+\hspace{6pt}   & 0.8 (0.9)\\ 
+Income &  \\ 
+\hspace{6pt}   & 67,857.4 (70,655.2)\\ 
+\bottomrule
+
+\end{tabular}
+\end{table}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# prem\_diary2 \textless{}{-} prem\_diary \%\textgreater{}\%}
+\CommentTok{\#   gather(variable, value, telework:qmi\_ss)}
+\CommentTok{\# }
+\CommentTok{\# prem\_diary3 \textless{}{-} prem\_diary2 \%\textgreater{}\%}
+\CommentTok{\#   unite(var\_gender, variable, gender\_chr)}
+\CommentTok{\# }
+\CommentTok{\# prem\_diary4 \textless{}{-} prem\_diary3 \%\textgreater{}\%}
+\CommentTok{\#   spread(var\_gender, value)}
+\CommentTok{\# }
+\CommentTok{\# rm(prem\_diary2, prem\_diary3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#write.csv(data\_pair,"data\_pair.csv")}
+\end{Highlighting}
+\end{Shaded}
+
+
+\end{document}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2021.3.31)  6 MAY 2021 13:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2021.3.31)  7 MAY 2021 21:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -405,11 +405,7 @@ d-pdftex.def
 File: l3backend-pdftex.def 2021-03-18 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count281
 \l__pdf_internal_box=\box50
-) (./analysis.aux
-
-LaTeX Warning: Label `' multiply defined.
-
-)
+) (./analysis.aux)
 \openout1 = `analysis.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 107.
@@ -546,265 +542,152 @@ LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line
 119.
 (c:/Users/iris_/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ts1lmtt.fd
 File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-<analysis_files/figure-latex/unnamed-chunk-2-1.pdf, id=4, 469.755pt x 325.215pt
->
+) [1
+
+{c:/Users/iris_/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdfte
+x.map}]
+<analysis_files/figure-latex/unnamed-chunk-2-1.pdf, id=15, 469.755pt x 325.215p
+t>
 File: analysis_files/figure-latex/unnamed-chunk-2-1.pdf Graphic file (type pdf)
 
 <use analysis_files/figure-latex/unnamed-chunk-2-1.pdf>
 Package pdftex.def Info: analysis_files/figure-latex/unnamed-chunk-2-1.pdf  use
-d on input line 173.
+d on input line 176.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[1
-
-{c:/Users/iris_/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdfte
-x.map}]
 <analysis_files/figure-latex/unnamed-chunk-3-1.pdf, id=16, 469.755pt x 325.215p
 t>
 File: analysis_files/figure-latex/unnamed-chunk-3-1.pdf Graphic file (type pdf)
 
 <use analysis_files/figure-latex/unnamed-chunk-3-1.pdf>
 Package pdftex.def Info: analysis_files/figure-latex/unnamed-chunk-3-1.pdf  use
-d on input line 186.
+d on input line 189.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [2 <./analysis_files/figure-latex/unnamed-chunk-2-1.pdf>] [3 <./analysis_files/
 figure-latex/unnamed-chunk-3-1.pdf>]
-Overfull \hbox (118.24327pt too wide) in paragraph at lines 248--248
+Overfull \hbox (70.99341pt too wide) in paragraph at lines 253--253
 []\T1/lmtt/m/n/10 ## Fixed effects:  qmi_ss_A ~ gender_chr_A + gender_chr_A:day
-_of_study_A + fair_chores_C_A:gender_chr_A -      1[] 
+_of_study_A + fair_chores_C_A:gender_chr_A[] 
  []
 
 [4]
-Overfull \hbox (280.9928pt too wide) in paragraph at lines 331--331
+Overfull \hbox (280.9928pt too wide) in paragraph at lines 330--330
 []\T1/lmtt/m/n/10 ## Fixed effects:  qmi_ss_A ~ gender_chr_A + gender_chr_A:day
 _of_study_A + fair_chores_C_A:gender_chr_A +      fair_chores_C_P:gender_chr_A 
 - 1[] 
  []
 
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 342.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 342.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 342.
-[5] [6]
-Overfull \hbox (858.49112pt too wide) in paragraph at lines 524--524
+[5]
+Overfull \hbox (853.24113pt too wide) in paragraph at lines 471--471
 []\T1/lmtt/m/n/10 ## Fixed effects:  qmi_ss_A ~ gender_chr_A + gender_chr_A:day
 _of_study_A + fair_chores_C_A:gender_chr_A +      fair_chores_C_P:gender_chr_A 
 + gender_chr_A:grbs_C_A + grbs_C_A:gender_chr_A:fair_chores_C_A +      grbs_C_A
-:gender_chr_A:fair_chores_C_P + -1[] 
+:gender_chr_A:fair_chores_C_P - 1[] 
  []
 
-[7] [8]
-Overfull \hbox (4018.98193pt too wide) in paragraph at lines 551--551
+[6] [7] [8] [9]
+Overfull \hbox (139.24321pt too wide) in paragraph at lines 613--613
+[]\T1/lmtt/m/n/10 ## Fixed effects:  fair_chores_C_A ~ gender_chr_A + telework_
+A:gender_chr_A + childnum +      r_years + income_A - 1[] 
+ []
+
+
+Overfull \hbox (3163.23442pt too wide) in paragraph at lines 633--633
 []\T1/lmtt/m/n/10 ## We fitted a linear mixed model (estimated using REML and n
-lminb optimizer) to predict qmi_ss_A with gender_chr_A, day_of_study_A, fair_ch
-ores_C_A, fair_chores_C_P, grbs_C_A, dyadID and obsid (formula: qmi_ss_A ~ gend
-er_chr_A + gender_chr_A:day_of_study_A + fair_chores_C_A:gender_chr_A + fair_ch
-ores_C_P:gender_chr_A + gender_chr_A:grbs_C_A + grbs_C_A:gender_chr_A:fair_chor
-es_C_A + grbs_C_A:gender_chr_A:fair_chores_C_P + -1). The model included gender
-_chr_A and dyadID as random effects (formula: ~gender_chr_A - 1 | dyadID). The 
-model\TS1/lmtt/m/n/10 '\T1/lmtt/m/n/10 s total explanatory power is substantial
- (conditional R2 = 0.68) and the part related to the fixed effects alone (margi
-nal R2) is of 0.02. The model\TS1/lmtt/m/n/10 '\T1/lmtt/m/n/10 s intercept, cor
-responding to gender_chr_A = , day_of_study_A = 0, fair_chores_C_A = 0, fair_ch
-ores_C_P = 0 and grbs_C_A = 0, is at  (t() = , p ). Within this model:[] 
+lminb optimizer) to predict fair_chores_C_A with gender_chr_A, telework_A, chil
+dnum, r_years, income_A, dyadID and obsid (formula: fair_chores_C_A ~ gender_ch
+r_A + telework_A:gender_chr_A + childnum + r_years + income_A - 1). The model i
+ncluded gender_chr_A and dyadID as random effects (formula: ~gender_chr_A - 1 |
+ dyadID). The model\TS1/lmtt/m/n/10 '\T1/lmtt/m/n/10 s total explanatory power 
+is substantial (conditional R2 = 0.65) and the part related to the fixed effect
+s alone (marginal R2) is of 0.02. The model\TS1/lmtt/m/n/10 '\T1/lmtt/m/n/10 s 
+intercept, corresponding to gender_chr_A = , telework_A = 0, childnum = 0, r_ye
+ars = 0 and income_A = 0, is at  (t() = , p ). Within this model:[] 
  []
 
 
-Overfull \hbox (480.49222pt too wide) in paragraph at lines 551--551
-[]\T1/lmtt/m/n/10 ##   - The effect of gender_chr_A [M] is statistically signif
-icant and positive (beta = 3.55, 95% CI [3.41, 3.69], t(2013) = 49.46, p < .001
-; Std. beta = 0.04, 95% CI [-0.15, 0.23])[] 
+Overfull \hbox (506.74214pt too wide) in paragraph at lines 633--633
+[]\T1/lmtt/m/n/10 ##   - The effect of gender_chr_A [M] is statistically non-si
+gnificant and positive (beta = 0.29, 95% CI [-0.17, 0.76], t(1722) = 1.25, p = 
+0.213; Std. beta = 0.06, 95% CI [-0.14, 0.25])[] 
  []
 
 
-Overfull \hbox (485.7422pt too wide) in paragraph at lines 551--551
-[]\T1/lmtt/m/n/10 ##   - The effect of gender_chr_A [W] is statistically signif
-icant and positive (beta = 3.43, 95% CI [3.30, 3.57], t(2013) = 50.36, p < .001
-; Std. beta = -0.05, 95% CI [-0.23, 0.13])[] 
+Overfull \hbox (511.99213pt too wide) in paragraph at lines 633--633
+[]\T1/lmtt/m/n/10 ##   - The effect of gender_chr_A [W] is statistically non-si
+gnificant and positive (beta = 0.35, 95% CI [-0.25, 0.95], t(1722) = 1.13, p = 
+0.259; Std. beta = -0.05, 95% CI [-0.25, 0.16])[] 
  []
 
 
-Overfull \hbox (742.99146pt too wide) in paragraph at lines 551--551
-[]\T1/lmtt/m/n/10 ##   - The interaction effect of day_of_study_A on gender_chr
-_A [M] is statistically non-significant and negative (beta = -2.90e-03, 95% CI 
-[-8.34e-03, 2.53e-03], t(2013) = -1.05, p = 0.295; Std. beta = -0.02, 95% CI [-
-0.05, 0.01])[] 
- []
-
-
-Overfull \hbox (685.24162pt too wide) in paragraph at lines 551--551
-[]\T1/lmtt/m/n/10 ##   - The interaction effect of day_of_study_A on gender_chr
-_A [W] is statistically significant and positive (beta = 6.22e-03, 95% CI [1.33
-e-05, 0.01], t(2013) = 1.97, p < .05; Std. beta = 0.03, 95% CI [7.45e-05, 0.07]
-)[] 
- []
-
-
-Overfull \hbox (632.74178pt too wide) in paragraph at lines 551--551
-[]\T1/lmtt/m/n/10 ##   - The interaction effect of fair_chores_C_A on gender_ch
-r_A [M] is statistically significant and positive (beta = 0.07, 95% CI [0.03, 0
-.11], t(2013) = 3.80, p < .001; Std. beta = 0.10, 95% CI [0.05, 0.15])[] 
- []
-
-
-Overfull \hbox (632.74178pt too wide) in paragraph at lines 551--551
-[]\T1/lmtt/m/n/10 ##   - The interaction effect of fair_chores_C_A on gender_ch
-r_A [W] is statistically significant and positive (beta = 0.08, 95% CI [0.04, 0
-.12], t(2013) = 3.65, p < .001; Std. beta = 0.11, 95% CI [0.05, 0.16])[] 
- []
-
-
-Overfull \hbox (727.2415pt too wide) in paragraph at lines 551--551
-[]\T1/lmtt/m/n/10 ##   - The interaction effect of fair_chores_C_P on gender_ch
-r_A [M] is statistically non-significant and negative (beta = -7.09e-03, 95% CI
- [-0.04, 0.03], t(2013) = -0.38, p = 0.700; Std. beta = -9.88e-03, 95% CI [-0.0
-6, 0.04])[] 
- []
-
-
-Overfull \hbox (727.2415pt too wide) in paragraph at lines 551--551
-[]\T1/lmtt/m/n/10 ##   - The interaction effect of fair_chores_C_P on gender_ch
-r_A [W] is statistically non-significant and negative (beta = -2.95e-03, 95% CI
- [-0.05, 0.04], t(2013) = -0.14, p = 0.892; Std. beta = -4.11e-03, 95% CI [-0.0
-6, 0.06])[] 
- []
-
-
-Overfull \hbox (632.74178pt too wide) in paragraph at lines 551--551
-[]\T1/lmtt/m/n/10 ##   - The interaction effect of grbs_C_A on gender_chr_A [M]
- is statistically non-significant and positive (beta = 0.07, 95% CI [-0.09, 0.2
-3], t(2013) = 0.88, p = 0.378; Std. beta = 0.06, 95% CI [-0.08, 0.21])[] 
- []
-
-
-Overfull \hbox (632.74178pt too wide) in paragraph at lines 551--551
-[]\T1/lmtt/m/n/10 ##   - The interaction effect of grbs_C_A on gender_chr_A [W]
- is statistically non-significant and positive (beta = 0.04, 95% CI [-0.10, 0.1
-9], t(2013) = 0.58, p = 0.561; Std. beta = 0.04, 95% CI [-0.09, 0.17])[] 
- []
-
-
-Overfull \hbox (742.99146pt too wide) in paragraph at lines 551--551
-[]\T1/lmtt/m/n/10 ##   - The interaction effect of grbs_C_A on gender_chr_A [M]
- * fair_chores_C_A is statistically non-significant and negative (beta = -0.04,
- 95% CI [-0.08, 0.01], t(2013) = -1.42, p = 0.156; Std. beta = -0.03, 95% CI [-
-0.08, 0.01])[] 
- []
-
-
-Overfull \hbox (742.99146pt too wide) in paragraph at lines 551--551
-[]\T1/lmtt/m/n/10 ##   - The interaction effect of grbs_C_A on gender_chr_A [W]
- * fair_chores_C_A is statistically non-significant and negative (beta = -0.04,
- 95% CI [-0.10, 0.02], t(2013) = -1.20, p = 0.231; Std. beta = -0.03, 95% CI [-
-0.09, 0.02])[] 
- []
-
-
-Overfull \hbox (769.24138pt too wide) in paragraph at lines 551--551
-[]\T1/lmtt/m/n/10 ##   - The interaction effect of grbs_C_A on gender_chr_A [M]
- * fair_chores_C_P is statistically non-significant and positive (beta = 5.91e-
-04, 95% CI [-0.06, 0.06], t(2013) = 0.02, p = 0.983; Std. beta = 5.36e-04, 95% 
-CI [-0.05, 0.05])[] 
- []
-
-
-Overfull \hbox (742.99146pt too wide) in paragraph at lines 551--551
-[]\T1/lmtt/m/n/10 ##   - The interaction effect of grbs_C_A on gender_chr_A [W]
- * fair_chores_C_P is statistically non-significant and negative (beta = -0.02,
- 95% CI [-0.07, 0.04], t(2013) = -0.55, p = 0.584; Std. beta = -0.01, 95% CI [-
-0.07, 0.04])[] 
- []
-
-
-Overfull \hbox (532.99207pt too wide) in paragraph at lines 551--551
-[]\T1/lmtt/m/n/10 ## Standardized parameters were obtained by fitting the model
- on a standardized version of the dataset. 95% Confidence Intervals (CIs) and p
--values were computed using the Wald approximation.[] 
- []
-
-[9] [10]
-Overfull \hbox (107.7433pt too wide) in paragraph at lines 671--671
-[]\T1/lmtt/m/n/10 ## Fixed effects:  fair_chores_C_A ~ genderE_A + telework_A:g
-enderE_A + childnum +      r_years + income_A - 1[] 
- []
-
-[11]
-Overfull \hbox (3068.7347pt too wide) in paragraph at lines 689--689
-[]\T1/lmtt/m/n/10 ## We fitted a linear mixed model (estimated using REML and n
-lminb optimizer) to predict fair_chores_C_A with genderE_A, telework_A, childnu
-m, r_years, income_A, dyadID and obsid (formula: fair_chores_C_A ~ genderE_A + 
-telework_A:genderE_A + childnum + r_years + income_A - 1). The model included g
-ender_chr_A and dyadID as random effects (formula: ~gender_chr_A - 1 | dyadID).
- The model\TS1/lmtt/m/n/10 '\T1/lmtt/m/n/10 s total explanatory power is weak (
-conditional R2 = 0.04) and the part related to the fixed effects alone (margina
-l R2) is of 0.04. The model\TS1/lmtt/m/n/10 '\T1/lmtt/m/n/10 s intercept, corre
-sponding to genderE_A = 0, telework_A = 0, childnum = 0, r_years = 0 and income
-_A = 0, is at  (t() = , p ). Within this model:[] 
- []
-
-
-Overfull \hbox (485.7422pt too wide) in paragraph at lines 689--689
-[]\T1/lmtt/m/n/10 ##   - The effect of genderE_A is statistically non-significa
-nt and negative (beta = -0.05, 95% CI [-0.30, 0.19], t(1724) = -0.42, p = 0.671
-; Std. beta = -0.07, 95% CI [-0.19, 0.04])[] 
- []
-
-
-Overfull \hbox (454.2423pt too wide) in paragraph at lines 689--689
+Overfull \hbox (454.2423pt too wide) in paragraph at lines 633--633
 []\T1/lmtt/m/n/10 ##   - The effect of childnum is statistically non-significan
-t and positive (beta = 0.05, 95% CI [-0.10, 0.19], t(79) = 0.65, p = 0.516; Std
-. beta = 0.01, 95% CI [-0.14, 0.16])[] 
+t and positive (beta = 0.01, 95% CI [-0.15, 0.18], t(79) = 0.16, p = 0.871; Std
+. beta = 0.01, 95% CI [-0.14, 0.17])[] 
  []
 
 
-Overfull \hbox (506.74214pt too wide) in paragraph at lines 689--689
+Overfull \hbox (485.7422pt too wide) in paragraph at lines 633--633
 []\T1/lmtt/m/n/10 ##   - The effect of r_years is statistically non-significant
- and negative (beta = -5.81e-03, 95% CI [-0.02, 3.70e-03], t(79) = -1.22, p = 0
-.228; Std. beta = -0.12, 95% CI [-0.27, 0.04])[] 
+ and negative (beta = -0.01, 95% CI [-0.03, 3.95e-03], t(79) = -1.50, p = 0.137
+; Std. beta = -0.12, 95% CI [-0.28, 0.04])[] 
  []
 
 
-Overfull \hbox (527.74208pt too wide) in paragraph at lines 689--689
+Overfull \hbox (527.74208pt too wide) in paragraph at lines 633--633
 []\T1/lmtt/m/n/10 ##   - The effect of income_A is statistically non-significan
-t and positive (beta = 7.40e-07, 95% CI [-1.03e-06, 2.51e-06], t(1724) = 0.82, 
-p = 0.412; Std. beta = 0.03, 95% CI [-0.10, 0.16])[] 
+t and positive (beta = 5.20e-07, 95% CI [-1.38e-06, 2.42e-06], t(1722) = 0.54, 
+p = 0.592; Std. beta = 0.04, 95% CI [-0.10, 0.17])[] 
  []
 
 
-Overfull \hbox (622.2418pt too wide) in paragraph at lines 689--689
-[]\T1/lmtt/m/n/10 ##   - The interaction effect of telework_A on genderE_A is s
-tatistically non-significant and negative (beta = -0.03, 95% CI [-0.34, 0.28], 
-t(1724) = -0.18, p = 0.859; Std. beta = -0.02, 95% CI [-0.16, 0.11])[] 
+Overfull \hbox (658.9917pt too wide) in paragraph at lines 633--633
+[]\T1/lmtt/m/n/10 ##   - The interaction effect of telework_A on gender_chr_A [
+M] is statistically non-significant and negative (beta = -0.07, 95% CI [-0.44, 
+0.30], t(1722) = -0.38, p = 0.706; Std. beta = -0.03, 95% CI [-0.20, 0.13])[] 
  []
 
 
-Overfull \hbox (532.99207pt too wide) in paragraph at lines 689--689
+Overfull \hbox (658.9917pt too wide) in paragraph at lines 633--633
+[]\T1/lmtt/m/n/10 ##   - The interaction effect of telework_A on gender_chr_A [
+W] is statistically non-significant and negative (beta = -0.29, 95% CI [-0.79, 
+0.22], t(1722) = -1.12, p = 0.261; Std. beta = -0.13, 95% CI [-0.36, 0.10])[] 
+ []
+
+
+Overfull \hbox (532.99207pt too wide) in paragraph at lines 633--633
 []\T1/lmtt/m/n/10 ## Standardized parameters were obtained by fitting the model
  on a standardized version of the dataset. 95% Confidence Intervals (CIs) and p
 -values were computed using the Wald approximation.[] 
  []
 
-[12]
+[10]
+Overfull \hbox (118.24327pt too wide) in paragraph at lines 697--697
+[]\T1/lmtt/m/n/10 ## Fixed effects:  fair_chores_C_A ~ gender_chr_A + telework_
+A:gender_chr_A + childnum +      r_years + income_A[] 
+ []
 
-LaTeX Warning: Float too large for page by 38.80946pt on input line 820.
+[11] [12] [13] [14]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 911.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 911.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 911.
 
-[13] [14] (./analysis.aux)
+LaTeX Warning: Float too large for page by 38.80946pt on input line 973.
 
-LaTeX Warning: There were multiply-defined labels.
-
+[15] [16] (./analysis.aux)
 Package rerunfilecheck Info: File `analysis.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 10441 strings out of 480937
- 153355 string characters out of 5904822
- 474871 words of memory out of 5000000
- 27478 multiletter control sequences out of 15000+600000
+ 10443 strings out of 480937
+ 153375 string characters out of 5904822
+ 471686 words of memory out of 5000000
+ 27479 multiletter control sequences out of 15000+600000
  442249 words of font info for 66 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 71i,10n,74p,870b,465s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 71i,10n,74p,707b,465s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/Users/iris_/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-math
 it.enc}{c:/Users/iris_/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm
 -mathsy.enc}{c:/Users/iris_/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/
@@ -820,10 +703,10 @@ eX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb><c:/Users/iris_/AppData/Roaming/T
 inyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb><c:/Users/iris_/AppData/Roam
 ing/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb><c:/Users/iris_/AppData
 /Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on analysis.pdf (14 pages, 338487 bytes).
+Output written on analysis.pdf (16 pages, 297254 bytes).
 PDF statistics:
- 135 PDF objects out of 1000 (max. 8388607)
- 103 compressed objects within 2 object streams
- 17 named destinations out of 1000 (max. 500000)
+ 139 PDF objects out of 1000 (max. 8388607)
+ 105 compressed objects within 2 object streams
+ 18 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -3,8 +3,8 @@ title: "analysis"
 author: "Iris Zhong"
 date: "4/27/2021"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -13,6 +13,7 @@ library(nlme)
 library(tidyverse)
 library(report)
 library(stargazer)
+library(papaja)
 ```
 
 ```{r}
@@ -29,116 +30,177 @@ data_pair <- data_pair %>%
          grbs_C_P = grbs_ss_P - mean(grbs_ss_P, na.rm = T))
 ```
 
+
 ```{r}
-ggplot(data_pair, aes(x = fair_chores_A, y = qmi_ss_A, color= gender_chr_A, shape= gender_chr_A)) +
+plot1 <- ggplot(data_pair, aes(x = fair_chores_C_A, y = qmi_ss_A, color = factor(gender_chr_A, labels = c("Men","Women")), shape= factor(gender_chr_A, labels = c("Men","Women")))) +
   geom_point()+
   geom_jitter() +
-  geom_smooth(method = "lm")
+  geom_smooth(method = "lm", aes(linetype = factor(gender_chr_A, labels = c("Men","Women"))), se=F) +
+  scale_color_grey(start = 0.3, end = 0.5) +
+  theme_bw() +
+  scale_y_continuous(limits = c(1, 4), oob = scales::squish) +
+  labs(x = "Perceived chore fairness score (Centered)", y = "QMI score", color = "Gender", shape = "Gender", linetype = "Gender") +
+ scale_fill_manual(labels = c("Men", "Women"))
+
+# ggsave("qmi_fairness.png")
 ```
 
 
-```{r}
+```{r, include = F}
 ggplot(data_pair, aes(x = fair_chores_A)) +
   geom_histogram()
 ```
 
 
 
+# Satisfaction ~ chore
 
 ```{r}
-mod_qmi_chore  <- lme(qmi_ss_A ~ gender_chr_A + gender_chr_A:day_of_study_A + fair_chores_C_A:gender_chr_A  - 1,
+ggplot(data_pair, aes(x = as.factor(fair_chores_A), y = qmi_ss_A )) +
+  geom_boxplot() +
+  facet_wrap(~gender_chr_A) 
+```
+
+```{r}
+ggplot(data_pair, aes(x = as.factor(day_of_study_A), y = qmi_ss_A)) +
+  geom_boxplot()+
+  facet_wrap(~gender_chr_A) +
+  geom_jitter(alpha = 0.2)
+```
+
+```{r}
+
+```
+
+
+## 1. qmi ~ gender + fair_chores_A * gender (+ telework * gender + day_of_study * gender)
+
+```{r qmi chore 1}
+fairness_grbs  <- lme(fair_chores_C_A ~ gender_chr_A + 
+                          telework_A:gender_chr_A +
+                          gender_chr_A:day_of_study_A + 
+                          grbs_C_A:gender_chr_A -1,
                       data = data_pair, 
                       random = ~ gender_chr_A - 1|dyadID,
                       correlation = corCompSymm(form = ~1|dyadID/obsid),
                       weights = varIdent(form = ~1|gender_chr_A),
                       na.action = na.omit)
 
-summary(mod_qmi_chore)
-#stargazer(mod_qmi_chore)
+summary(fairness_grbs)
+
 ```
 
 
-```{r}
-mod_qmi_chore_APIM  <- lme(qmi_ss_A ~ gender_chr_A + 
+```{r qmi chore 1}
+mod_qmi_chore_1  <- lme(qmi_ss_A ~ gender_chr_A + 
+                          telework_A:gender_chr_A +
+                          gender_chr_A:day_of_study_A + 
+                          fair_chores_C_A:gender_chr_A -1,
+                      data = data_pair, 
+                      random = ~ gender_chr_A - 1|dyadID,
+                      correlation = corCompSymm(form = ~1|dyadID/obsid),
+                      weights = varIdent(form = ~1|gender_chr_A),
+                      na.action = na.omit)
+
+summary(mod_qmi_chore_1)
+
+```
+
+```{r qmi chore 1 mod}
+mod_qmi_chore_1_mod  <- lme(qmi_ss_A ~ genderE_A + 
+                          telework_A:genderE_A +
+                          genderE_A:day_of_study_A + 
+                          fair_chores_C_A:genderE_A,
+                      data = data_pair, 
+                      random = ~ gender_chr_A - 1|dyadID,
+                      correlation = corCompSymm(form = ~1|dyadID/obsid),
+                      weights = varIdent(form = ~1|gender_chr_A),
+                      na.action = na.omit)
+
+summary(mod_qmi_chore_1_mod)
+
+```
+
+## 2. qmi ~ gender + fair_chores_A * gender + fair_chores_P * gender (+ telework * gender + day_of_study * gender) 
+
+```{r qmi chore 2}
+mod_qmi_chore_2  <- lme(qmi_ss_A ~ gender_chr_A + 
+                          telework_A:gender_chr_A +
                              gender_chr_A:day_of_study_A + 
                              fair_chores_C_A:gender_chr_A +
-                             fair_chores_C_P:gender_chr_A  - 1,
+                             fair_chores_C_P:gender_chr_A -1,
                       data = data_pair, 
                       random = ~ gender_chr_A - 1|dyadID,
                       correlation = corCompSymm(form = ~1|dyadID/obsid),
                       weights = varIdent(form = ~1|gender_chr_A),
                       na.action = na.omit)
 
-summary(mod_qmi_chore_APIM)
-#stargazer(mod_qmi_chore,mod_qmi_chore_APIM)
+summary(mod_qmi_chore_2)
+
+```
+
+```{r qmi chore 2 mod}
+mod_qmi_chore_2_mod  <- lme(qmi_ss_A ~ genderE_A + 
+                          telework_A:genderE_A +
+                             genderE_A:day_of_study_A + 
+                             fair_chores_C_A:genderE_A +
+                             fair_chores_C_P:genderE_A,
+                      data = data_pair, 
+                      random = ~ gender_chr_A - 1|dyadID,
+                      correlation = corCompSymm(form = ~1|dyadID/obsid),
+                      weights = varIdent(form = ~1|gender_chr_A),
+                      na.action = na.omit)
+
+summary(mod_qmi_chore_2_mod)
+
 ```
 
 
-\begin{table}[!htbp] \centering 
-  \caption{} 
-  \label{} 
-\begin{tabular}{@{\extracolsep{5pt}}lcc} 
-\\[-1.8ex]\hline 
-\hline \\[-1.8ex] 
- & \multicolumn{2}{c}{\textit{Dependent variable:}} \\ 
-\cline{2-3} 
-\\[-1.8ex] & \multicolumn{2}{c}{qmi\_ss\_A} \\ 
-\\[-1.8ex] & (1) & (2)\\ 
-\hline \\[-1.8ex] 
- gender\_chr\_AM & 3.563$^{***}$ & 3.563$^{***}$ \\ 
-  & (0.070) & (0.070) \\ 
-  & & \\ 
- gender\_chr\_AW & 3.426$^{***}$ & 3.426$^{***}$ \\ 
-  & (0.066) & (0.067) \\ 
-  & & \\ 
- gender\_chr\_AM:day\_of\_study\_A & $-$0.003 & $-$0.003 \\ 
-  & (0.003) & (0.003) \\ 
-  & & \\ 
- gender\_chr\_AW:day\_of\_study\_A & 0.007$^{**}$ & 0.007$^{**}$ \\ 
-  & (0.003) & (0.003) \\ 
-  & & \\ 
- gender\_chr\_AM:fair\_chores\_C\_A & 0.069$^{***}$ & 0.069$^{***}$ \\ 
-  & (0.018) & (0.019) \\ 
-  & & \\ 
- gender\_chr\_AW:fair\_chores\_C\_A & 0.085$^{***}$ & 0.082$^{***}$ \\ 
-  & (0.019) & (0.020) \\ 
-  & & \\ 
- gender\_chr\_AM:fair\_chores\_C\_P &  & $-$0.008 \\ 
-  &  & (0.018) \\ 
-  & & \\ 
- gender\_chr\_AW:fair\_chores\_C\_P &  & $-$0.003 \\ 
-  &  & (0.021) \\ 
-  & & \\ 
-\hline \\[-1.8ex] 
-Observations & 2,107 & 2,107 \\ 
-Log Likelihood & $-$1,157.993 & $-$1,163.909 \\ 
-Akaike Inf. Crit. & 2,339.985 & 2,355.818 \\ 
-Bayesian Inf. Crit. & 2,407.787 & 2,434.907 \\ 
-\hline 
-\hline \\[-1.8ex] 
-\textit{Note:}  & \multicolumn{2}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
-\end{tabular} 
-\end{table} 
+## 3. qmi ~ gender + fair_chores_A * gender + fair_chores_P * gender + grbs * gender + grbs * fair_chores_A * gender + grbs * fair_chores_P * gender (+ telework * gender + day_of_study * gender) 
 
-```{r}
-mod_qmi_chore_APIM_2  <- lme(qmi_ss_A ~ gender_chr_A + 
+```{r qmi chore 3}
+mod_qmi_chore_3  <- lme(qmi_ss_A ~ gender_chr_A + 
+                          telework_A:gender_chr_A +
                                gender_chr_A:day_of_study_A +
                                fair_chores_C_A:gender_chr_A +
                                fair_chores_C_P:gender_chr_A + 
                                gender_chr_A:grbs_C_A+             
                                grbs_C_A:gender_chr_A:fair_chores_C_A+
-                               grbs_C_A:gender_chr_A:fair_chores_C_P+  - 1,
+                               grbs_C_A:gender_chr_A:fair_chores_C_P -1,
                       data = data_pair, 
                       random = ~ gender_chr_A - 1|dyadID,
                       correlation = corCompSymm(form = ~1|dyadID/obsid),
                       weights = varIdent(form = ~1|gender_chr_A),
                       na.action = na.omit)
 
-summary(mod_qmi_chore_APIM_2)
-report(mod_qmi_chore_APIM_2)
+summary(mod_qmi_chore_3)
+#report(mod_qmi_chore_3)
 ```
 
-```{r}
+
+```{r qmi chore 3 mod}
+mod_qmi_chore_3_mod  <- lme(qmi_ss_A ~ genderE_A + 
+                          telework_A:genderE_A +
+                               genderE_A:day_of_study_A +
+                               fair_chores_C_A:genderE_A +
+                               fair_chores_C_P:genderE_A + 
+                               genderE_A:grbs_C_A+             
+                               grbs_C_A:genderE_A:fair_chores_C_A+
+                               grbs_C_A:genderE_A:fair_chores_C_P,
+                      data = data_pair, 
+                      random = ~ gender_chr_A - 1|dyadID,
+                      correlation = corCompSymm(form = ~1|dyadID/obsid),
+                      weights = varIdent(form = ~1|gender_chr_A),
+                      na.action = na.omit)
+
+summary(mod_qmi_chore_3_mod)
+#report(mod_qmi_chore_3)
+```
+
+
+## R^2
+
+```{r qmi chore empty}
 mod_qmi_chore_empty<- lme(qmi_ss_A ~ gender_chr_A - 1,
                      data = data_pair,
                      random = ~ gender_chr_A - 1|dyadID,
@@ -155,8 +217,31 @@ residual standard deviation for men: 0.4064918 * 0.8740537
 residual variance: square them
 
 
+Calculate pseudo-R^2:
+
+```{r qmi chore R2}
+resid_var_qmi_chore_W <- 0.4064918^2
+resid_var_qmi_chore_M <- (0.4064918 * 0.8740537)^2
+r2_qmi_chore_W1 <- 1 - (0.4051607^2)/resid_var_qmi_chore_W
+r2_qmi_chore_M1 <- 1 - (0.4051607*0.8741175)^2/resid_var_qmi_chore_M
+r2_qmi_chore_W2 <- 1 - (0.4052860^2)/resid_var_qmi_chore_W
+r2_qmi_chore_M2 <- 1 - (0.4052860*0.8741499)^2/resid_var_qmi_chore_M
+r2_qmi_chore_W3 <- 1 - (0.4055747^2)/resid_var_qmi_chore_W
+r2_qmi_chore_M3 <- 1 - (0.4055747*0.8739182)^2/resid_var_qmi_chore_M
+```
+
+# Chore ~ Telework
+
 ```{r}
-mod_chore_work  <- lme(fair_chores_C_A ~ gender_chr_A + telework_A:gender_chr_A  - 1,
+ggplot(data_pair, aes(x = as.factor(telework_A), y = fair_chores_C_A)) +
+  geom_boxplot() +
+  facet_wrap(~genderE_A)
+```
+
+
+## 1. (not used) Chore ~ gender + telework * gender (+ day_of_study * gender)
+```{r, include = F}
+mod_chore_work  <- lme(fair_chores_C_A ~ gender_chr_A + day_of_study_A:gender_chr_A+ telework_A:gender_chr_A  - 1,
                       data = data_pair, 
                       random = ~ gender_chr_A - 1|dyadID,
                       correlation = corCompSymm(form = ~1|dyadID/obsid),
@@ -166,8 +251,13 @@ mod_chore_work  <- lme(fair_chores_C_A ~ gender_chr_A + telework_A:gender_chr_A 
 summary(mod_chore_work)
 ```
 
-```{r}
-mod_chore_work_2  <- lme(fair_chores_C_A ~ gender_chr_A + telework_A:gender_chr_A + childnum + r_years + income_A  - 1,
+## 2. Chore ~ gender + telework * gender (+ day_of_study * gender + childnum + r_years + income)
+
+```{r chore work}
+mod_chore_work_2  <- lme(fair_chores_C_A ~ gender_chr_A +
+                           day_of_study_A:gender_chr_A + 
+                           telework_A:gender_chr_A + 
+                           childnum + r_years + income_A  - 1,
                       data = data_pair, 
                       random = ~ gender_chr_A - 1|dyadID,
                       correlation = corCompSymm(form = ~1|dyadID/obsid),
@@ -175,15 +265,53 @@ mod_chore_work_2  <- lme(fair_chores_C_A ~ gender_chr_A + telework_A:gender_chr_
                       na.action = na.omit)
 
 summary(mod_chore_work_2)
-report(mod_chore_work_2)
+#report(mod_chore_work_2)
 ```
 
+## Mod 2 Moderation
 
+```{r chore work mod}
+mod_chore_work_2_mod  <- lme(fair_chores_C_A ~ genderE_A + 
+                               telework_A:genderE_A + childnum + r_years + income_A,
+                      data = data_pair, 
+                      random = ~ gender_chr_A - 1|dyadID,
+                      correlation = corCompSymm(form = ~1|dyadID/obsid),
+                      weights = varIdent(form = ~1|gender_chr_A),
+                      na.action = na.omit)
 
+summary(mod_chore_work_2_mod)
 
+```
 
-```{r}
-mod_work_qmi  <- lme(qmi_ss_A ~ gender_chr_A + telework_A + telework_P,
+## R^2
+
+```{r chore work empty}
+mod_chore_work_empty<- lme(fair_chores_C_A ~ gender_chr_A - 1,
+                     data = data_pair,
+                     random = ~ gender_chr_A - 1|dyadID,
+                     correlation = corCompSymm(form = ~1|dyadID/obsid), 
+                     weights = varIdent(form = ~1|gender_chr_A), 
+                     na.action = na.omit)
+
+summary(mod_chore_work_empty)
+```
+
+```{r chore work R2}
+resid_var_chore_work_W <- 0.6076890^2
+resid_var_chore_work_M <- (0.6076890 * 0.9637828)^2
+r2_chore_work_W <- 1 - (0.6042395^2)/resid_var_chore_work_W
+r2_chore_work_M <- 1 - (0.6042395*0.9601972)^2/resid_var_chore_work_M
+
+```
+
+# Satisfaction ~ Telework
+
+## qmi ~ gender + telework * gender (+ day_of_study * gender)
+
+```{r qmi work}
+mod_work_qmi  <- lme(qmi_ss_A ~ gender_chr_A + 
+                       day_of_study_A:gender_chr_A +
+                       telework_A:gender_chr_A-1,
                       data = data_pair, 
                       random = ~ gender_chr_A - 1|dyadID,
                       correlation = corCompSymm(form = ~1|dyadID/obsid),
@@ -191,72 +319,160 @@ mod_work_qmi  <- lme(qmi_ss_A ~ gender_chr_A + telework_A + telework_P,
                       na.action = na.omit)
 
 summary(mod_work_qmi)
-#stargazer(mod_work_qmi, mod_chore_work_2, mod_qmi_chore,mod_qmi_chore_APIM)
+
+```
+
+```{r qmi work mod}
+mod_work_qmi_mod  <- lme(qmi_ss_A ~ genderE_A + 
+                       day_of_study_A:genderE_A +
+                       telework_A:genderE_A,
+                      data = data_pair, 
+                      random = ~ gender_chr_A - 1|dyadID,
+                      correlation = corCompSymm(form = ~1|dyadID/obsid),
+                      weights = varIdent(form = ~1|gender_chr_A),
+                      na.action = na.omit)
+
+summary(mod_work_qmi_mod)
+
+```
+
+```{r}
+ggplot(data_pair, aes(x = as.factor(telework_A), y = qmi_ss_A)) +
+  geom_boxplot()
+```
+
+
+
+## R^2
+
+
+```{r qmi work empty}
+mod_qmi_work_empty<- lme(qmi_ss_A ~ gender_chr_A - 1,
+                     data = data_pair,
+                     random = ~ gender_chr_A - 1|dyadID,
+                     correlation = corCompSymm(form = ~1|dyadID/obsid), 
+                     weights = varIdent(form = ~1|gender_chr_A), 
+                     na.action = na.omit)
+
+summary(mod_qmi_work_empty)
+```
+
+
+```{r qmi work R2}
+resid_var_qmi_work_W <- 0.4064918^2
+resid_var_qmi_work_M <- (0.4064918 * 0.8740537)^2
+r2_qmi_work_W <- 1 - (0.4061178^2)/resid_var_qmi_work_W
+r2_qmi_work_M<- 1 - ((0.4061178*0.8749703)^2)/resid_var_qmi_work_M
+r2_qmi_work_W
+r2_qmi_work_M
+resid_var_qmi_work_M
+(0.4061178*0.8749703)^2
+
+```
+
+```{r, results = "asis"}
+stargazer(mod_qmi_chore_1, mod_qmi_chore_2, mod_qmi_chore_3, type = "html",
+          title = "Relationship between satisfaction, perceived chore fairness and gender ideology",
+          dep.var.labels=c("Relationship satisfaction"),
+          covariate.labels=c("Men","Women", "Men * Telework", "Women * Telework", "Men * Day of study", "Women * Day of study", "Men * Actor chore fairness", "Women * Actor chore fairness", "Men * Partner chore fairness","Women * Partner chore fairness","Man * Gender ideology", "Woman * Gender ideology", "Man * Actor chore fairness * Gender ideology","Woman * Actor chore fairness * Gender ideology","Man * Partner chore fairness * Gender ideology","Woman * Partner chore fairness * Gender ideology" ))
+```
+
+```{r, results = "asis"}
+stargazer(mod_work_qmi, type = "html",
+          title = "Relationship between telework and relationship satisfaction",
+          dep.var.labels=c("Relationship satisfaction"),
+          covariate.labels=c("Men","Women", "Men * Day of study", "Women * Day of study","Men * Telework", "Women * Telework" ))
+```
+
+```{r, results = "asis"}
+stargazer(mod_chore_work_2, type = "html",
+          title = "Relationship between perceived chore fairness and telework",
+          dep.var.labels=c("Perceived chore fairness"),
+          covariate.labels=c("Men","Women", "Number of children", "Relationship length", "Income", "Men * Day of study","Women * Day of study","Men * Telework","Women * Telework" ))
 ```
 
 \begin{table}[!htbp] \centering 
   \caption{} 
   \label{} 
-\begin{tabular}{@{\extracolsep{5pt}}lcccc} 
+\begin{tabular}{@{\extracolsep{5pt}}lccc} 
 \\[-1.8ex]\hline 
 \hline \\[-1.8ex] 
- & \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
-\cline{2-5} 
-\\[-1.8ex] & qmi\_ss\_A & fair\_chores\_C\_A & \multicolumn{2}{c}{qmi\_ss\_A} \\ 
-\\[-1.8ex] & (1) & (2) & (3) & (4)\\ 
+ & \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-4} 
+\\[-1.8ex] & \multicolumn{3}{c}{qmi\_ss\_A} \\ 
+\\[-1.8ex] & (1) & (2) & (3)\\ 
 \hline \\[-1.8ex] 
- gender\_chr\_AM &  &  & 3.563$^{***}$ & 3.563$^{***}$ \\ 
-  &  &  & (0.070) & (0.070) \\ 
-  & & & & \\ 
- gender\_chr\_AW & $-$0.084$^{*}$ &  & 3.426$^{***}$ & 3.426$^{***}$ \\ 
-  & (0.049) &  & (0.066) & (0.067) \\ 
-  & & & & \\ 
- telework\_A & $-$0.020 &  &  &  \\ 
-  & (0.057) &  &  &  \\ 
-  & & & & \\ 
- genderE\_A &  & $-$0.053 &  &  \\ 
-  &  & (0.126) &  &  \\ 
-  & & & & \\ 
- childnum &  & 0.048 &  &  \\ 
-  &  & (0.073) &  &  \\ 
-  & & & & \\ 
- r\_years &  & $-$0.006 &  &  \\ 
-  &  & (0.005) &  &  \\ 
-  & & & & \\ 
- income\_A &  & 0.00000 &  &  \\ 
-  &  & (0.00000) &  &  \\ 
-  & & & & \\ 
- genderE\_A:telework\_A &  & $-$0.028 &  &  \\ 
-  &  & (0.158) &  &  \\ 
-  & & & & \\ 
- gender\_chr\_AM:day\_of\_study\_A &  &  & $-$0.003 & $-$0.003 \\ 
-  &  &  & (0.003) & (0.003) \\ 
-  & & & & \\ 
- gender\_chr\_AW:day\_of\_study\_A &  &  & 0.007$^{**}$ & 0.007$^{**}$ \\ 
-  &  &  & (0.003) & (0.003) \\ 
-  & & & & \\ 
- gender\_chr\_AM:fair\_chores\_C\_A &  &  & 0.069$^{***}$ & 0.069$^{***}$ \\ 
-  &  &  & (0.018) & (0.019) \\ 
-  & & & & \\ 
- gender\_chr\_AW:fair\_chores\_C\_A &  &  & 0.085$^{***}$ & 0.082$^{***}$ \\ 
-  &  &  & (0.019) & (0.020) \\ 
-  & & & & \\ 
- gender\_chr\_AM:fair\_chores\_C\_P &  &  &  & $-$0.008 \\ 
-  &  &  &  & (0.018) \\ 
-  & & & & \\ 
- gender\_chr\_AW:fair\_chores\_C\_P &  &  &  & $-$0.003 \\ 
-  &  &  &  & (0.021) \\ 
-  & & & & \\ 
- Constant & 3.560$^{***}$ &  &  &  \\ 
-  & (0.077) &  &  &  \\ 
-  & & & & \\ 
+ gender\_chr\_AM & 3.606$^{***}$ & 3.606$^{***}$ & 3.590$^{***}$ \\ 
+  & (0.087) & (0.087) & (0.090) \\ 
+  & & & \\ 
+ gender\_chr\_AW & 3.387$^{***}$ & 3.387$^{***}$ & 3.386$^{***}$ \\ 
+  & (0.096) & (0.096) & (0.097) \\ 
+  & & & \\ 
+ gender\_chr\_AM:telework\_A & $-$0.078 & $-$0.078 & $-$0.067 \\ 
+  & (0.094) & (0.094) & (0.096) \\ 
+  & & & \\ 
+ gender\_chr\_AW:telework\_A & 0.054 & 0.054 & 0.062 \\ 
+  & (0.096) & (0.096) & (0.096) \\ 
+  & & & \\ 
+ gender\_chr\_AM:day\_of\_study\_A & $-$0.003 & $-$0.003 & $-$0.003 \\ 
+  & (0.003) & (0.003) & (0.003) \\ 
+  & & & \\ 
+ gender\_chr\_AW:day\_of\_study\_A & 0.007$^{**}$ & 0.007$^{**}$ & 0.006$^{*}$ \\ 
+  & (0.003) & (0.003) & (0.003) \\ 
+  & & & \\ 
+ gender\_chr\_AM:fair\_chores\_C\_A & 0.069$^{***}$ & 0.069$^{***}$ & 0.072$^{***}$ \\ 
+  & (0.018) & (0.019) & (0.019) \\ 
+  & & & \\ 
+ gender\_chr\_AW:fair\_chores\_C\_A & 0.085$^{***}$ & 0.082$^{***}$ & 0.076$^{***}$ \\ 
+  & (0.019) & (0.020) & (0.021) \\ 
+  & & & \\ 
+ gender\_chr\_AM:fair\_chores\_C\_P &  & $-$0.008 & $-$0.007 \\ 
+  &  & (0.018) & (0.018) \\ 
+  & & & \\ 
+ gender\_chr\_AW:fair\_chores\_C\_P &  & $-$0.003 & $-$0.003 \\ 
+ & (0.003) & (0.003) & (0.003) \\ 
+  & & & \\ 
+ gender\_chr\_AW:day\_of\_study\_A & 0.007$^{**}$ & 0.007$^{**}$ & 0.006$^{*}$ \\ 
+  & (0.003) & (0.003) & (0.003) \\ 
+  & & & \\ 
+ gender\_chr\_AM:fair\_chores\_C\_A & 0.069$^{***}$ & 0.069$^{***}$ & 0.072$^{***}$ \\ 
+  & (0.018) & (0.019) & (0.019) \\ 
+  & & & \\ 
+ gender\_chr\_AW:fair\_chores\_C\_A & 0.085$^{***}$ & 0.082$^{***}$ & 0.076$^{***}$ \\ 
+  & (0.019) & (0.020) & (0.021) \\ 
+  & & & \\ 
+ gender\_chr\_AM:fair\_chores\_C\_P &  & $-$0.008 & $-$0.007 \\ 
+  &  & (0.018) & (0.018) \\ 
+  & & & \\ 
+ gender\_chr\_AW:fair\_chores\_C\_P &  & $-$0.003 & $-$0.003 \\ 
+  &  & (0.021) & (0.022) \\ 
+  & & & \\ 
+ gender\_chr\_AM:grbs\_C\_A &  &  & 0.060 \\ 
+ &  &  & (0.084) \\ 
+  & & & \\ 
+ gender\_chr\_AW:grbs\_C\_A &  &  & 0.035 \\ 
+  &  &  & (0.075) \\ 
+  & & & \\ 
+ gender\_chr\_AM:fair\_chores\_C\_A:grbs\_C\_A &  &  & $-$0.035 \\ 
+  &  &  & (0.025) \\ 
+  & & & \\ 
+ gender\_chr\_AW:fair\_chores\_C\_A:grbs\_C\_A &  &  & $-$0.038 \\ 
+  &  &  & (0.030) \\ 
+  & & & \\ 
+ gender\_chr\_AM:fair\_chores\_C\_P:grbs\_C\_A &  &  & 0.002 \\ 
+  &  &  & (0.029) \\ 
+  & & & \\ 
+ gender\_chr\_AW:fair\_chores\_C\_P:grbs\_C\_A &  &  & $-$0.016 \\ 
+  &  &  & (0.029) \\ 
+   & & & \\ 
 \hline \\[-1.8ex] 
-Observations & 2,107 & 1,807 & 2,107 & 2,107 \\ 
-Log Likelihood & $-$1,162.963 & $-$1,847.812 & $-$1,157.993 & $-$1,163.909 \\ 
-Akaike Inf. Crit. & 2,343.926 & 3,717.624 & 2,339.985 & 2,355.818 \\ 
-Bayesian Inf. Crit. & 2,394.790 & 3,778.087 & 2,407.787 & 2,434.907 \\ 
+Observations & 2,107 & 2,107 & 2,107 \\ 
+Log Likelihood & $-$1,160.550 & $-$1,166.468 & $-$1,178.435 \\ 
+Akaike Inf. Crit. & 2,349.100 & 2,364.937 & 2,400.871 \\ 
+Bayesian Inf. Crit. & 2,428.189 & 2,455.309 & 2,525.070 \\ 
 \hline 
 \hline \\[-1.8ex] 
-\textit{Note:}  & \multicolumn{4}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
 \end{tabular} 
 \end{table} 
+
